@@ -1,66 +1,64 @@
-@import "remixicon","reset","generalStyles/nav";
+@import "remixicon", "reset", "generalStyles/nav";
 
-html{
-	box-sizing : border-box;
-	font-size: 10px;
+html {
+  box-sizing: border-box;
+  font-size: 10px;
 }
 
 *,
 *::before,
-*::after{
-	box-sizing: inherit;
+*::after {
+  box-sizing: inherit;
 }
 
-.website-wrapper{
-	background-color: #F3F4F6;
+@font-face {
+  font-family: Yekanbakh;
+  src: local('Yekan Bakh'),
+    url('/assets/fonts/YekanBakh-Regular.ttf') format('truetype'),
+    url('/assets/fonts/YekanBakh-Regular.woff') format('woff'),
+    url('/assets/fonts/YekanBakh-Regular.woff2') format('woff2');
 }
 
-@font-face{
-	font-family: Yekanbakh;
-	src : local('Yekan Bakh'),
-	url('/assets/fonts/YekanBakh-Regular.ttf') format('truetype'), 
-	url('/assets/fonts/YekanBakh-Regular.woff') format('woff'),
-	url('/assets/fonts/YekanBakh-Regular.woff2') format('woff2');
-} 
-
-body{
-	font-family : Yekanbakh;
-	color: $textColor;
+body {
+  font-family: Yekanbakh;
+  color: $textColor;
 }
 
-img{
-	max-width: 100%;
-	max-height: 100%;
+.website-wrapper {
+  background-color: #f3f4f6;
 }
 
-input,button{
-	outline: none;
-	font-family: yekanbakh;
+img {
+  max-width: 100%;
+  max-height: 100%;
 }
 
-a{
-	text-decoration: none;
+input,
+button {
+  outline: none;
+  font-family: yekanbakh;
 }
 
-a,button,input{
-	transition: color .2s,opacity .2s,background-color .2s;
+a {
+  text-decoration: none;
 }
 
-button,span{
-	cursor: pointer;
+button,
+span {
+  cursor: pointer;
 }
 
-.vertical-divider{
-	width: 1.5rem;
-	height: 1px;
-	transform: rotate(90deg);
-	background-color: $creamColor;
+.vertical-divider {
+  width: 2rem;
+  height: 1px;
+  transform: rotate(90deg);
+  background-color: $creamColor;
 }
 
-.hidden{
-	display: none;
+.hidden {
+  display: none;
 }
 
-.show-block{
-	display: block;
+.show-block {
+  display: block;
 }

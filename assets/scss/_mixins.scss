@@ -1,0 +1,27 @@
+@mixin textStyle($color,$fontSize,$fontWeight : "",$fontFamily : "") {
+  font-size: $fontSize;
+  color: $color;
+  @if $fontFamily != "" {
+    font-family: $fontFamily;
+  } @else if $fontWeight != "" {
+    font-weight: $fontWeight;
+  }
+}
+
+@mixin alignCenter {
+  display: flex;
+  align-items: center;
+}
+
+@mixin transitionList {
+  transition: opacity .3s, transform .3s, visibility .3s;
+  transform: translateX(20px);
+  visibility: hidden;
+  opacity: 0;
+}
+
+@mixin showTransitionedList {
+  visibility: visible;
+  opacity: 1;
+  transform: translateX(0);
+}

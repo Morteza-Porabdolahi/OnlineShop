@@ -1,142 +1,133 @@
-@import "../variables";
+@import "../variables", "../mixins";
 
-.header{
-    &__body{
-        text-align: center;
-        padding: 10rem 0;
+.header {
+  &__body {
+    text-align: center;
+    padding: 10rem 0;
 
-        .body__search-input{
-            position: relative;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: $whiteColor;
-            width: 86rem;
-            margin: 3rem auto;
-            padding: 3rem 3rem 3rem 1.5rem;
-            border-radius: 10px;
+    .body__search-input {
+      @include alignCenter;
+      position: relative;
+      justify-content: space-between;
+      background-color: $whiteColor;
+      width: 86rem;
+      margin: 3rem auto;
+      padding: 2rem 3rem 2rem 1.5rem;
+      border-radius: 10px;
 
-            .search-input__left{
-                display: flex;
-                gap:.8rem;
-                align-items: center;
-            }
+      .search-input__left {
+        @include alignCenter;
+        gap: .8rem;
+      }
 
-            .search-input__category-selector{
-
-                span:first-child{
-                    font-size: 1.5rem;
-                    display: inline-block;
-                    text-overflow: ellipsis;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    width: 9rem;
-                    vertical-align: middle;
-                    transition: opacity .3s;
-
-                    &:hover{
-                        opacity: .8;
-                    }
-                }
-
-                .category-selector__list{
-                    position: absolute;
-                    background-color: $whiteColor;
-                    bottom: -21rem;
-                    left: 1rem;
-                    box-shadow: 1px 2px 5px rgba(0,0,0,20%);
-                    border-radius: 5px;
-                    width: 22rem;
-                    padding: 2.5rem 2.5rem 2.5rem 8rem;
-                }
-
-                .category-selector__list li {
-                    font-size: 1.6rem;
-                    color: $grayerColor;
-                    text-align: right;
-                    cursor: pointer;
-                    transition:color .3s;
-
-                    &:hover{
-                        color: $textColor;
-                    }
-                }
-
-                .category-selector__list > ul > li{
-                    &:not(:last-child){
-                        padding-bottom: 2rem;
-                    }
-                }
-
-                .category-selector__list > ul > li > ul > li{
-                    text-align: right;
-                    padding-right: 1.5rem;
-
-                    &:first-child{
-                        padding-bottom: 2rem;
-                    }
-                }
-
-                .category-selector__list > ul > li > ul{
-                    margin-top: 2rem;
-                }
-
-
-                span:nth-child(2){
-                    font-size: 2.5rem;
-                    vertical-align: middle;
-                    color: $grayColor;
-                }
-            }
-
-            .search-input__search-icon{
-                font-size: 2rem;
-                color: $grayerColor;
-            }
-
-            input{
-                border: 0;
-                background-color: transparent;
-                width: 50%;
-                color: #777;
-                
-                &::placeholder{
-                    font-size: 1.8rem;
-                }
-            }
+      .search-input__category-selector {
+        padding: 1rem 0;
+        &:hover {
+          .category-selector__list-container {
+            @include showTransitionedList;
+          }
         }
 
-        .body__paras{
-            p:first-child{
-                color: $grayerColor;
-                font-size: 2.4rem;
-            }
+        span:first-child {
+          font-size: 1.5rem;
+          vertical-align: middle;
+          transition: opacity .3s;
 
-            p:nth-child(2){
-                font-size: 3.5rem;
-                margin-top: 1.5rem;
-                color: $blackColor;
-            }
+          &:hover {
+            opacity: .8;
+          }
         }
 
-        .body__products-title{
-            display: flex;
-            justify-content: center;
-            gap: 9.5rem;
+        .category-selector__list-container {
+          position: absolute;
+          background-color: $whiteColor;
+          bottom: -19rem;
+          left: 1rem;
+          box-shadow: $boxShdow;
+          border-radius: 5px;
+          width: 22rem;
+          padding: 2.5rem 2.5rem 2.5rem 8rem;
+          @include transitionList;
         }
 
-        .products-title__product{
-            .product__img{
-                width: 70px;
-                height: 70px;
-            }
+        .category-selector__list-container li {
+          @include textStyle($grayerColor,1.6rem);
+          text-align: right;
+          cursor: pointer;
+          transition: color .3s;
 
-            .product__title{
-                font-size: 2rem;
-                font-weight: 600;
-        
-            }
+          &:hover {
+            color: $textColor;
+          }
         }
 
+        .list-container__list > li {
+          &:not(:last-child) {
+            padding-bottom: 2rem;
+          }
+        }
+
+        .inner-list__item {
+          text-align: right;
+          padding-right: 1.5rem;
+
+          &:first-child {
+            padding-bottom: 2rem;
+          }
+        }
+
+        .item__inner-list {
+          margin-top: 2rem;
+        }
+
+        span:nth-child(2) {
+          @include textStyle($grayColor,2.5rem);
+          vertical-align: middle;
+        }
+      }
+
+      .search-input__search-icon {
+        @include textStyle($grayerColor,2rem);
+      }
+
+      input {
+        border: 0;
+        background-color: transparent;
+        width: 50%;
+        color: #777;
+
+        &::placeholder {
+          font-size: 1.8rem;
+        }
+      }
     }
+
+    .body__paras {
+      p:first-child {
+        @include textStyle($grayerColor,2.4rem);
+      }
+
+      p:nth-child(2) {
+        @include textStyle($blackColor,3.5rem);
+        margin-top: 1.5rem;
+      }
+    }
+
+    .body__products-title {
+      display: flex;
+      justify-content: center;
+      gap: 9.5rem;
+    }
+
+    .products-title__product {
+      .product__img {
+        width: 70px;
+        height: 70px;
+      }
+
+      .product__title {
+        @include textStyle($textColor,2rem,600);
+      }
+    }
+  }
 }
