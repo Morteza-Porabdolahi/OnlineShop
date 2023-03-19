@@ -9,8 +9,4 @@
   "keywords": [],
   "author": "Morteza",
   "license": "ISC",
-  "dependencies": {
-    "aos": "^2.3.4",
-    "remixicon": "^2.5.0"
-  }
 }

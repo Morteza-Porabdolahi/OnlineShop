@@ -1,4 +1,4 @@
-@import "remixicon","reset";
+@import "remixicon","reset","generalStyles/nav";
 
 html{
 	box-sizing : border-box;
@@ -11,6 +11,10 @@ html{
 	box-sizing: inherit;
 }
 
+.website-wrapper{
+	background-color: #F3F4F6;
+}
+
 @font-face{
 	font-family: Yekanbakh;
 	src : local('Yekan Bakh'),
@@ -21,6 +25,7 @@ html{
 
 body{
 	font-family : Yekanbakh;
+	color: $textColor;
 }
 
 img{
@@ -30,5 +35,32 @@ img{
 
 input,button{
 	outline: none;
+	font-family: yekanbakh;
 }
 
+a{
+	text-decoration: none;
+}
+
+a,button,input{
+	transition: color .2s,opacity .2s,background-color .2s;
+}
+
+button,span{
+	cursor: pointer;
+}
+
+.vertical-divider{
+	width: 1.5rem;
+	height: 1px;
+	transform: rotate(90deg);
+	background-color: $creamColor;
+}
+
+.hidden{
+	display: none;
+}
+
+.show-block{
+	display: block;
+}
