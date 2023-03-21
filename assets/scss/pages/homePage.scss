@@ -1,1 +1,315 @@
-@import "../generalStyles/header"
+@import "../generalStyles/header", "../variables", "../mixins", "../animations";
+
+.main {
+  section {
+    padding: 6rem 1.5rem;
+  }
+
+  &__bestselling {
+    background-color: $whiteColor;
+
+    .bestselling__products {
+      display: grid;
+      grid-template-rows: 1fr 1fr;
+      grid-template-columns: repeat(10, 1fr);
+      gap: 2.5rem 2rem;
+    }
+
+    .products__product {
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 8%);
+      padding: 1.5rem;
+      border-radius: 10px;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .product__description {
+      position: absolute;
+      background-color: $textColor;
+      border: 1px solid $blackColor;
+      padding: 1rem;
+      width: 50rem;
+      top: 0;
+      left: 0;
+      z-index: 1;
+      color: $whiteColor;
+    }
+
+    .description__title {
+      font-size: 2rem;
+      margin: 1.5rem 0;
+    }
+
+    .author__description {
+      font-size: 1.5rem;
+      opacity: .9;
+    }
+
+    .author__name {
+      @include textStyle($grayColor,1.1rem);
+      margin-bottom: .5rem;
+      display: block;
+    }
+
+    .description__other {
+      @include alignCenter;
+      justify-content: space-between;
+    }
+
+    .description__price {
+      text-align: left;
+      font-weight: bold;
+
+      .price__price {
+        font-size: 3rem;
+        margin-top: .5rem;
+      }
+
+      .price__currency {
+        font-size: 1.8rem;
+      }
+    }
+
+    .product__description {
+      display: none;
+      animation: .3s opacityZeroToOne;
+    }
+  }
+
+  &__essential-wp-plugins {
+    padding: 0rem 1.5rem 6rem 1.5rem !important;
+  }
+
+  &__new-temps,
+  &__essential-wp-plugins {
+    .temp__description {
+      padding: 2rem;
+    }
+
+    .description__title {
+      @include alignCenter;
+      justify-content: space-between;
+
+      a {
+        @include textStyle($textColor,1.5rem,bold);
+        transition: color .3s;
+        line-height: 1.5;
+
+        &:hover {
+          color: $themeColor;
+        }
+      }
+
+      span {
+        @include textStyle($grayColor,1.9rem);
+      }
+    }
+
+    .description__price {
+      cursor: text;
+      @include alignCenter;
+      justify-content: left;
+      gap: .5rem;
+      padding: 2.5rem 0 .8rem 0;
+
+      .price__new-price {
+        font-size: 1.6rem;
+        font-weight: bold;
+      }
+
+      .price__price {
+        @include textStyle($creamColor,1.4rem);
+        text-decoration: line-through;
+      }
+    }
+
+    .description__add-to-basket {
+      display: none;
+      .add-to-basket__icon,
+      .add-to-basket__title {
+        vertical-align: middle;
+      }
+
+      .add-to-basket__icon {
+        font-size: 2.1rem;
+      }
+
+      .add-to-basket__title {
+        font-size: 1.5rem;
+        margin-right: .5rem;
+      }
+    }
+  }
+
+  .new-temps__temps,
+  .posts {
+    @include alignCenter;
+    gap: 2rem;
+    overflow: hidden;
+  }
+
+  .temps__temp,
+  .post {
+    box-shadow: $boxShdow;
+    background-color: $whiteColor;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    min-width: calc((100% / 4) - 1.5rem);
+  }
+
+  &__blog-posts {
+    background-color: $whiteColor;
+
+    .archive-btn__container {
+      text-align: center;
+      padding-top: 6rem;
+
+      .archive-btn {
+        border: 0;
+        border-radius: 5px;
+        background-color: $themeColor;
+        padding: 1rem 2.5rem;
+        transition: background-color .3s;
+        @include textStyle($whiteColor,1.7rem);
+
+        &:hover {
+          background-color: rgb(223, 134, 1);
+        }
+      }
+    }
+
+    .post:hover {
+      .post__img-container {
+        img {
+          transform: scale(1.04);
+        }
+      }
+
+      .img-container__layer {
+        opacity: 1;
+      }
+    }
+
+    .post__img-container {
+      position: relative;
+
+      img {
+        transition: transform .3s;
+      }
+    }
+
+    .img-container__layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      background-color: rgba(0, 0, 0, 30%);
+      @include alignCenter;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity .3s;
+
+      a {
+        @include textStyle($whiteColor,2rem);
+      }
+    }
+
+    .post__title {
+      @include textStyle($textColor, 1.9rem);
+      transition: color .3s;
+      line-height: 1.2;
+
+      &:hover {
+        color: $themeColor;
+      }
+    }
+
+    .post__btns {
+      @include alignCenter;
+      justify-content: space-between;
+    }
+
+    .btns {
+      @include alignCenter;
+      color: $grayColor;
+      font-size: 1.8rem;
+      gap: 1rem;
+    }
+
+    .btns__share,
+    .btns__comment {
+      transition: color .3s;
+    }
+
+    .btns__share:hover,
+    .btns__comment:hover {
+      color: $textColor;
+    }
+
+    .btns__comment {
+      display: flex;
+      sup {
+        font-size: 1.3rem;
+      }
+    }
+
+    .post__summary {
+      @include textStyle($grayerColor,1.5em);
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      padding: 2rem 0;
+    }
+
+    .post__description {
+      padding: 2rem;
+    }
+
+    .post__author {
+      img {
+        border-radius: 50%;
+        width: 3rem;
+        vertical-align: middle;
+        height: 3rem;
+      }
+
+      span {
+        font-size: 1.5rem;
+        margin-right: 1rem;
+      }
+    }
+  }
+
+  .main-sections-title {
+    @include alignCenter;
+    justify-content: space-between;
+    margin-bottom: 2.5rem;
+
+    a {
+      @include textStyle($textColor,1.4rem,bold);
+      transition: color .3s;
+
+      &:hover {
+        color: $themeColor;
+      }
+    }
+
+    p {
+      font-size: 1.9rem;
+      font-weight: bold;
+      word-spacing: .2rem;
+    }
+
+    p > span {
+      color: $themeColor;
+    }
+
+    a > span,
+    p > span {
+      vertical-align: middle;
+      font-size: 2.3rem;
+    }
+  }
+}
