@@ -9,4 +9,7 @@
   "keywords": [],
   "author": "Morteza",
   "license": "ISC",
+  "dependencies": {
+    "swiper": "^9.1.1"
+  }
 }

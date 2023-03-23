@@ -2,7 +2,7 @@
 
 .main {
   section {
-    padding: 6rem 1.5rem;
+    padding: 4rem 1.5rem;
   }
 
   &__bestselling {
@@ -31,7 +31,7 @@
       width: 50rem;
       top: 0;
       left: 0;
-      z-index: 1;
+      z-index: 3;
       color: $whiteColor;
     }
 
@@ -144,7 +144,10 @@
   .new-temps__temps,
   .posts {
     @include alignCenter;
-    gap: 2rem;
+    flex-direction: column;
+  }
+
+  .posts {
     overflow: hidden;
   }
 
@@ -155,7 +158,6 @@
     border-radius: 10px;
     overflow: hidden;
     cursor: pointer;
-    min-width: calc((100% / 4) - 1.5rem);
   }
 
   &__blog-posts {
