@@ -26,6 +26,11 @@
 
     .social__nav {
       gap: 3rem;
+
+      a{
+        color: $textColor;
+      }
+      
       a:hover {
         color: $grayerColor;
       }
@@ -206,6 +211,7 @@
         &__basket-icon {
           position: relative;
           margin-left: 2rem;
+          color: $grayerColor;
           transition: opacity .3s;
 
           &:hover {

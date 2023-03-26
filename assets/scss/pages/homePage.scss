@@ -188,7 +188,7 @@
     .post:hover {
       .post__img-container {
         img {
-          transform: scale(1.04);
+          transform: translateX(-1rem);
         }
       }
 
@@ -199,9 +199,11 @@
 
     .post__img-container {
       position: relative;
+      overflow: hidden;
 
       img {
         transition: transform .3s;
+        scale: 1.2;
       }
     }
 

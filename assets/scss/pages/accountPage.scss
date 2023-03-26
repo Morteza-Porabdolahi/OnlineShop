@@ -1,0 +1,99 @@
+@import "../variables", "../mixins","../generalStyles/pagesTitle";
+
+.main {
+
+  &__forms{
+    display: flex;
+    padding: 0 10rem;
+
+    .forms__divider{
+      @include alignCenter;
+      flex-direction: column;
+      justify-content: center;
+      
+      span{
+        font-size: 2rem;
+        display: inline-block;
+        padding-block: 1rem;
+      }
+
+      .divider__line{
+        background-color: $creamColor;
+        writing-mode: vertical-rl;
+        width: 1px;
+        height: 17rem;
+      }
+    }
+
+    .forms__form-container{
+      width: 50%;
+      padding: 3rem 4rem 1rem 4rem;
+    }
+
+    .form-container__title{
+      @include textStyle($textColor,2.8rem,bold);
+      margin-bottom: 2rem
+    }
+
+    .input-container__title{
+      @include textStyle($textColor,1.7rem);
+
+      &::after{
+        content: '*';
+        color: red;
+        font-size: 2.5rem;
+      }
+    }
+
+    .input-container__input{
+      border: 1px solid $creamColor;
+      background-color: transparent;
+      @include textStyle($grayerColor,1.5rem);
+      width: 100%;
+      border-radius: 5px;
+      padding: .5rem 1rem;
+      margin: .5rem 0 2.5rem 0;
+    }
+
+    .form__btn{
+      background-color: #57d57e;
+      transition: background-color .3s;
+      padding: .8rem 2rem;
+      border: 0;
+      border-radius: 5px;
+      color: $whiteColor;
+      margin-top: 2rem;
+      
+      &:hover{
+        background-color: #50C479;
+      }
+    }
+
+    .form__options{
+      @include alignCenter;
+      justify-content: space-between;
+    }
+
+    .remember__text{
+      font-size: 1.5rem;
+    }
+
+    .remember__checkbox{
+      vertical-align: middle;
+    }
+
+    .options__forgot-password{
+      @include textStyle($themeColor,1.5rem)
+    }
+
+    .options__warning{
+      @include textStyle($grayerColor,1.8rem);
+      line-height: 1.5;
+
+      a{
+        font-weight: bold;
+        color: $themeColor;
+      }
+    }
+  }
+}

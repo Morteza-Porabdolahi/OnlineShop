@@ -1,0 +1,35 @@
+@import "../variables", "../mixins";
+
+.main {
+    &__intro {
+      padding: 3rem;
+  
+      .intro__title {
+        @include textStyle($textColor,3rem,bold);
+        margin-bottom: 1rem;
+      }
+  
+      .intro__breadcrumb {
+        @include alignCenter;
+  
+        .item {
+          font-size: 1.6rem;
+  
+          a {
+            color: $grayColor;
+          }
+  
+          &:not(:last-child) > a::after {
+            font-family: "remixicon";
+            vertical-align: middle;
+            font-size: 2rem;
+            content: '\ea52';
+          }
+        }
+  
+        .item__active > a {
+          color: $textColor;
+        }
+      }
+    }
+}  
