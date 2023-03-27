@@ -14,11 +14,11 @@
       gap: 1.5rem;
 
       .box__title {
-        @include textStyle($grayerColor,2.5rem);
+        @include textStyle($grayerColor, 2.5rem);
       }
 
       .box__desc {
-        @include textStyle($grayColor,1.9rem);
+        @include textStyle($grayColor, 1.9rem);
       }
 
       svg {
@@ -29,7 +29,7 @@
   }
 
   &__newsletter {
-    padding: 4rem 2rem 4rem 0;
+    padding: 4rem 2rem 4rem 2rem;
 
     .newsletter__container {
       background-color: $whiteColor;
@@ -46,6 +46,7 @@
 
       .social__aparat {
         background-color: #ffe9e9;
+
         svg {
           width: 2.5rem;
           height: 2.5rem;
@@ -117,10 +118,10 @@
         border: 1px solid $creamColor;
         border-left: 0;
         width: 100%;
-        @include textStyle($grayerColor,1.5rem);
+        @include textStyle($grayerColor, 1.5rem);
 
         &::placeholder {
-          @include textStyle($grayColor,1.5rem);
+          @include textStyle($grayColor, 1.5rem);
         }
       }
 
@@ -138,11 +139,12 @@
 
     p {
       span {
-        @include textStyle($themeColor,2rem);
+        @include textStyle($themeColor, 2rem);
         vertical-align: middle;
         margin-left: .5rem;
       }
-      @include textStyle($grayerColor,1.6rem,bold);
+
+      @include textStyle($grayerColor, 1.6rem, bold);
     }
 
     .addresses__lists {
@@ -153,6 +155,7 @@
     .lists__list {
       .list__title {
         margin-bottom: 2rem;
+
         span:nth-child(2) {
           font-size: 1.8rem;
           font-weight: bold;
@@ -160,14 +163,14 @@
         }
 
         p {
-          @include textStyle($grayerColor,1.4rem);
+          @include textStyle($grayerColor, 1.4rem);
           margin-top: .5rem;
         }
       }
 
-      .list__title > span:first-child,
-      .list__item > span:first-child {
-        @include textStyle($themeColor,2rem);
+      .list__title>span:first-child,
+      .list__item>span:first-child {
+        @include textStyle($themeColor, 2rem);
         vertical-align: middle;
       }
 
@@ -209,8 +212,10 @@
         }
 
         &::before {
-          content: "\2022"; /* Add content: \2022 is the CSS Code/unicode for a bullet */
-          color: $grayColor; /* Change the color */
+          content: "\2022";
+          /* Add content: \2022 is the CSS Code/unicode for a bullet */
+          color: $grayColor;
+          /* Change the color */
           display: inline-block;
           width: 2rem;
           margin-left: .8rem;
@@ -222,7 +227,7 @@
         }
 
         a {
-          @include textStyle($textColor , 1.5rem , bold);
+          @include textStyle($textColor , 1.5rem, bold);
           position: relative;
           transition: color .3s;
 
@@ -249,7 +254,7 @@
     }
 
     p {
-      @include textStyle($grayerColor,1.4rem);
+      @include textStyle($grayerColor, 1.4rem);
     }
   }
 }

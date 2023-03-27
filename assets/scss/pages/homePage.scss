@@ -1,8 +1,8 @@
 @import "../generalStyles/header",
-  "../variables",
-  "../mixins",
-  "../animations",
-  "../generalStyles/footer";
+"../variables",
+"../mixins",
+"../animations",
+"../generalStyles/footer";
 
 .main {
   section {
@@ -50,7 +50,7 @@
     }
 
     .author__name {
-      @include textStyle($grayColor,1.1rem);
+      @include textStyle($grayColor, 1.1rem);
       margin-bottom: .5rem;
       display: block;
     }
@@ -95,7 +95,7 @@
       justify-content: space-between;
 
       a {
-        @include textStyle($textColor,1.5rem,bold);
+        @include textStyle($textColor, 1.5rem, bold);
         transition: color .3s;
         line-height: 1.5;
 
@@ -105,7 +105,7 @@
       }
 
       span {
-        @include textStyle($grayColor,1.9rem);
+        @include textStyle($grayColor, 1.9rem);
       }
     }
 
@@ -122,13 +122,14 @@
       }
 
       .price__price {
-        @include textStyle($creamColor,1.4rem);
+        @include textStyle($creamColor, 1.4rem);
         text-decoration: line-through;
       }
     }
 
     .description__add-to-basket {
       display: none;
+
       .add-to-basket__icon,
       .add-to-basket__title {
         vertical-align: middle;
@@ -177,7 +178,7 @@
         background-color: $themeColor;
         padding: 1rem 2.5rem;
         transition: background-color .3s;
-        @include textStyle($whiteColor,1.7rem);
+        @include textStyle($whiteColor, 1.7rem);
 
         &:hover {
           background-color: rgb(223, 134, 1);
@@ -220,7 +221,7 @@
       transition: opacity .3s;
 
       a {
-        @include textStyle($whiteColor,2rem);
+        @include textStyle($whiteColor, 2rem);
       }
     }
 
@@ -258,13 +259,14 @@
 
     .btns__comment {
       display: flex;
+
       sup {
         font-size: 1.3rem;
       }
     }
 
     .post__summary {
-      @include textStyle($grayerColor,1.5em);
+      @include textStyle($grayerColor, 1.5em);
       white-space: nowrap;
       text-overflow: ellipsis;
       overflow: hidden;
@@ -296,7 +298,7 @@
     margin-bottom: 2.5rem;
 
     a {
-      @include textStyle($textColor,1.4rem,bold);
+      @include textStyle($textColor, 1.4rem, bold);
       transition: color .3s;
 
       &:hover {
@@ -310,12 +312,12 @@
       word-spacing: .2rem;
     }
 
-    p > span {
+    p>span {
       color: $themeColor;
     }
 
-    a > span,
-    p > span {
+    a>span,
+    p>span {
       vertical-align: middle;
       font-size: 2.3rem;
     }

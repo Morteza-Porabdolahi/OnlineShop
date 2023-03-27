@@ -1,0 +1,283 @@
+@import "../variables", "../mixins", "../generalStyles/pagesTitle";
+
+.main {
+    &__body {
+        display: flex;
+        gap: 3rem;
+        padding: 0 1.5rem;
+
+        .body__posts-section {
+            width: 75%;
+            @include alignCenter;
+            flex-direction: column;
+
+            .posts-section__load-btn {
+                padding: .8rem 2.8rem;
+                background-color: transparent;
+                border-radius: 5px;
+                border: 1px solid $creamColor;
+                font-size: 1.5rem;
+                margin-top: 2.5rem;
+                transition: border-color .3s;
+
+                &:hover {
+                    border-color: $grayColor;
+                }
+            }
+
+            .posts-section__posts {
+                overflow: hidden;
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2rem;
+                padding: 3rem 0;
+            }
+
+            .posts__post {
+                box-shadow: $boxShdow;
+                background-color: $whiteColor;
+                border-radius: 10px;
+                overflow: hidden;
+                cursor: pointer;
+                transition: transform .3s;
+            }
+
+            .posts__post:hover {
+                transform: translateY(-1rem);
+
+                .post__img-container {
+                    img {
+                        transform: translateX(-1rem) translateY(-1rem);
+                    }
+                }
+
+                .img-container__layer {
+                    opacity: 1;
+                }
+            }
+
+            .post__img-container {
+                position: relative;
+                overflow: hidden;
+
+                img {
+                    transition: transform .3s;
+                    scale: 1.2;
+                }
+            }
+
+            .img-container__layer {
+                position: absolute;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                right: 0;
+                background-color: rgba(0, 0, 0, 30%);
+                @include alignCenter;
+                justify-content: center;
+                opacity: 0;
+                transition: opacity .3s;
+
+                a {
+                    @include textStyle($whiteColor, 2rem);
+                }
+            }
+
+            .post__title {
+                @include textStyle($textColor, 1.9rem);
+                transition: color .3s;
+                line-height: 1.2;
+
+                &:hover {
+                    color: $themeColor;
+                }
+            }
+
+            .post__btns {
+                @include alignCenter;
+                justify-content: space-between;
+            }
+
+            .btns {
+                @include alignCenter;
+                color: $grayColor;
+                font-size: 1.8rem;
+                gap: 1rem;
+            }
+
+            .btns__share,
+            .btns__comment {
+                transition: color .3s;
+            }
+
+            .btns__share:hover,
+            .btns__comment:hover {
+                color: $textColor;
+            }
+
+            .btns__comment {
+                display: flex;
+
+                sup {
+                    font-size: 1.3rem;
+                }
+            }
+
+            .post__summary {
+                @include textStyle($grayerColor, 1.5em);
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                padding: 2rem 0;
+            }
+
+            .post__description {
+                padding: 2rem;
+            }
+
+            .post__author {
+                img {
+                    border-radius: 50%;
+                    width: 3rem;
+                    vertical-align: middle;
+                    height: 3rem;
+                }
+
+                span {
+                    font-size: 1.5rem;
+                    margin-right: 1rem;
+                }
+            }
+
+        }
+
+        .body__aside {
+            width: 25%;
+            padding: 3rem 0;
+
+            .aside__aside-container>div {
+                box-shadow: $boxShdow;
+                background-color: $whiteColor;
+                border-radius: 10px;
+                padding: 2.5rem;
+                margin-bottom: 3rem;
+            }
+
+            .aside-container__search-box {
+                @include alignCenter;
+                gap: .3rem;
+            }
+
+            .search-box__input {
+                border: 1px solid $creamColor;
+                border-radius: 5px;
+                padding: .8rem 1rem;
+                width: 100%;
+                @include textStyle($grayerColor, 1.4rem);
+
+                &::placeholder {
+                    @include textStyle($grayColor, 1.5rem);
+                }
+            }
+
+            .search-box__btn {
+                background-color: $themeColor;
+                border: 0;
+                @include textStyle($whiteColor, 1.6rem);
+                padding: .75rem 2rem;
+                border-radius: 5px;
+                transition: background-color .3s;
+
+                &:hover {
+                    background-color: rgb(223, 134, 1);
+                }
+            }
+
+            .aside-children-title {
+                @include alignCenter;
+                gap: 1rem;
+                margin-bottom: 2rem;
+
+                span {
+                    color: $themeColor;
+                    font-size: 2rem;
+                }
+
+                h3 {
+                    font-size: 1.7rem;
+                }
+            }
+
+            .products__product,
+            .posts__post {
+                display: flex;
+                gap: 1rem;
+                align-items: flex-start;
+
+                &:not(:last-child) {
+                    margin-bottom: 2rem;
+                }
+
+                .descriptions__title {
+                    @include textStyle($textColor, 1.7rem);
+                    transition: color .3s;
+
+                    &:hover {
+                        color: $themeColor;
+                    }
+                }
+
+
+            }
+
+            .products__product {
+
+                &:not(:last-child) {
+                    border-bottom: 1px solid #E4E4E4;
+                    padding-bottom: 1rem;
+                }
+
+                .product__img {
+                    width: 55px;
+                    height: 65px;
+                    border-radius: 10px;
+                }
+
+                .descriptions__prices {
+                    margin-top: .8rem;
+                }
+
+                .prices__real-price {
+                    text-decoration: line-through;
+                    @include textStyle($grayColor, 1.5rem);
+                }
+
+                .prices__new-price {
+                    @include textStyle($themeColor, 1.6rem);
+                    margin-top: .8rem;
+                }
+            }
+
+            .posts__post {
+                .post__img {
+                    width: 45px;
+                    height: 45px;
+                    border-radius: 10px;
+                }
+
+                .descriptions__date {
+                    @include alignCenter;
+                    @include textStyle($grayColor, 1.5rem);
+                    flex-direction: row-reverse;
+                    justify-content: start;
+                    margin-top: 1rem;
+                    gap: .5rem;
+
+                    span {
+                        cursor: text;
+                    }
+                }
+            }
+        }
+    }
+}
