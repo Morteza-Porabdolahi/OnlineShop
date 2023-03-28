@@ -1,0 +1,88 @@
+@import "../variables", "../mixins", "../generalStyles/pagesTitle";
+
+.main {
+    &__body {
+        display: flex;
+        flex-direction: row-reverse;
+        gap: 3rem;
+        padding: 0 1.5rem;
+
+        .body__products-container {
+            width: 75%;
+
+            .products-container__products {
+                overflow: hidden;
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2rem;
+                padding: 3rem 0;
+            }
+
+            .products__prodcut {
+                box-shadow: $boxShdow;
+                background-color: $whiteColor;
+                border-radius: 10px;
+                overflow: hidden;
+                cursor: pointer;
+                transition: transform .3s;
+            }
+
+            .product__img-container {
+                position: relative;
+            }
+
+            .img-container__options {
+                position: absolute;
+                top: 2rem;
+                left: 2rem;
+                opacity: 0;
+                transition: opacity .3s;
+            }
+
+            .prices-title__title {
+                @include textStyle($textColor, 1.9rem);
+                transition: color .3s;
+                line-height: 1.2;
+
+                &:hover {
+                    color: $themeColor;
+                }
+            }
+
+            .summary-btn__summary {
+                @include textStyle($grayerColor, 1.4rem);
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+            }
+        }
+
+        .body__aside {
+            width: 25%;
+            padding: 3rem 0;
+
+            .aside>div {
+                box-shadow: $boxShdow;
+                background-color: $whiteColor;
+                border-radius: 10px;
+                padding: 2.5rem;
+                margin-bottom: 3rem;
+            }
+
+            .aside-children-title {
+                @include alignCenter;
+                gap: 1rem;
+                margin-bottom: 2rem;
+
+                span {
+                    color: $themeColor;
+                    font-size: 2rem;
+                }
+
+                h3 {
+                    font-size: 1.7rem;
+                }
+            }
+        }
+    }
+}

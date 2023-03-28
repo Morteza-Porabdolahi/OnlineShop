@@ -1,8 +1,8 @@
 @import "remixicon",
-  "reset",
-  "generalStyles/nav",
-  "./slider",
-  "./generalStyles/footer";
+"reset",
+"generalStyles/nav",
+"./slider",
+"./generalStyles/footer";
 
 html {
   box-sizing: border-box;
@@ -13,6 +13,8 @@ html {
 *::before,
 *::after {
   box-sizing: inherit;
+  margin: 0;
+  padding: 0;
 }
 
 @font-face {
@@ -65,4 +67,10 @@ span {
 
 .show-block {
   display: block;
+}
+
+.truncate {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }

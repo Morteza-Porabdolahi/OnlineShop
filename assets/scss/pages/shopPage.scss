@@ -1,1 +1,251 @@
-@import "../variables", "../mixins", "../generalStyles/pagesTitle";
+@import "../variables", "../mixins", "../generalStyles/pagesTitle", "../animations";
+
+.main {
+    &__body {
+        display: flex;
+        flex-direction: row-reverse;
+        gap: 3rem;
+        padding: 0 1.5rem;
+
+        .body__products-container {
+            width: 75%;
+
+            .products-container__products {
+                overflow: hidden;
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2rem;
+                padding: 3rem 0;
+            }
+
+            .products__prodcut {
+                box-shadow: $boxShdow;
+                background-color: $whiteColor;
+                border-radius: 10px;
+                overflow: hidden;
+                cursor: pointer;
+                position: relative;
+            }
+
+            .product__img-container {
+                position: relative;
+            }
+
+            .img-container__options {
+                position: absolute;
+                top: 2rem;
+                left: 2rem;
+                opacity: 0;
+                transition: opacity .3s;
+            }
+
+            .prices-title__title {
+                @include textStyle($textColor, 1.6rem);
+                transition: color .3s;
+                line-height: 1.2;
+
+                &:hover {
+                    color: $themeColor;
+                }
+            }
+
+            .description__prices-title {
+                padding: 1rem 1.5rem 2rem 1.5rem;
+            }
+
+            .prices-title__prices {
+                text-align: left
+            }
+
+            .prices__real-price,
+            .prices__new-price {
+                font-size: 1.5rem;
+                cursor: default;
+            }
+
+            .prices__real-price {
+                margin-left: .5rem;
+                text-decoration: line-through;
+                color: $grayColor;
+            }
+
+            .description__summary-btn {
+                padding: 0 1rem;
+                display: none;
+            }
+
+            .summary-btn__btn {
+                width: 100%;
+                text-align: center;
+                background-color: #57d57e;
+                transition: background-color .3s;
+                padding: 1.3rem 0;
+                border: 0;
+                border-radius: 5px;
+                margin: 1.5rem 0;
+                @include textStyle($whiteColor, 1.5rem);
+
+                &:hover {
+                    background-color: #50C479;
+                }
+            }
+
+            .summary-btn__summary {
+                @include textStyle($grayerColor, 1.4rem);
+                -webkit-line-clamp: 3;
+                line-height: 1.5;
+                position: relative;
+                cursor: text;
+
+                &:hover>.summary__three-dots {
+                    bottom: 0;
+                }
+
+                .summary__three-dots {
+                    background-color: rgba(255, 255, 255, .8);
+                    position: absolute;
+                    bottom: -3rem;
+                    transition: bottom .3s;
+                    right: 0;
+                    left: 0;
+                    text-align: center;
+
+                    .three-dots__dot {
+                        display: inline-block;
+                        width: 4px;
+                        height: 4px;
+                        border-radius: 50%;
+                        background-color: $textColor;
+                        margin-left: .2rem;
+                    }
+                }
+            }
+        }
+
+        .body__aside {
+            width: 25%;
+            padding: 3rem 0;
+
+            .aside>div {
+                box-shadow: $boxShdow;
+                background-color: $whiteColor;
+                border-radius: 10px;
+                padding: 2.5rem;
+                margin-bottom: 3rem;
+            }
+
+            .aside-children-title {
+                @include alignCenter;
+                gap: 1rem;
+                margin-bottom: 2rem;
+
+                span {
+                    color: $themeColor;
+                    font-size: 2rem;
+                }
+
+                h3 {
+                    font-size: 1.7rem;
+                }
+            }
+
+            .stock__special-sale {
+                margin-bottom: 1rem
+            }
+
+            .stock__special-sale,
+            .stock__available {
+                @include alignCenter;
+                gap: 1rem;
+
+                input {
+                    cursor: pointer;
+                    /* hiding browser el */
+                    appearance: none;
+                    /* Safari support */
+                    -webkit-appearance: none;
+                    border: 0.1rem solid $grayerColor;
+                    background-color: transparent;
+                    border-radius: 50%;
+                    width: 1.4rem;
+                    height: 1.4rem;
+                    transition: border-color .3s, background-color .3s;
+                    position: relative;
+
+                    &:hover {
+                        border-color: $themeColor;
+                    }
+
+                    &:checked {
+                        background-color: $themeColor;
+                        border: 0;
+
+                        &+label {
+                            color: $textColor;
+                        }
+
+                        &::before {
+                            color: $whiteColor;
+                            content: '\2713';
+                            position: absolute;
+                            top: -1px;
+                        }
+                    }
+                }
+
+                label {
+                    @include textStyle($grayerColor, 1.8rem)
+                }
+            }
+
+            .price-filtering__container {
+
+                .container__range {
+                    @include textStyle($grayerColor, 1.7rem);
+                    line-height: 1.5;
+
+                    .range__start,
+                    .range__end {
+                        color: $textColor;
+                    }
+                }
+
+                .container__filter-btn {
+                    border: 0;
+                    border-radius: 5px;
+                    background-color: $themeColor;
+                    @include textStyle($whiteColor, 1.5rem);
+                    transition: background-color .3s;
+                    padding: .8rem 2rem;
+                    margin-top: 1rem;
+
+                    &:hover {
+                        background-color: rgb(223, 134, 1);
+                    }
+
+                }
+            }
+
+            .products-category__list {
+
+                .list__item:not(:last-child) {
+                    margin-bottom: 1.5rem;
+                }
+
+                .item__title {
+                    font-size: 1.8rem;
+                    transition: opacity .3s;
+
+                    &:hover {
+                        opacity: .7;
+                    }
+                }
+
+                .item__title--active {
+                    color: $themeColor;
+                    opacity: 1 !important;
+                }
+            }
+        }
+    }
+}
