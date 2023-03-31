@@ -1,0 +1,174 @@
+@import "../variables", "../mixins", "../generalStyles/pagesTitle";
+
+.main {
+    &__product-container {
+        padding: 3.5rem 3rem;
+
+        .product-container__product-header {
+            display: flex;
+            gap: 3rem;
+
+            .product-header__product-img-container {
+                text-align: left;
+
+                img {
+                    box-shadow: $boxShdow;
+                    border-radius: 5px;
+                }
+
+                a {
+                    background-color: $themeColor;
+                    filter: brightness(1.2);
+                    @include textStyle($whiteColor, 1.9rem);
+                    padding: 1.5rem 2rem;
+                    border-radius: 5px;
+                    display: inline-block;
+                    margin-top: 3rem;
+                    transition: filter .3s;
+
+                    &:hover {
+                        filter: brightness(1);
+                    }
+
+                    span {
+                        vertical-align: middle;
+                        margin-left: .2rem;
+                    }
+                }
+            }
+        }
+
+        .product-header__product-info-box,
+        .body-aside__product-info-box {
+            width: 42%;
+            box-shadow: $boxShdow;
+            background-color: $whiteColor;
+            border-radius: 5px;
+            padding: 5rem 3rem 2rem 3rem;
+
+            .product-descriptions__product-selling-info {
+                @include alignCenter;
+                justify-content: center;
+                gap: 4rem;
+
+                div {
+                    text-align: center;
+
+                    h4 {
+                        @include textStyle($grayerColor, 3rem);
+                        margin-bottom: 1rem;
+                    }
+
+                    span {
+                        @include textStyle($grayColor, 2rem)
+                    }
+                }
+
+                div:first-child {
+                    border-left: 1px dashed $creamColor;
+                    padding-left: 4rem;
+                }
+            }
+
+            .product-properties__properties-list {
+                border-bottom: 1px dashed $creamColor;
+                padding: 4rem 0 1.5rem 0;
+
+                li:not(:last-child) {
+                    margin-bottom: .8rem;
+                }
+
+                li>span {
+                    @include textStyle($grayerColor, 1.6rem);
+
+                    &::before {
+                        content: "✓";
+                        @include textStyle(#57D57E, 2rem);
+                    }
+                }
+
+            }
+
+            .product-additional-desc__price {
+                @include textStyle($grayerColor, 2.8rem);
+                margin: 2rem 0;
+            }
+
+            .product-additional-desc__add-to-basket-btn {
+                width: 100%;
+                background-color: #57D57E;
+                border: 0;
+                border-radius: 5px;
+                @include textStyle($whiteColor, 2.1rem);
+                padding: 1rem 0;
+                transition: background-color .3s;
+
+                &:hover {
+                    background-color: #50C479;
+                }
+            }
+
+            .product-additional-desc__product-meta-list {
+                margin-top: 2.5rem;
+
+                li {
+                    margin-top: 2rem;
+                    @include alignCenter;
+                    gap: .5rem;
+
+                    span {
+                        font-size: 1.8rem;
+                    }
+
+                    p {
+                        font-size: 1.6rem;
+                        display: inline-block;
+
+                        a {
+                            color: $grayerColor;
+                            transition: color .3s;
+                            margin-left: .3rem;
+
+                            &:hover {
+                                color: $themeColor;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .product-container__product-body {
+
+            .body-aside__product-info-box {
+                background-color: transparent;
+                box-shadow: none;
+                width: 30%;
+                border-right: 1px dashed $creamColor;
+
+                .product-properties__properties-list {
+                    border-bottom: 0;
+                    padding: 2.5rem 0 3.5rem 0;
+                }
+
+
+                .product-info-box__product-badges {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 1rem;
+                    border-bottom: 1px dashed $creamColor;
+                    padding: 4rem 0;
+
+                    .product-badges__product-badge {
+                        display: flex;
+                        font-size: 4.2rem;
+                        padding: .8rem;
+                        border-radius: 5px;
+                    }
+                }
+            }
+
+
+        }
+    }
+}

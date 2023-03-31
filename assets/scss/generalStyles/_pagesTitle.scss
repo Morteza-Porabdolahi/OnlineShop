@@ -6,7 +6,7 @@
 
     .intro__title {
       @include textStyle($textColor, 3rem, bold);
-      margin-bottom: 1rem;
+      margin: 2rem 0;
     }
 
     .intro__breadcrumb {
@@ -17,6 +17,11 @@
 
         a {
           color: $grayColor;
+          transition: color .3s;
+
+          &:hover {
+            color: $textColor;
+          }
         }
 
         &:not(:last-child)>a::after {
@@ -24,10 +29,11 @@
           vertical-align: middle;
           font-size: 2rem;
           content: '\ea52';
+          color: $grayColor;
         }
       }
 
-      .item__active>a {
+      .item--active>a {
         color: $textColor;
       }
     }
