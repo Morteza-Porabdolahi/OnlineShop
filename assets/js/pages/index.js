@@ -1,6 +1,4 @@
-let $ = document;
-
-// Pop Up for Products Descriptions
+const $ = document;
 const products = $.querySelectorAll('.products__product');
 
 // Posts and Products Slider

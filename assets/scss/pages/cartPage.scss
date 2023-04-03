@@ -1,1 +1,209 @@
 @import "../variables", "../mixins", "../generalStyles/pagesTitle", "../generalStyles/wishlistAndBasket";
+
+.main {
+    padding: 0 1.5rem;
+
+    .body__no-products {
+        display: none;
+    }
+
+    .body__cart-products-container {
+        display: flex;
+        justify-content: space-between;
+
+        .cart-products__upgrade-cart {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+
+            .upgrade-card__btn {
+                background-color: $bgColor;
+                border: 0;
+                @include textStyle($grayerColor, 1.5rem);
+            }
+        }
+
+        .upgrade-card__discount-input-container {
+
+            input {
+                border: 1px solid #ddd;
+                background-color: transparent;
+                padding: .8rem 1.7rem;
+                border-radius: 5px;
+                @include textStyle($grayerColor, 1.6rem);
+
+                &::placeholder {
+                    color: $grayColor;
+                }
+            }
+
+            button {
+                background-color: #57D57E;
+                @include textStyle($whiteColor, 1.5rem);
+                border: 0;
+                padding: .8rem 1.7rem;
+                border-radius: 5px;
+            }
+        }
+
+        .cart-products-container__checkout-box {
+            width: 40%;
+            border: 2px solid $themeColor;
+            border-radius: 10px;
+            padding: 3rem;
+
+            h2 {
+                font-size: 2.8rem;
+                margin-bottom: 3rem;
+            }
+
+            .checkout-box__sum {
+                @include alignCenter;
+                justify-content: space-between;
+                font-size: 1.7rem;
+                border-bottom: 1px solid #ddd;
+                padding-bottom: 2rem;
+                margin-bottom: 2.5rem;
+
+                .sum__sum-number {
+                    @include textStyle($themeColor, 1.6rem);
+                }
+            }
+
+            button {
+                width: 100%;
+                background-color: #57D57E;
+                border: 0;
+                @include textStyle($whiteColor, 1.8rem);
+                border-radius: 5px;
+                padding: 1rem 0;
+            }
+        }
+
+        .cart-products-container__cart-products {
+            width: 58%;
+
+            table {
+                width: 100%;
+                display: block;
+
+                tbody,
+                thead {
+                    display: block;
+                }
+
+
+                thead {
+                    border-bottom: 1px solid #ddd;
+                    padding-bottom: 1.5rem;
+
+                    tr {
+                        display: flex;
+
+                        .product-name-title {
+                            width: 55%;
+                        }
+
+                        .product-price-title,
+                        .product-number-title,
+                        .product-price-sum-title {
+                            width: calc(45% /3);
+                        }
+
+                    }
+
+                    td {
+                        font-size: 1.6rem;
+                        text-align: center;
+                    }
+                }
+
+                tbody>tr {
+                    @include alignCenter;
+                    justify-content: space-between;
+                    border-bottom: 1px solid #ddd;
+                    padding: 1rem;
+                }
+
+                .title-container__number-of-product {
+                    @include alignCenter;
+                    border: 1px solid #ddd;
+                    width: fit-content;
+                    border-radius: 5px;
+                    font-size: 1.8rem;
+                    margin: 1.5rem 0;
+                    overflow: hidden;
+
+                    span {
+                        padding: .5rem .8rem;
+                        color: $grayerColor;
+                    }
+
+                    .number-of-product__add {
+                        border-right: 1px solid #ddd
+                    }
+
+                    .number-of-product__remove {
+                        border-left: 1px solid #ddd;
+                    }
+
+                    .number-of-product__add,
+                    .number-of-product__remove {
+                        transition: background-color .3s, color .3s;
+                        padding: .5rem;
+                        font-size: 2rem;
+                        cursor: pointer;
+
+                        &:hover {
+                            color: $whiteColor;
+                            background-color: $themeColor;
+                        }
+                    }
+                }
+
+
+                .product-price {
+                    color: $grayerColor;
+                }
+
+                .product-price,
+                .product-sum-price {
+                    font-size: 1.7rem;
+                }
+
+                .product-sum-price {
+                    color: $themeColor
+                }
+
+                .product-col {
+                    @include alignCenter;
+                    font-size: 1.8rem;
+                    gap: 1.5rem;
+
+                    img {
+                        width: 7rem;
+                        height: 8rem;
+                        border-radius: 10px;
+                    }
+
+                    .product-col__product-title {
+                        color: $textColor;
+                        transition: color .3s;
+
+                        &:hover {
+                            color: $themeColor;
+                        }
+                    }
+
+                    .product-col__remove-btn {
+                        font-size: 3rem;
+                        cursor: pointer;
+                        margin-left: .5rem;
+                    }
+                }
+            }
+
+
+        }
+    }
+}

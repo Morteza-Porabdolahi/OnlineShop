@@ -6,7 +6,7 @@
 
     .intro__title {
       @include textStyle($textColor, 3rem, bold);
-      margin: 2rem 0;
+      padding: 2rem 0;
     }
 
     .intro__breadcrumb {

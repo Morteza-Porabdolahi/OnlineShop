@@ -7,7 +7,7 @@
     <title>متاتم || علاقه مندی ها</title>
     <link rel="icon" type="image/x-icon" href="/assets/images/metatheme-300x125.png">
     <link rel="stylesheet" href="/assets/css/general.css">
-    <link rel="stylesheet" href="/assets/css/pages/wishlistPage.css">
+    <link rel="stylesheet" href="/assets/css/pages/checkOutPage.css">
 </head>
 
 <body>
@@ -224,280 +224,134 @@
             </header>
             <main class="main">
                 <section class="main__intro">
-                    <h1 class="intro__title">علاقه مندی ها</h1>
+                    <h1 class="intro__title">سبد خرید</h1>
                     <div class="intro__breadcrumb">
                         <div class="item">
                             <a href="/">خانه</a>
                         </div>
-                        <div class="item item__active">
-                            <a>علاقه مندی ها</a>
+                        <div class="item">
+                            <a>سبد خرید</a>
+                        </div>
+                        <div class="item item--active">
+                            <a>صورتحساب</a>
                         </div>
                     </div>
                 </section>
                 <section class="main__body">
-                    <section class="body__no-products">
-                        <svg width="150" height="150" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
-                            <!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-                            <path fill="black" style="opacity : .1;"
-                                d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9l2.6-2.4C267.2 438.6 256 404.6 256 368c0-97.2 78.8-176 176-176c28.3 0 55 6.7 78.7 18.5c.9-6.5 1.3-13 1.3-19.6v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5zM432 512c79.5 0 144-64.5 144-144s-64.5-144-144-144s-144 64.5-144 144s64.5 144 144 144zm16-208v48h48c8.8 0 16 7.2 16 16s-7.2 16-16 16H448v48c0 8.8-7.2 16-16 16s-16-7.2-16-16V384H368c-8.8 0-16-7.2-16-16s7.2-16 16-16h48V304c0-8.8 7.2-16 16-16s16 7.2 16 16z" />
-                        </svg>
-                        <h3 class="no-products__title">محصولی به لیست علاقه مندی های شما اضافه نشده است.</h3>
-                        <a class="no-products__btn" href="/pages/shopPage.html">بازگشت به فروشگاه</a>
-                    </section>
-                    <div class="body__favorite-products">
-                        <h3 class="favorite-products__title">محصولات علاقه مندی شما</h3>
-                        <div class="favorite-products__products-container">
-                            <div class="products-container__products">
-                                <div class="products-product-container">
-                                    <button class="product__remove-btn">
-                                        <span class="remove-btn__icon">&times;</span>
-                                        حذف
-                                    </button>
-                                    <div class="products__prodcut">
-                                        <div class="product__img-container">
-                                            <img src="../assets/images/63146da1cef0181f650a3095.png" alt="test"
-                                                class="img-container__img">
-                                            <div class="img-container__options">
-                                                <span class="ri-heart-line"></span>
-                                            </div>
-                                        </div>
-                                        <div class="product__description">
-                                            <div class="description__prices-title">
-                                                <a href="#" class="prices-title__title">
-                                                    قالب فروشگاهی قطعات خودرو پارتدو، Partdo
-                                                </a>
-                                                <div class="prices-title__prices">
-                                                    <span class="prices__real-price">
-                                                        345,000 تومان
-                                                    </span>
-                                                    <span class="prices__new-price">
-                                                        329,000 تومان
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <div class="description__summary-btn">
-                                                <p class="summary-btn__summary truncate">
-                                                    لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
-                                                    استفاده
-                                                    از
-                                                    طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و
-                                                    سطرآنچنان که
-                                                    لازم است.
-                                                    <span class="summary__three-dots">
-                                                        <span class="three-dots__dot"></span>
-                                                        <span class="three-dots__dot"></span>
-                                                        <span class="three-dots__dot"></span>
-                                                    </span>
-                                                </p>
-                                                <p class="summary-btn__btn">
-                                                    افزودن به سبد خرید
-                                                </p>
-                                            </div>
-                                        </div>
-
+                    <div class="body__bill-container">
+                        <div class="bill-container__discount">
+                            <span class="discount__icon ri-percent-line"></span>
+                            <span class="discount__title">
+                                کد تخفیف دارید؟
+                            </span>
+                            <span class="discount__input-switcher">
+                                برای نوشتن کد اینجا کلیک کنید
+                            </span>
+                            <div class="discount__discount-input-container">
+                                <div class="discount-input-container__input-container">
+                                    <p>اگر کد تخفیف دارید، لطفا در زیر بنویسید.</p>
+                                    <div class="input-container__input-group">
+                                        <input type="text" class="input-group__input" placeholder="کد تخفیف">
+                                        <button class="input-group__submit-discount">اعمال کد تخفیف</button>
                                     </div>
                                 </div>
-                                <div class="products-product-container">
-                                    <button class="product__remove-btn">
-                                        <span class="remove-btn__icon">&times;</span>
-                                        حذف
-                                    </button>
-                                    <div class="products__prodcut">
-                                        <div class="product__img-container">
-                                            <img src="../assets/images/63146da1cef0181f650a3095.png" alt="test"
-                                                class="img-container__img">
-                                            <div class="img-container__options">
-                                                <span class="ri-heart-line"></span>
-                                            </div>
-                                        </div>
-                                        <div class="product__description">
-                                            <div class="description__prices-title">
-                                                <a href="#" class="prices-title__title">
-                                                    قالب فروشگاهی قطعات خودرو پارتدو، Partdo
-                                                </a>
-                                                <div class="prices-title__prices">
-                                                    <span class="prices__real-price">
-                                                        345,000 تومان
-                                                    </span>
-                                                    <span class="prices__new-price">
-                                                        329,000 تومان
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <div class="description__summary-btn">
-                                                <p class="summary-btn__summary truncate">
-                                                    لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
-                                                    استفاده
-                                                    از
-                                                    طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و
-                                                    سطرآنچنان که
-                                                    لازم است.
-                                                    <span class="summary__three-dots">
-                                                        <span class="three-dots__dot"></span>
-                                                        <span class="three-dots__dot"></span>
-                                                        <span class="three-dots__dot"></span>
-                                                    </span>
-                                                </p>
-                                                <p class="summary-btn__btn">
-                                                    افزودن به سبد خرید
-                                                </p>
-                                            </div>
-                                        </div>
+                            </div>
 
+                        </div>
+                        <div class="bill-container__bill">
+                            <div class="bill__form-container">
+                                <h2>جزئیات صورتحساب</h2>
+                                <form class="form-container__form">
+                                    <div class="form__inputs">
+                                        <div class="inputs__fullname-inputs">
+                                            <div class="input-container">
+                                                <label for="first-name" class="input-container__title">
+                                                    نام
+                                                    <span>*</span>
+                                                </label>
+                                                <input id="first-name" name="firstName" type="text"
+                                                    class="input-container__input">
+                                            </div>
+                                            <div class="input-container">
+                                                <label for="last-name" class="input-container__title">
+                                                    نام خانوادگی
+                                                    <span>*</span>
+                                                </label>
+                                                <input type="text" id="last-name" name="lastName"
+                                                    class="input-container__input">
+                                            </div>
+                                        </div>
+                                        <div class="input-container">
+                                            <label for="phone" class="input-container__title">
+                                                تلفن
+                                                <span>*</span>
+                                            </label>
+                                            <input type="tel" id="phone" name="phone" class="input-container__input">
+                                        </div>
+                                        <div class="input-container">
+                                            <label for="email" class="input-container__title">
+                                                ایمیل
+                                                <span>*</span>
+                                            </label>
+                                            <input type="email" id="email" name="email" class="input-container__input">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="products-product-container">
-                                    <button class="product__remove-btn">
-                                        <span class="remove-btn__icon">&times;</span>
-                                        حذف
-                                    </button>
-                                    <div class="products__prodcut">
-                                        <div class="product__img-container">
-                                            <img src="../assets/images/63146da1cef0181f650a3095.png" alt="test"
-                                                class="img-container__img">
-                                            <div class="img-container__options">
-                                                <span class="ri-heart-line"></span>
-                                            </div>
-                                        </div>
-                                        <div class="product__description">
-                                            <div class="description__prices-title">
-                                                <a href="#" class="prices-title__title">
-                                                    قالب فروشگاهی قطعات خودرو پارتدو، Partdo
-                                                </a>
-                                                <div class="prices-title__prices">
-                                                    <span class="prices__real-price">
-                                                        345,000 تومان
-                                                    </span>
-                                                    <span class="prices__new-price">
-                                                        329,000 تومان
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <div class="description__summary-btn">
-                                                <p class="summary-btn__summary truncate">
-                                                    لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
-                                                    استفاده
-                                                    از
-                                                    طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و
-                                                    سطرآنچنان که
-                                                    لازم است.
-                                                    <span class="summary__three-dots">
-                                                        <span class="three-dots__dot"></span>
-                                                        <span class="three-dots__dot"></span>
-                                                        <span class="three-dots__dot"></span>
-                                                    </span>
-                                                </p>
-                                                <p class="summary-btn__btn">
-                                                    افزودن به سبد خرید
-                                                </p>
-                                            </div>
-                                        </div>
+                                </form>
 
-                                    </div>
-                                </div>
-                                <div class="products-product-container">
-                                    <button class="product__remove-btn">
-                                        <span class="remove-btn__icon">&times;</span>
-                                        حذف
-                                    </button>
-                                    <div class="products__prodcut">
-                                        <div class="product__img-container">
-                                            <img src="../assets/images/63146da1cef0181f650a3095.png" alt="test"
-                                                class="img-container__img">
-                                            <div class="img-container__options">
-                                                <span class="ri-heart-line"></span>
-                                            </div>
-                                        </div>
-                                        <div class="product__description">
-                                            <div class="description__prices-title">
-                                                <a href="#" class="prices-title__title">
-                                                    قالب فروشگاهی قطعات خودرو پارتدو، Partdo
-                                                </a>
-                                                <div class="prices-title__prices">
-                                                    <span class="prices__real-price">
-                                                        345,000 تومان
-                                                    </span>
-                                                    <span class="prices__new-price">
-                                                        329,000 تومان
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <div class="description__summary-btn">
-                                                <p class="summary-btn__summary truncate">
-                                                    لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
-                                                    استفاده
-                                                    از
-                                                    طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و
-                                                    سطرآنچنان که
-                                                    لازم است.
-                                                    <span class="summary__three-dots">
-                                                        <span class="three-dots__dot"></span>
-                                                        <span class="three-dots__dot"></span>
-                                                        <span class="three-dots__dot"></span>
-                                                    </span>
-                                                </p>
-                                                <p class="summary-btn__btn">
-                                                    افزودن به سبد خرید
-                                                </p>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <div class="products-product-container">
-                                    <button class="product__remove-btn">
-                                        <span class="remove-btn__icon">&times;</span>
-                                        حذف
-                                    </button>
-                                    <div class="products__prodcut">
-                                        <div class="product__img-container">
-                                            <img src="../assets/images/63146da1cef0181f650a3095.png" alt="test"
-                                                class="img-container__img">
-                                            <div class="img-container__options">
-                                                <span class="ri-heart-line"></span>
-                                            </div>
-                                        </div>
-                                        <div class="product__description">
-                                            <div class="description__prices-title">
-                                                <a href="#" class="prices-title__title">
-                                                    قالب فروشگاهی قطعات خودرو پارتدو، Partdo
-                                                </a>
-                                                <div class="prices-title__prices">
-                                                    <span class="prices__real-price">
-                                                        345,000 تومان
-                                                    </span>
-                                                    <span class="prices__new-price">
-                                                        329,000 تومان
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <div class="description__summary-btn">
-                                                <p class="summary-btn__summary truncate">
-                                                    لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
-                                                    استفاده
-                                                    از
-                                                    طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و
-                                                    سطرآنچنان که
-                                                    لازم است.
-                                                    <span class="summary__three-dots">
-                                                        <span class="three-dots__dot"></span>
-                                                        <span class="three-dots__dot"></span>
-                                                        <span class="three-dots__dot"></span>
-                                                    </span>
-                                                </p>
-                                                <p class="summary-btn__btn">
-                                                    افزودن به سبد خرید
-                                                </p>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
+                            </div>
+                            <div class="bill__order-box">
+                                <h2>سفارش شما</h2>
+                                <table class="order-box__table">
+                                    <thead>
+                                        <tr>
+                                            <td>محصول</td>
+                                            <td>قیمت</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <span class="product-name">
+                                                    قالب فروش فایل پیکسل پرو | Pixel pro × 2
+                                                </span>
+                                            </td>
+                                            <td class="product-price">
+                                                <span>658,000</span>
+                                                تومان
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span class="product-name">
+                                                    قالب فروش فایل پیکسل پرو | Pixel pro × 2
+                                                </span>
+                                            </td>
+                                            <td class="product-price">
+                                                <span>
+                                                    658,000
+                                                </span> تومان
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>مجموع</td>
+                                            <td class="sum-of-prices">
+                                                <span>
+                                                    987,000
+                                                </span> تومان
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <p class="order-box__description">
+                                    اطلاعات شخصی شما برای پردازش سفارش شما و پشتیبانی از تجربه شما در این وبسایت و برای
+                                    اهداف دیگری که در <a href="#">سیاست حفظ حریم خصوصی</a> توضیح داده شده است استفاده
+                                    می‌شود
+                                </p>
+                                <button class="order-box__submit-btn">پرداخت</button>
                             </div>
                         </div>
                     </div>
                 </section>
-
             </main>
             <footer class="footer">
                 <section class="footer__container">
@@ -722,6 +576,7 @@
         </section>
     </section>
 
+    <script src="/assets/js/pages/checkOutPage.js"></script>
     <script src="/assets/js/nav.js"></script>
 </body>
 

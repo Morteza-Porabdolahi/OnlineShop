@@ -1,0 +1,345 @@
+@import "../variables", "../mixins", "../generalStyles/pagesTitle";
+
+.main {
+    &__body {
+        display: flex;
+        gap: 3rem;
+        padding: 0 1.5rem;
+
+        .body__post-container {
+            width: 75%;
+
+            .post-contaienr__post-title {
+                font-size: 3.5rem;
+            }
+
+            .post-container__post-author-desc,
+            .post-author-desc__author-desc,
+            .post-author-desc__post-tags,
+            .post-container__share-post,
+            .comment-identity__comment-author,
+            .comment-details__comment-identity {
+                @include alignCenter;
+            }
+
+            .post-author-desc__author-desc>img,
+            .post-container__post-author-details>img,
+            .comment-author__img,
+            .post-container__share-post>div {
+                border-radius: 50%;
+            }
+
+            .post-container__post-author-desc {
+                font-size: 1.5rem;
+            }
+
+            .author-desc__author-name {
+                color: $textColor;
+            }
+
+            .post-author-desc__post-date {
+                color: $grayerColor;
+            }
+
+            .post-author-desc__post-tags {
+                .post-tags__post-tag {
+                    background-color: $textColor;
+                    color: $whiteColor;
+                    border-radius: 10px;
+                    padding: .3rem 1rem;
+                }
+            }
+
+            .post-container__post-img {
+                width: 100%;
+            }
+
+            .post-container__post-text {
+                font-size: 1.6rem;
+
+                p {
+                    color: $grayerColor;
+                    line-height: 1.7;
+                }
+
+                h3 {
+                    font-size: 3.5rem;
+                    line-height: 1.5;
+                }
+
+                h4 {
+                    font-size: 2.6rem;
+                }
+
+            }
+
+            .post-container__share-post {
+                justify-content: center;
+
+                div>a {
+                    color: $whiteColor;
+                }
+
+                .share-post__twitter {
+                    background-color: #198FD7;
+                }
+
+                .share-post__pinterest {
+                    background-color: #A80718;
+                }
+
+                .share-post__facebook {
+                    background-color: #344F87;
+                }
+
+                .share-post__email {
+                    background-color: #DC891A;
+                }
+            }
+
+            .post-container__post-author-details {
+                text-align: center;
+
+                h4 {
+                    font-size: 1.9rem;
+                }
+
+                p {
+                    @include textStyle($grayerColor, 1.6rem);
+                    line-height: 1.5;
+                    word-spacing: .2px;
+                }
+
+                a {
+                    @include textStyle($textColor, 1.7rem);
+                }
+            }
+
+            .post-comments-container__title {
+                font-size: 3rem;
+            }
+
+            .comment-details__comment-identity {
+                justify-content: space-between;
+            }
+
+            .comment-author__desc {
+                font-size: 1.5rem;
+
+                .desc__comment-date {
+                    color: $grayerColor;
+                }
+            }
+
+            .comment-details__comment-text {
+                p {
+                    font-size: 1.7rem;
+                    line-height: 1.5;
+                }
+            }
+
+            .comment__reply {
+                border-top: 1px solid #ddd;
+            }
+
+            .comment__reply::before {
+                content: '\f307';
+                font-family: "remixicon";
+                @include textStyle($grayColor, 3rem);
+            }
+
+            .post-comments-container__submit-comment-container {
+                font-size: 1.75rem;
+
+                h4 {
+                    font-size: 3rem;
+                }
+
+                p {
+                    color: $grayerColor;
+
+                    span {
+                        @include textStyle(red, 2.5rem);
+                    }
+                }
+            }
+
+            .submit-comment-container__form {
+
+                textarea,
+                input {
+                    border: 1px solid #ddd;
+                    background-color: transparent;
+                    border-radius: 5px;
+                    padding: .5rem .8rem;
+                    @include textStyle($grayerColor, 1.5rem);
+                    width: 100%;
+                }
+
+                .inputs__comment-text-input,
+                .comment-author-input__input-container {
+                    >span {
+                        display: block;
+
+                        span {
+                            @include textStyle(red, 2.5rem)
+                        }
+                    }
+                }
+
+                .inputs__comment-author-input {
+                    display: flex;
+
+                    .comment-author-input__input-container {
+                        flex-basis: calc(100% / 3);
+                    }
+                }
+
+                .inputs__remember-me {
+                    input {
+                        width: fit-content;
+                        vertical-align: middle;
+                    }
+                }
+
+                .inputs__submit-comment {
+                    background-color: $themeColor;
+                    @include textStyle($whiteColor, 1.5rem);
+                    border: 0;
+                    border-radius: 5px;
+                    padding: .7rem 1.5rem;
+                }
+            }
+
+        }
+
+        .body__aside {
+            width: 25%;
+            padding: 3rem 0;
+
+            .aside__aside-container>div {
+                box-shadow: $boxShdow;
+                background-color: $whiteColor;
+                border-radius: 10px;
+                padding: 2.5rem;
+                margin-bottom: 3rem;
+            }
+
+            .aside-container__search-box {
+                @include alignCenter;
+                gap: .3rem;
+            }
+
+            .search-box__input {
+                border: 1px solid $creamColor;
+                border-radius: 5px;
+                padding: .8rem 1rem;
+                width: 100%;
+                @include textStyle($grayerColor, 1.4rem);
+
+                &::placeholder {
+                    @include textStyle($grayColor, 1.5rem);
+                }
+            }
+
+            .search-box__btn {
+                background-color: $themeColor;
+                border: 0;
+                @include textStyle($whiteColor, 1.6rem);
+                padding: .75rem 2rem;
+                border-radius: 5px;
+                transition: background-color .3s;
+
+                &:hover {
+                    background-color: rgb(223, 134, 1);
+                }
+            }
+
+            .aside-children-title {
+                @include alignCenter;
+                gap: 1rem;
+                margin-bottom: 2rem;
+
+                span {
+                    color: $themeColor;
+                    font-size: 2rem;
+                }
+
+                h3 {
+                    font-size: 1.7rem;
+                }
+            }
+
+            .products__product,
+            .posts__post {
+                display: flex;
+                gap: 1rem;
+                align-items: flex-start;
+
+                &:not(:last-child) {
+                    margin-bottom: 2rem;
+                }
+
+                .descriptions__title {
+                    @include textStyle($textColor, 1.7rem);
+                    transition: color .3s;
+
+                    &:hover {
+                        color: $themeColor;
+                    }
+                }
+
+
+            }
+
+            .products__product {
+
+                &:not(:last-child) {
+                    border-bottom: 1px solid #E4E4E4;
+                    padding-bottom: 1rem;
+                }
+
+                .product__img {
+                    width: 55px;
+                    height: 65px;
+                    border-radius: 10px;
+                }
+
+                .descriptions__prices {
+                    margin-top: .8rem;
+                }
+
+                .prices__real-price {
+                    text-decoration: line-through;
+                    @include textStyle($grayColor, 1.5rem);
+                }
+
+                .prices__new-price {
+                    @include textStyle($themeColor, 1.6rem);
+                    margin-top: .8rem;
+                }
+            }
+
+            .posts__post {
+                .post__img {
+                    width: 45px;
+                    height: 45px;
+                    border-radius: 10px;
+                }
+
+                .descriptions__date {
+                    @include alignCenter;
+                    @include textStyle($grayColor, 1.5rem);
+                    flex-direction: row-reverse;
+                    justify-content: start;
+                    margin-top: 1rem;
+                    gap: .5rem;
+
+                    span {
+                        cursor: text;
+                    }
+                }
+            }
+        }
+    }
+}
