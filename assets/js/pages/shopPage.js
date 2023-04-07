@@ -1,5 +1,3 @@
-const $ = document;
-
 const minRangeInput = $.querySelector('.min-range');
 const maxRangeInput = $.querySelector('.max-range');
 const rangeStartPrice = $.querySelector('.start__price');

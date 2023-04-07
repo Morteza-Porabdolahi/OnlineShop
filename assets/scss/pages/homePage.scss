@@ -1,8 +1,136 @@
-@import "../generalStyles/header",
-"../variables",
+@import "../variables",
 "../mixins",
-"../animations",
-"../generalStyles/footer";
+"../generalStyles/footer", "../generalStyles/productsPopUp";
+
+.header__body {
+  text-align: center;
+  padding: 30rem 0 10rem 0;
+
+  .body__search-input {
+    @include alignCenter;
+    position: relative;
+    justify-content: space-between;
+    background-color: $whiteColor;
+    width: 86rem;
+    margin: 3rem auto;
+    padding: 2rem 3rem 2rem 1.5rem;
+    border-radius: 10px;
+
+    .search-input__left {
+      @include alignCenter;
+      gap: .8rem;
+    }
+
+    .search-input__category-selector {
+      padding: 1rem 0;
+
+      &:hover {
+        .category-selector__list-container {
+          @include showTransitionedList;
+        }
+      }
+
+      span:first-child {
+        font-size: 1.5rem;
+        vertical-align: middle;
+        transition: opacity .3s;
+
+        &:hover {
+          opacity: .8;
+        }
+      }
+
+      .category-selector__list-container {
+        position: absolute;
+        background-color: $whiteColor;
+        bottom: -19rem;
+        left: 1rem;
+        box-shadow: $mediumBoxShadow;
+        border-radius: 5px;
+        width: 22rem;
+        padding: 2.5rem 2.5rem 2.5rem 8rem;
+        @include navBarListStyles;
+      }
+
+      .category-selector__list-container li {
+        @include textStyle($grayerColor, 1.6rem);
+        text-align: right;
+        cursor: pointer;
+        transition: color .3s;
+
+        &:hover {
+          color: $textColor;
+        }
+      }
+
+      .list-container__list>li {
+        &:not(:last-child) {
+          padding-bottom: 2rem;
+        }
+      }
+
+      .inner-list__item {
+        text-align: right;
+        padding-right: 1.5rem;
+
+        &:first-child {
+          padding-bottom: 2rem;
+        }
+      }
+
+      .item__inner-list {
+        margin-top: 2rem;
+      }
+
+      span:nth-child(2) {
+        @include textStyle($grayColor, 2.5rem);
+        vertical-align: middle;
+      }
+    }
+
+    .search-input__search-icon {
+      @include textStyle($grayerColor, 2rem);
+    }
+
+    input {
+      width: 50%;
+      border: 0;
+
+      &::placeholder {
+        font-size: 1.6rem;
+        color: #777;
+      }
+    }
+  }
+
+  .body__paras {
+    p:first-child {
+      @include textStyle($grayerColor, 2.4rem);
+    }
+
+    p:nth-child(2) {
+      @include textStyle($blackColor, 3.5rem);
+      margin-top: 1.5rem;
+    }
+  }
+
+  .body__products-title {
+    display: flex;
+    justify-content: center;
+    gap: 9.5rem;
+  }
+
+  .products-title__product {
+    .product__img {
+      width: 70px;
+      height: 70px;
+    }
+
+    .product__title {
+      @include textStyle($textColor, 2rem, 600);
+    }
+  }
+}
 
 .main {
   section {
@@ -26,58 +154,6 @@
       cursor: pointer;
       position: relative;
     }
-
-    .product__description {
-      position: absolute;
-      background-color: $textColor;
-      border: 1px solid $blackColor;
-      padding: 1rem;
-      width: 50rem;
-      top: 0;
-      left: 0;
-      z-index: 3;
-      color: $whiteColor;
-    }
-
-    .description__title {
-      font-size: 2rem;
-      margin: 1.5rem 0;
-    }
-
-    .author__description {
-      font-size: 1.5rem;
-      opacity: .9;
-    }
-
-    .author__name {
-      @include textStyle($grayColor, 1.1rem);
-      margin-bottom: .5rem;
-      display: block;
-    }
-
-    .description__other {
-      @include alignCenter;
-      justify-content: space-between;
-    }
-
-    .description__price {
-      text-align: left;
-      font-weight: bold;
-
-      .price__price {
-        font-size: 3rem;
-        margin-top: .5rem;
-      }
-
-      .price__currency {
-        font-size: 1.8rem;
-      }
-    }
-
-    .product__description {
-      display: none;
-      animation: .3s opacityZeroToOne;
-    }
   }
 
   &__essential-wp-plugins {
@@ -96,12 +172,8 @@
 
       a {
         @include textStyle($textColor, 1.5rem, bold);
-        transition: color .3s;
+        @include textHover;
         line-height: 1.5;
-
-        &:hover {
-          color: $themeColor;
-        }
       }
 
       span {
@@ -158,7 +230,7 @@
 
   .temps__temp,
   .post {
-    box-shadow: $boxShdow;
+    box-shadow: $mediumBoxShadow;
     background-color: $whiteColor;
     border-radius: 10px;
     overflow: hidden;
@@ -227,12 +299,8 @@
 
     .post__title {
       @include textStyle($textColor, 1.9rem);
-      transition: color .3s;
+      @include textHover;
       line-height: 1.2;
-
-      &:hover {
-        color: $themeColor;
-      }
     }
 
     .post__btns {
@@ -299,11 +367,7 @@
 
     a {
       @include textStyle($textColor, 1.4rem, bold);
-      transition: color .3s;
-
-      &:hover {
-        color: $themeColor;
-      }
+      @include textHover;
     }
 
     p {

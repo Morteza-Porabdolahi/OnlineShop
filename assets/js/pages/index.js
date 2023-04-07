@@ -1,4 +1,3 @@
-const $ = document;
 const products = $.querySelectorAll('.products__product');
 
 // Posts and Products Slider

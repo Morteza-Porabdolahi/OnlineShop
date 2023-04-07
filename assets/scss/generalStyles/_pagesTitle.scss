@@ -1,12 +1,11 @@
-@import "../variables", "../mixins";
-
 .main {
+  padding: 23rem 1.5rem 0 1.5rem;
+
   &__intro {
-    padding: 3rem 3rem 0 3rem;
 
     .intro__title {
       @include textStyle($textColor, 3rem, bold);
-      padding: 2rem 0;
+      margin-bottom: 1rem;
     }
 
     .intro__breadcrumb {

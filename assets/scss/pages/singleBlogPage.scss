@@ -1,16 +1,16 @@
-@import "../variables", "../mixins", "../generalStyles/pagesTitle";
+@import "../variables", "../mixins", "../generalStyles/pagesTitle", "../generalStyles/BlogAndSingleBlogPage";
 
 .main {
     &__body {
         display: flex;
         gap: 3rem;
-        padding: 0 1.5rem;
 
         .body__post-container {
             width: 75%;
 
             .post-contaienr__post-title {
                 font-size: 3.5rem;
+                margin-top: 4rem;
             }
 
             .post-container__post-author-desc,
@@ -18,8 +18,28 @@
             .post-author-desc__post-tags,
             .post-container__share-post,
             .comment-identity__comment-author,
-            .comment-details__comment-identity {
+            .comment-details__comment-identity,
+            .share-post__social,
+            .share-post__post-categories {
                 @include alignCenter;
+            }
+
+            .comment-identity__comment-author {
+                gap: 1.5rem;
+
+                img {
+                    width: 5rem;
+                    height: 5rem;
+                }
+            }
+
+            .post-author-desc__author-desc {
+                gap: 1rem;
+
+                img {
+                    width: 3rem;
+                    height: 3rem;
+                }
             }
 
             .post-author-desc__author-desc>img,
@@ -31,6 +51,8 @@
 
             .post-container__post-author-desc {
                 font-size: 1.5rem;
+                gap: 1.5rem;
+                padding: 2rem 0;
             }
 
             .author-desc__author-name {
@@ -42,24 +64,28 @@
             }
 
             .post-author-desc__post-tags {
+                gap: .5rem;
+                flex-wrap: wrap;
+
                 .post-tags__post-tag {
                     background-color: $textColor;
                     color: $whiteColor;
-                    border-radius: 10px;
+                    border-radius: 7px;
                     padding: .3rem 1rem;
                 }
             }
 
             .post-container__post-img {
                 width: 100%;
+                border-radius: 10px;
             }
 
             .post-container__post-text {
-                font-size: 1.6rem;
+                font-size: 1.7rem;
 
                 p {
                     color: $grayerColor;
-                    line-height: 1.7;
+                    line-height: 2;
                 }
 
                 h3 {
@@ -71,18 +97,73 @@
                     font-size: 2.6rem;
                 }
 
+                p,
+                h3,
+                h4 {
+                    text-align: justify;
+                    margin: 2rem 0;
+                }
+
             }
 
             .post-container__share-post {
-                justify-content: center;
+                justify-content: space-between;
+                padding: 2rem 0;
 
                 div>a {
                     color: $whiteColor;
                 }
 
+                .share-post__social {
+                    gap: .5rem;
+
+                    >div {
+                        font-size: 2rem;
+                        padding: .8rem 1rem;
+                        border-radius: 50%;
+                        cursor: pointer;
+                    }
+                }
+
+                .share-post__post-categories {
+                    gap: 1.5rem;
+
+                    >div {
+                        border-radius: 5px;
+                        border: 1px solid $creamColor;
+                        padding: .7rem 1.2rem;
+                        cursor: pointer;
+                        transition: border-color .3s;
+
+                        &:hover {
+                            border-color: $themeColor;
+
+                            span::before {
+                                background-color: $themeColor;
+                            }
+                        }
+
+                        span {
+                            font-size: 1.7rem;
+
+                            &::before {
+                                transition: background-color .3s;
+                                content: '';
+                                display: inline-block;
+                                border-radius: 50%;
+                                width: .6rem;
+                                height: .6rem;
+                                background-color: $creamColor;
+                                margin-left: .8rem;
+                            }
+                        }
+                    }
+                }
+
                 .share-post__twitter {
                     background-color: #198FD7;
                 }
+
 
                 .share-post__pinterest {
                     background-color: #A80718;
@@ -101,48 +182,78 @@
                 text-align: center;
 
                 h4 {
-                    font-size: 1.9rem;
+                    margin-top: 2.5rem;
+                    font-size: 2rem;
                 }
 
                 p {
-                    @include textStyle($grayerColor, 1.6rem);
+                    @include textStyle($grayerColor, 1.7rem);
                     line-height: 1.5;
                     word-spacing: .2px;
+                    padding: 2.5rem 0;
+                }
+
+                img {
+                    width: 9rem;
+                    height: 9rem;
                 }
 
                 a {
-                    @include textStyle($textColor, 1.7rem);
+                    @include textStyle($textColor, 1.8rem);
+                    @include textHover;
                 }
             }
 
             .post-comments-container__title {
                 font-size: 3rem;
+                margin-top: 4rem;
             }
 
             .comment-details__comment-identity {
                 justify-content: space-between;
+                padding: 2rem 0;
+
+                .comment-identity__reply-btn {
+                    font-size: 1.5rem;
+                    border-bottom: 1px solid $themeColor;
+                    padding-bottom: .5rem;
+                    cursor: pointer;
+                    transition: color .3s;
+
+                    &:hover {
+                        color: $grayerColor;
+                    }
+                }
             }
 
             .comment-author__desc {
-                font-size: 1.5rem;
+                font-size: 1.6rem;
 
                 .desc__comment-date {
                     color: $grayerColor;
+                    margin-top: 1rem;
                 }
             }
 
             .comment-details__comment-text {
+                padding: 0 7rem 2.5rem 0;
+
                 p {
-                    font-size: 1.7rem;
+                    @include textStyle($grayerColor, 1.8rem);
                     line-height: 1.5;
                 }
             }
 
             .comment__reply {
-                border-top: 1px solid #ddd;
+                border-top: 1px solid $creamColor;
+                position: relative;
+                margin-right: 7rem;
             }
 
             .comment__reply::before {
+                top: -1.5rem;
+                right: -5rem;
+                position: absolute;
                 content: '\f307';
                 font-family: "remixicon";
                 @include textStyle($grayColor, 3rem);
@@ -157,6 +268,7 @@
 
                 p {
                     color: $grayerColor;
+                    padding: 2rem 0;
 
                     span {
                         @include textStyle(red, 2.5rem);
@@ -168,27 +280,29 @@
 
                 textarea,
                 input {
-                    border: 1px solid #ddd;
-                    background-color: transparent;
-                    border-radius: 5px;
-                    padding: .5rem .8rem;
-                    @include textStyle($grayerColor, 1.5rem);
+                    padding: .8rem 1.2rem;
+                    font-size: 1.5rem;
                     width: 100%;
                 }
 
                 .inputs__comment-text-input,
                 .comment-author-input__input-container {
-                    >span {
-                        display: block;
+                    display: flex;
+                    flex-direction: column;
+                    gap: .5rem;
 
-                        span {
-                            @include textStyle(red, 2.5rem)
-                        }
+                    >span {
+                        display: flex;
+                        align-items: start;
+                        gap: .3rem;
                     }
                 }
 
                 .inputs__comment-author-input {
                     display: flex;
+                    align-items: end;
+                    gap: 2rem;
+                    margin-top: 1.5rem;
 
                     .comment-author-input__input-container {
                         flex-basis: calc(100% / 3);
@@ -196,150 +310,22 @@
                 }
 
                 .inputs__remember-me {
+                    margin: 2.5rem 0;
+
                     input {
                         width: fit-content;
                         vertical-align: middle;
+                        margin-left: .5rem;
                     }
                 }
 
                 .inputs__submit-comment {
-                    background-color: $themeColor;
-                    @include textStyle($whiteColor, 1.5rem);
-                    border: 0;
-                    border-radius: 5px;
+                    font-size: 1.5rem;
                     padding: .7rem 1.5rem;
+                    @include orangeButtonStyles;
                 }
             }
 
-        }
-
-        .body__aside {
-            width: 25%;
-            padding: 3rem 0;
-
-            .aside__aside-container>div {
-                box-shadow: $boxShdow;
-                background-color: $whiteColor;
-                border-radius: 10px;
-                padding: 2.5rem;
-                margin-bottom: 3rem;
-            }
-
-            .aside-container__search-box {
-                @include alignCenter;
-                gap: .3rem;
-            }
-
-            .search-box__input {
-                border: 1px solid $creamColor;
-                border-radius: 5px;
-                padding: .8rem 1rem;
-                width: 100%;
-                @include textStyle($grayerColor, 1.4rem);
-
-                &::placeholder {
-                    @include textStyle($grayColor, 1.5rem);
-                }
-            }
-
-            .search-box__btn {
-                background-color: $themeColor;
-                border: 0;
-                @include textStyle($whiteColor, 1.6rem);
-                padding: .75rem 2rem;
-                border-radius: 5px;
-                transition: background-color .3s;
-
-                &:hover {
-                    background-color: rgb(223, 134, 1);
-                }
-            }
-
-            .aside-children-title {
-                @include alignCenter;
-                gap: 1rem;
-                margin-bottom: 2rem;
-
-                span {
-                    color: $themeColor;
-                    font-size: 2rem;
-                }
-
-                h3 {
-                    font-size: 1.7rem;
-                }
-            }
-
-            .products__product,
-            .posts__post {
-                display: flex;
-                gap: 1rem;
-                align-items: flex-start;
-
-                &:not(:last-child) {
-                    margin-bottom: 2rem;
-                }
-
-                .descriptions__title {
-                    @include textStyle($textColor, 1.7rem);
-                    transition: color .3s;
-
-                    &:hover {
-                        color: $themeColor;
-                    }
-                }
-
-
-            }
-
-            .products__product {
-
-                &:not(:last-child) {
-                    border-bottom: 1px solid #E4E4E4;
-                    padding-bottom: 1rem;
-                }
-
-                .product__img {
-                    width: 55px;
-                    height: 65px;
-                    border-radius: 10px;
-                }
-
-                .descriptions__prices {
-                    margin-top: .8rem;
-                }
-
-                .prices__real-price {
-                    text-decoration: line-through;
-                    @include textStyle($grayColor, 1.5rem);
-                }
-
-                .prices__new-price {
-                    @include textStyle($themeColor, 1.6rem);
-                    margin-top: .8rem;
-                }
-            }
-
-            .posts__post {
-                .post__img {
-                    width: 45px;
-                    height: 45px;
-                    border-radius: 10px;
-                }
-
-                .descriptions__date {
-                    @include alignCenter;
-                    @include textStyle($grayColor, 1.5rem);
-                    flex-direction: row-reverse;
-                    justify-content: start;
-                    margin-top: 1rem;
-                    gap: .5rem;
-
-                    span {
-                        cursor: text;
-                    }
-                }
-            }
         }
     }
 }

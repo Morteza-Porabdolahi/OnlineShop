@@ -1,99 +1,83 @@
-@import "../variables", "../mixins","../generalStyles/pagesTitle";
+@import "../variables", "../mixins", "../generalStyles/pagesTitle";
 
-.main {
+.main__forms {
+  display: flex;
+  padding: 0 10rem;
 
-  &__forms{
-    display: flex;
-    padding: 0 10rem;
+  .forms__divider {
+    @include alignCenter;
+    flex-direction: column;
+    justify-content: center;
 
-    .forms__divider{
-      @include alignCenter;
-      flex-direction: column;
-      justify-content: center;
-      
-      span{
-        font-size: 2rem;
-        display: inline-block;
-        padding-block: 1rem;
-      }
-
-      .divider__line{
-        background-color: $creamColor;
-        writing-mode: vertical-rl;
-        width: 1px;
-        height: 17rem;
-      }
+    span {
+      font-size: 2rem;
+      display: inline-block;
+      padding-block: 1rem;
     }
 
-    .forms__form-container{
-      width: 50%;
-      padding: 3rem 4rem 1rem 4rem;
+    .divider__line {
+      background-color: $creamColor;
+      writing-mode: vertical-rl;
+      width: 1px;
+      height: 17rem;
     }
+  }
 
-    .form-container__title{
-      @include textStyle($textColor,2.8rem,bold);
-      margin-bottom: 2rem
-    }
+  .forms__form-container {
+    width: 50%;
+    padding: 3rem 4rem 1rem 4rem;
+  }
 
-    .input-container__title{
-      @include textStyle($textColor,1.7rem);
+  .form-container__title {
+    @include textStyle($textColor, 2.8rem, bold);
+    margin-bottom: 3rem;
+  }
 
-      &::after{
-        content: '*';
-        color: red;
-        font-size: 2.5rem;
-      }
-    }
+  .form__input-container {
+    margin-bottom: 3rem;
+  }
 
-    .input-container__input{
-      border: 1px solid $creamColor;
-      background-color: transparent;
-      @include textStyle($grayerColor,1.5rem);
-      width: 100%;
-      border-radius: 5px;
-      padding: .5rem 1rem;
-      margin: .5rem 0 2.5rem 0;
-    }
+  .input-container__title {
+    font-size: 1.7rem;
+    margin-bottom: .5rem;
+  }
 
-    .form__btn{
-      background-color: #57d57e;
-      transition: background-color .3s;
-      padding: .8rem 2rem;
-      border: 0;
-      border-radius: 5px;
-      color: $whiteColor;
-      margin-top: 2rem;
-      
-      &:hover{
-        background-color: #50C479;
-      }
-    }
+  .input-container__input {
+    width: 100%;
+  }
 
-    .form__options{
-      @include alignCenter;
-      justify-content: space-between;
-    }
+  .form__btn {
+    @include greenButtonStyles;
+    padding: .8rem 2rem;
+    margin-top: 2rem;
+    font-size: 1.5rem;
+  }
 
-    .remember__text{
-      font-size: 1.5rem;
-    }
+  .form__options {
+    @include alignCenter;
+    justify-content: space-between;
+  }
 
-    .remember__checkbox{
-      vertical-align: middle;
-    }
+  .remember__text {
+    font-size: 1.5rem;
+    margin-right: .5rem;
+  }
 
-    .options__forgot-password{
-      @include textStyle($themeColor,1.5rem)
-    }
+  .remember__checkbox {
+    vertical-align: middle;
+  }
 
-    .options__warning{
-      @include textStyle($grayerColor,1.8rem);
-      line-height: 1.5;
+  .options__forgot-password {
+    @include textStyle($themeColor, 1.5rem);
+  }
 
-      a{
-        font-weight: bold;
-        color: $themeColor;
-      }
+  .options__warning {
+    @include textStyle($grayerColor, 1.8rem);
+    line-height: 1.5;
+
+    a {
+      font-weight: bold;
+      color: $themeColor;
     }
   }
 }

@@ -5,7 +5,9 @@
 }
 
 @media only screen and (min-width: 1376px) {
-  .container {
+
+  .container,
+  .header__nav-container {
     max-width: 1360px;
     margin: 0 auto;
   }

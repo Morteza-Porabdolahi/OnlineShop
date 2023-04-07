@@ -1,4 +1,3 @@
-const $ = document;
 const discountInputSwitcher = $.querySelector('.discount__input-switcher');
 const discountInputContainer = $.querySelector('.discount__discount-input-container');
 

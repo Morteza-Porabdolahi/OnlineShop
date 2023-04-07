@@ -1,34 +1,32 @@
-@import "../variables", "../mixins", "../generalStyles/pagesTitle", "../animations";
+@import "../variables", "../mixins", "../generalStyles/pagesTitle", '../generalStyles/productsPopUp.scss';
 
 .main {
+    .main__intro .intro__title {
+        margin: 2rem 0;
+    }
+
     &__product-container {
 
         .product-container__product-header {
             display: flex;
             gap: 3rem;
-            padding: 3rem 3.5rem 6rem 3.5rem;
+            padding: 3rem 1.5rem 6rem 1.5rem;
 
             .product-header__product-img-container {
                 text-align: left;
 
                 img {
-                    box-shadow: $boxShdow;
+                    box-shadow: $mediumBoxShadow;
                     border-radius: 5px;
                 }
 
                 a {
-                    background-color: $themeColor;
-                    filter: brightness(1.2);
-                    @include textStyle($whiteColor, 1.9rem);
+                    font-size: 1.9rem;
                     padding: 1.5rem 2rem;
-                    border-radius: 5px;
                     display: inline-block;
+                    border-radius: 5px;
                     margin-top: 3rem;
-                    transition: filter .3s;
-
-                    &:hover {
-                        filter: brightness(1);
-                    }
+                    @include orangeButtonStyles;
 
                     span {
                         vertical-align: middle;
@@ -41,7 +39,7 @@
         .product-header__product-info-box,
         .body-aside__product-info-box {
             width: 42%;
-            box-shadow: $boxShdow;
+            box-shadow: $mediumBoxShadow;
             background-color: $whiteColor;
             border-radius: 5px;
             padding: 5rem 3rem 2rem 3rem;
@@ -84,6 +82,7 @@
                     &::before {
                         content: "✓";
                         @include textStyle(#57D57E, 2rem);
+                        margin-left: .5rem;
                     }
                 }
 
@@ -96,16 +95,9 @@
 
             .product-additional-desc__add-to-basket-btn {
                 width: 100%;
-                background-color: #57D57E;
-                border: 0;
-                border-radius: 5px;
-                @include textStyle($whiteColor, 2.1rem);
+                font-size: 2.1rem;
                 padding: 1rem 0;
-                transition: background-color .3s;
-
-                &:hover {
-                    background-color: #50C479;
-                }
+                @include greenButtonStyles;
             }
 
             .product-additional-desc__product-meta-list {
@@ -126,12 +118,8 @@
 
                         a {
                             color: $grayerColor;
-                            transition: color .3s;
+                            @include textHover;
                             margin-left: .3rem;
-
-                            &:hover {
-                                color: $themeColor;
-                            }
                         }
                     }
                 }
@@ -149,9 +137,18 @@
             background-color: $whiteColor;
             padding: 6rem 3.5rem;
 
+            .products__product {
+                cursor: pointer;
+                width: 12rem;
+                height: 12rem;
+                display: flex;
+                justify-content: center;
+                padding: 2rem 0;
+                border-radius: 10px;
+                box-shadow: 1px 5px 5px rgba(0, 0, 0, .06);
+            }
 
             .body-aside__product-info-box {
-                background-color: transparent;
                 box-shadow: none;
                 border-right: 1px dashed $creamColor;
                 padding: 2rem 3rem 0 0;
@@ -175,13 +172,14 @@
                         font-size: 4.2rem;
                         padding: .8rem;
                         border-radius: 5px;
+                        cursor: pointer;
                     }
                 }
             }
 
             .product-body__product-main {
                 width: 72%;
-                padding-top: 5rem;
+                padding-top: 4rem;
             }
 
             .tabs-container__header {
@@ -197,9 +195,9 @@
                             color: $grayColor;
                             font-weight: bold;
                             display: inline-block;
-                            width: 2px;
-                            height: 2px;
-                            margin: 0 1rem;
+                            width: .2rem;
+                            height: .2rem;
+                            margin: 0 1.5rem;
                         }
 
                         &:first-child::before {
@@ -252,7 +250,6 @@
 
             .tabs {
 
-
                 .tab {
                     display: none;
                 }
@@ -272,8 +269,7 @@
                     margin: 2rem 0;
 
                     span {
-                        color: $themeColor;
-                        font-size: 2rem;
+                        @include textStyle($themeColor, 2rem);
                         vertical-align: middle;
                     }
                 }
@@ -321,7 +317,8 @@
                 }
 
                 .product-asked-ques__question {
-                    border: 1px solid #F1F1F1;
+                    border: 1px solid $creamColor;
+                    border-radius: 5px;
                     box-shadow: 1px 1px 4px rgba(0, 0, 0, .04);
                     padding: 2rem 1.5rem;
                     max-height: 7rem;
@@ -343,6 +340,7 @@
                         @include textStyle($grayerColor, 1.8rem);
                         transition: color .3s;
                         cursor: pointer;
+                        display: block;
 
                         &:hover {
                             color: $textColor;
@@ -398,19 +396,14 @@
 
                 .comments__no-comments,
                 .submit-comment-section__info {
-                    @include textStyle($grayerColor, 1.6rem);
+                    @include textStyle($grayerColor, 1.7rem);
                     margin: 2rem 0;
                     line-height: 1.5;
                 }
 
-                .submit-comment-section__info>span,
-                .input-title>span {
-                    @include textStyle(red, 2.4rem);
-                    vertical-align: top;
-                }
-
                 .input-title {
                     font-size: 1.6rem;
+                    margin-bottom: .5rem;
                 }
 
                 .form-container__form {
@@ -418,20 +411,14 @@
 
                         >input,
                         textarea {
-                            border: 1px solid $creamColor;
                             width: 100%;
-                            border-radius: 5px;
-                            outline: none;
-                            color: $grayerColor;
                             padding: .8rem 1rem;
                         }
                     }
 
                     >div:not(:last-of-type) {
                         margin-bottom: 2rem;
-
                     }
-
                 }
 
                 .infos__save-information {
@@ -442,10 +429,6 @@
                         margin-right: .5rem;
                         line-height: 1.5;
                     }
-
-                    input {
-                        vertical-align: top;
-                    }
                 }
 
                 .comments-section__submit-comment-section {
@@ -453,17 +436,9 @@
                 }
 
                 .form__submit-btn {
-                    background-color: $themeColor;
-                    border: 0;
-                    border-radius: 5px;
-                    color: $whiteColor;
                     padding: .8rem 2rem;
-                    @include textStyle($whiteColor, 1.6rem);
-                    transition: background-color .3s;
-
-                    &:hover {
-                        background-color: rgb(223, 134, 1);
-                    }
+                    font-size: 1.6rem;
+                    @include orangeButtonStyles;
                 }
 
                 .comments__title,
@@ -516,66 +491,6 @@
                         @include textStyle($themeColor, 2rem);
                         vertical-align: middle;
                         margin-left: .5rem;
-                    }
-                }
-
-                .products__product {
-                    cursor: pointer;
-                    width: 12rem;
-                    height: 12rem;
-                    display: flex;
-                    justify-content: center;
-                    padding: 2rem 0;
-                    border-radius: 10px;
-                    box-shadow: 1px 5px 5px rgba(0, 0, 0, .06);
-                }
-
-                .product__description {
-                    position: absolute;
-                    background-color: $textColor;
-                    border: 1px solid $blackColor;
-                    padding: 1rem;
-                    width: 50rem;
-                    top: 0;
-                    left: 0;
-                    z-index: 3;
-                    color: $whiteColor;
-                    display: none;
-                    animation: .3s opacityZeroToOne;
-                }
-
-                .description__title {
-                    font-size: 2rem;
-                    margin: 1.5rem 0;
-                }
-
-                .author__description {
-                    font-size: 1.5rem;
-                    opacity: .9;
-                }
-
-                .author__name {
-                    @include textStyle($grayColor, 1.1rem);
-                    margin-bottom: .5rem;
-                    display: block;
-                }
-
-                .description__other {
-                    @include alignCenter;
-                    justify-content: space-between;
-                }
-
-                .description__price {
-                    text-align: left;
-                    font-weight: bold;
-
-                    .price__price {
-                        font-size: 3rem;
-                        margin-top: .5rem;
-                    }
-
-                    .price__currency {
-                        font-size: 1.8rem;
                     }
                 }
 

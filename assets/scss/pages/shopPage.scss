@@ -1,4 +1,4 @@
-@import "../variables", "../mixins", "../generalStyles/pagesTitle", "../animations", "../generalStyles/wishlistAndShop";
+@import "../variables", "../mixins", "../generalStyles/pagesTitle", "../generalStyles/wishlistAndShop";
 
 .main {
     &__body {
@@ -11,7 +11,6 @@
             width: 75%;
 
             .products-container__products {
-                overflow: hidden;
                 display: grid;
                 grid-template-columns: repeat(3, 1fr);
                 gap: 2rem;
@@ -27,7 +26,7 @@
             .options__number-of-products {
 
                 .number-of-products__title {
-                    @include textStyle($textColor , 1.8rem);
+                    font-size: 1.8rem;
                     cursor: default;
                     margin-left: .5rem;
                 }
@@ -43,6 +42,7 @@
                 .number-of-products__number {
                     @include textStyle($grayColor, 1.6rem);
                     transition: color .3s;
+                    cursor: pointer;
 
                     &:hover {
                         color: $textColor;
@@ -57,6 +57,7 @@
             .options__products-grid {
                 .products-grid__square {
                     margin-right: 1rem;
+                    cursor: pointer;
 
                     svg {
                         transition: fill .3s;
@@ -103,7 +104,7 @@
             padding: 3rem 0;
 
             .aside>div {
-                box-shadow: $boxShdow;
+                box-shadow: $mediumBoxShadow;
                 background-color: $whiteColor;
                 border-radius: 10px;
                 padding: 2.5rem;
@@ -114,11 +115,6 @@
                 @include alignCenter;
                 gap: 1rem;
                 margin-bottom: 2rem;
-
-                span {
-                    color: $themeColor;
-                    font-size: 2rem;
-                }
 
                 h3 {
                     font-size: 1.7rem;
@@ -139,7 +135,6 @@
                     appearance: none;
                     -webkit-appearance: none;
                     border: 0.1rem solid $grayerColor;
-                    background-color: transparent;
                     border-radius: 50%;
                     width: 1.4rem;
                     height: 1.4rem;
@@ -243,18 +238,10 @@
                 }
 
                 .container__filter-btn {
-                    border: 0;
-                    border-radius: 5px;
-                    background-color: $themeColor;
-                    @include textStyle($whiteColor, 1.5rem);
-                    transition: background-color .3s;
+                    font-size: 1.5rem;
                     padding: .8rem 2rem;
                     margin-top: 1rem;
-
-                    &:hover {
-                        background-color: rgb(223, 134, 1);
-                    }
-
+                    @include orangeButtonStyles;
                 }
             }
 

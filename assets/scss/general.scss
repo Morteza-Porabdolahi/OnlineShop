@@ -1,8 +1,8 @@
-@import "remixicon",
-"reset",
-"generalStyles/nav",
+@import "./remixicon", "./variables", "./mixins",
+"./reset",
+"./generalStyles/nav",
 "./slider",
-"./generalStyles/footer";
+"./generalStyles/footer", "./generalStyles/quantityStyles";
 
 html {
   box-sizing: border-box;
@@ -20,9 +20,9 @@ html {
 @font-face {
   font-family: Yekanbakh;
   src: local('Yekan Bakh'),
-    url('/assets/fonts/YekanBakh-Regular.ttf') format('truetype'),
-    url('/assets/fonts/YekanBakh-Regular.woff') format('woff'),
-    url('/assets/fonts/YekanBakh-Regular.woff2') format('woff2');
+    url('/assets/fonts/YekanBakh-Medium.ttf') format('truetype'),
+    url('/assets/fonts/YekanBakh-Medium.woff') format('woff'),
+    url('/assets/fonts/YekanBakh-Medium.woff2') format('woff2');
 }
 
 body {
@@ -30,49 +30,56 @@ body {
   color: $textColor;
 }
 
-.website-wrapper {
-  background-color: #f3f4f6;
-}
-
 img {
   max-width: 100%;
   max-height: 100%;
+}
+
+button {
+  cursor: pointer;
+  transition: color .3s, background-color .3s;
 }
 
 input,
 button,
 textarea {
   outline: none;
-  font-family: yekanbakh;
+  border: 0;
+  font-family: Yekanbakh;
+  border-radius: 5px;
+  background-color: transparent;
+}
+
+input:not([type="checkbox"], [type="radio"], [type="range"]),
+textarea {
+  border: 1px solid $creamColor;
+  padding: .8rem 1.2rem;
+  @include textStyle($grayerColor, 1.5rem);
+
+  &::placeholder {
+    font-family: Yekanbakh;
+    @include textStyle($grayColor, 1.4rem);
+  }
+}
+
+.required {
+  @include textStyle(red, 2.5rem);
 }
 
 a {
   text-decoration: none;
+  color: $textColor;
 }
 
-button {
-  cursor: pointer;
+.website-wrapper {
+  background-color: #f3f4f6;
 }
 
 .vertical-divider {
-  width: 2rem;
-  height: 1px;
+  width: 3rem;
+  height: .09px;
   transform: rotate(90deg);
-  background-color: $creamColor;
-}
-
-.hidden {
-  display: none;
-}
-
-.show-block {
-  display: block;
-}
-
-.truncate {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+  background-color: #ddd;
 }
 
 .modal-left {
@@ -84,7 +91,6 @@ button {
 }
 
 .modal-container__modal {
-  transition: all .3s;
   width: 26%;
   background-color: $whiteColor;
   padding: 3rem;
@@ -92,7 +98,7 @@ button {
   .modal__modal-header {
     @include alignCenter;
     justify-content: space-between;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid $creamColor;
     padding-bottom: 2rem;
     color: $textColor;
 
@@ -117,7 +123,7 @@ button {
   }
 
   .modal__modal-body {
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid $creamColor;
     padding: 2rem 0;
   }
 }
@@ -149,17 +155,11 @@ button {
     font-size: 1.7rem;
     display: block;
     margin-bottom: .5rem;
-
-    span {
-      @include textStyle(red, 2.2rem);
-    }
   }
 
   .input-container__input {
-    border: 1px solid $creamColor;
-    border-radius: 5px;
     padding: .6rem 1.5rem;
-    @include textStyle($grayerColor, 1.5rem);
+    font-size: 1.5rem;
     width: 100%
   }
 
@@ -179,12 +179,10 @@ button {
   }
 
   .form__submit-btn {
-    background-color: #50C479;
-    @include textStyle($whiteColor, 1.6rem);
-    border: 0;
+    font-size: 1.6rem;
     padding: .7rem 1.5rem;
-    border-radius: 5px;
     width: fit-content;
+    @include greenButtonStyles;
   }
 }
 
@@ -197,19 +195,18 @@ button {
   padding-top: 2rem;
 
   span {
-    @include textStyle(#F1F1F1, 10rem);
+    @include textStyle($creamColor, 10rem);
   }
 
   h5 {
-    @include textStyle($textColor, 1.8rem);
+    font-size: 1.8rem;
   }
 
-  button {
-    background-color: $themeColor;
-    @include textStyle($whiteColor, 1.3rem);
-    border: 0;
+  a {
+    font-size: 1.5rem;
     border-radius: 5px;
-    padding: .7rem 1.5rem;
+    padding: 1rem 1.5rem;
+    @include orangeButtonStyles;
   }
 }
 
@@ -233,11 +230,11 @@ button {
       }
 
       &::-webkit-scrollbar-track {
-        background-color: #f3f4f6;
+        background-color: $bgColor;
       }
 
       &::-webkit-scrollbar-thumb {
-        background-color: #ddd;
+        background-color: $creamColor;
       }
     }
 
@@ -246,7 +243,7 @@ button {
       gap: 1.5rem;
 
       &:not(:last-child) {
-        border-bottom: 1px solid #ddd;
+        border-bottom: 1px solid $creamColor;
         padding-bottom: 1.5rem;
       }
 
@@ -286,47 +283,8 @@ button {
         }
 
         a {
-          @include textStyle($textColor, 1.7rem);
-
-          &:hover {
-            color: $themeColor;
-          }
-        }
-      }
-
-      .title-container__number-of-product {
-        @include alignCenter;
-        border: 1px solid #ddd;
-        width: fit-content;
-        border-radius: 5px;
-        font-size: 1.8rem;
-        margin: 1.5rem 0;
-        overflow: hidden;
-
-        span {
-          padding: .5rem .8rem;
-          color: $grayerColor;
-        }
-
-        .number-of-product__add {
-          border-right: 1px solid #ddd
-        }
-
-        .number-of-product__remove {
-          border-left: 1px solid #ddd;
-        }
-
-        .number-of-product__add,
-        .number-of-product__remove {
-          transition: background-color .3s, color .3s;
-          padding: .5rem;
-          font-size: 2rem;
-          cursor: pointer;
-
-          &:hover {
-            color: $whiteColor;
-            background-color: $themeColor;
-          }
+          font-size: 1.7rem;
+          @include textHover;
         }
       }
 
@@ -346,7 +304,6 @@ button {
 
     button {
       width: 100%;
-      border-radius: 5px;
       font-size: 1.5rem;
       padding: .9rem 0;
       margin-top: 1rem;
@@ -354,7 +311,6 @@ button {
 
     .buy-completion__show-basket {
       border: 1px solid $creamColor;
-      background-color: transparent;
 
       a {
         color: $textColor;
@@ -362,11 +318,10 @@ button {
     }
 
     .buy-completion__checkout-btn {
-      border: 0;
-      background-color: #50C479;
+      @include greenButtonStyles;
 
       a {
-        color: $whiteColor;
+        color: $whiteColor
       }
     }
 
@@ -390,4 +345,18 @@ button {
     color: $themeColor;
   }
 
+}
+
+@keyframes opacityZeroToOne {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.title-icon {
+  @include textStyle($themeColor, 2rem);
 }

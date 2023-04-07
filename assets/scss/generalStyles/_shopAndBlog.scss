@@ -1,5 +1,3 @@
-@import "../variables", "../mixins", "../generalStyles/pagesTitle";
-
 .main {
     &__body {
         display: flex;
@@ -19,7 +17,7 @@
             }
 
             .products__prodcut {
-                box-shadow: $boxShdow;
+                box-shadow: $mediumBoxShadow;
                 background-color: $whiteColor;
                 border-radius: 10px;
                 overflow: hidden;
@@ -62,7 +60,7 @@
             padding: 3rem 0;
 
             .aside>div {
-                box-shadow: $boxShdow;
+                box-shadow: $mediumBoxShadow;
                 background-color: $whiteColor;
                 border-radius: 10px;
                 padding: 2.5rem;

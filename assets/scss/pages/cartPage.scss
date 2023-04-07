@@ -1,7 +1,6 @@
-@import "../variables", "../mixins", "../generalStyles/pagesTitle", "../generalStyles/wishlistAndBasket";
+@import "../variables", "../mixins", "../generalStyles/pagesTitle", "../generalStyles/wishlistAndBasket", "../generalStyles/quantityStyles";
 
 .main {
-    padding: 0 1.5rem;
 
     .body__no-products {
         display: none;
@@ -18,7 +17,6 @@
 
             .upgrade-card__btn {
                 background-color: $bgColor;
-                border: 0;
                 @include textStyle($grayerColor, 1.5rem);
             }
         }
@@ -26,23 +24,13 @@
         .upgrade-card__discount-input-container {
 
             input {
-                border: 1px solid #ddd;
-                background-color: transparent;
                 padding: .8rem 1.7rem;
-                border-radius: 5px;
-                @include textStyle($grayerColor, 1.6rem);
-
-                &::placeholder {
-                    color: $grayColor;
-                }
             }
 
             button {
-                background-color: #57D57E;
-                @include textStyle($whiteColor, 1.5rem);
-                border: 0;
+                font-size: 1.5rem;
                 padding: .8rem 1.7rem;
-                border-radius: 5px;
+                @include greenButtonStyles;
             }
         }
 
@@ -71,12 +59,10 @@
             }
 
             button {
+                font-size: 1.8rem;
                 width: 100%;
-                background-color: #57D57E;
-                border: 0;
-                @include textStyle($whiteColor, 1.8rem);
-                border-radius: 5px;
                 padding: 1rem 0;
+                @include greenButtonStyles;
             }
         }
 
@@ -94,7 +80,7 @@
 
 
                 thead {
-                    border-bottom: 1px solid #ddd;
+                    border-bottom: 1px solid $creamColor;
                     padding-bottom: 1.5rem;
 
                     tr {
@@ -121,46 +107,9 @@
                 tbody>tr {
                     @include alignCenter;
                     justify-content: space-between;
-                    border-bottom: 1px solid #ddd;
+                    border-bottom: 1px solid $creamColor;
                     padding: 1rem;
                 }
-
-                .title-container__number-of-product {
-                    @include alignCenter;
-                    border: 1px solid #ddd;
-                    width: fit-content;
-                    border-radius: 5px;
-                    font-size: 1.8rem;
-                    margin: 1.5rem 0;
-                    overflow: hidden;
-
-                    span {
-                        padding: .5rem .8rem;
-                        color: $grayerColor;
-                    }
-
-                    .number-of-product__add {
-                        border-right: 1px solid #ddd
-                    }
-
-                    .number-of-product__remove {
-                        border-left: 1px solid #ddd;
-                    }
-
-                    .number-of-product__add,
-                    .number-of-product__remove {
-                        transition: background-color .3s, color .3s;
-                        padding: .5rem;
-                        font-size: 2rem;
-                        cursor: pointer;
-
-                        &:hover {
-                            color: $whiteColor;
-                            background-color: $themeColor;
-                        }
-                    }
-                }
-
 
                 .product-price {
                     color: $grayerColor;
@@ -182,17 +131,12 @@
 
                     img {
                         width: 7rem;
-                        height: 8rem;
+                        height: 7rem;
                         border-radius: 10px;
                     }
 
                     .product-col__product-title {
-                        color: $textColor;
-                        transition: color .3s;
-
-                        &:hover {
-                            color: $themeColor;
-                        }
+                        @include textHover;
                     }
 
                     .product-col__remove-btn {
