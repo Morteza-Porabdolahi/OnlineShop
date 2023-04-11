@@ -2,21 +2,76 @@
     box-shadow: $mediumBoxShadow;
     background-color: $whiteColor;
     border-radius: 10px;
-    overflow: hidden;
     cursor: pointer;
     position: relative;
+
+    &:hover {
+        .product__img-container {
+            z-index: 2;
+        }
+
+        .product-bg {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .description__summary-btn {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .img-container__options {
+            opacity: 1;
+        }
+
+    }
+
+    .product-bg {
+        position: absolute;
+        pointer-events: none;
+        z-index: 1;
+        top: -15px;
+        right: -15px;
+        left: -15px;
+        bottom: -15px;
+        background-color: #fff;
+        border-radius: 10px;
+        margin-bottom: -15rem;
+        transform: scale(.92);
+        opacity: 0;
+        transition: transform .3s;
+        box-shadow: $mediumBoxShadow;
+    }
+}
+
+.product__description {
+    max-height: 8rem;
+    position: relative;
+    z-index: 2;
 }
 
 .product__img-container {
     position: relative;
+
+    img {
+        border-radius: 5px;
+    }
 }
 
 .img-container__options {
     position: absolute;
-    top: 2rem;
+    top: 3rem;
     left: 2rem;
     opacity: 0;
     transition: opacity .3s;
+
+    span {
+        background-color: $whiteColor;
+        padding: .8rem;
+        border-radius: 50%;
+        box-shadow: $mediumBoxShadow;
+        @include textStyle($grayerColor, 1.7rem)
+    }
 }
 
 .prices-title__title {
@@ -30,6 +85,9 @@
 }
 
 .description__prices-title {
+    // display: flex;
+    // flex-direction: column;
+    // justify-content: space-between;
     padding: 1rem 1.5rem 2rem 1.5rem;
 }
 
@@ -52,23 +110,19 @@
 
 .description__summary-btn {
     padding: 0 1rem;
-    display: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .3s, visibility .3s;
 }
 
 .summary-btn__btn {
-    width: 100%;
-    text-align: center;
-    background-color: #57d57e;
-    transition: background-color .3s;
-    padding: 1.3rem 0;
-    border: 0;
-    border-radius: 5px;
+    position: relative;
+    padding: 1rem 0;
     margin: 1.5rem 0;
-    @include textStyle($whiteColor, 1.5rem);
-
-    &:hover {
-        background-color: #50C479;
-    }
+    font-size: 1.5rem;
+    @include greenButtonStyles;
+    border-radius: 5px;
+    width: 100%;
 }
 
 .summary-btn__summary {
@@ -90,6 +144,7 @@
         right: 0;
         left: 0;
         text-align: center;
+        cursor: pointer;
 
         .three-dots__dot {
             display: inline-block;

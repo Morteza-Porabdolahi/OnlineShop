@@ -163,15 +163,21 @@
   &__new-temps,
   &__essential-wp-plugins {
     .temp__description {
-      padding: 2rem;
+      padding: 1.8rem;
+      min-height: 7rem;
+      translate: 0 36px;
+      margin-top: -40px;
+      background-color: $whiteColor;
+      transition: translate .3s;
     }
 
     .description__title {
-      @include alignCenter;
+      display: flex;
       justify-content: space-between;
+      gap: 1rem;
 
       a {
-        @include textStyle($textColor, 1.5rem, bold);
+        @include textStyle($textColor, 1.5rem);
         @include textHover;
         line-height: 1.5;
       }
@@ -186,7 +192,6 @@
       @include alignCenter;
       justify-content: left;
       gap: .5rem;
-      padding: 2.5rem 0 .8rem 0;
 
       .price__new-price {
         font-size: 1.6rem;
@@ -199,8 +204,12 @@
       }
     }
 
+    .temps__temp:hover .temp__description {
+      translate: 0;
+    }
+
     .description__add-to-basket {
-      display: none;
+      margin-top: 1.8rem;
 
       .add-to-basket__icon,
       .add-to-basket__title {
@@ -228,12 +237,19 @@
     overflow: hidden;
   }
 
+  .description__price-title {
+    display: flex;
+    flex-direction: column;
+    min-height: inherit;
+    justify-content: space-between;
+  }
+
   .temps__temp,
   .post {
     box-shadow: $mediumBoxShadow;
-    background-color: $whiteColor;
     border-radius: 10px;
     overflow: hidden;
+    background-color: $whiteColor;
     cursor: pointer;
   }
 
@@ -245,16 +261,9 @@
       padding-top: 6rem;
 
       .archive-btn {
-        border: 0;
-        border-radius: 5px;
-        background-color: $themeColor;
         padding: 1rem 2.5rem;
-        transition: background-color .3s;
-        @include textStyle($whiteColor, 1.7rem);
-
-        &:hover {
-          background-color: rgb(223, 134, 1);
-        }
+        font-size: 1.7rem;
+        @include orangeButtonStyles;
       }
     }
 

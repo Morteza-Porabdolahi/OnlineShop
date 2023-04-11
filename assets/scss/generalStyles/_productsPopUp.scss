@@ -10,39 +10,40 @@
     color: $whiteColor;
     display: none;
     animation: .3s opacityZeroToOne;
-}
 
-.description__title {
-    font-size: 2rem;
-    margin: 1.5rem 0;
-}
 
-.author__description {
-    font-size: 1.5rem;
-    opacity: .9;
-}
-
-.author__name {
-    @include textStyle($grayColor, 1.1rem);
-    margin-bottom: .5rem;
-    display: block;
-}
-
-.description__other {
-    @include alignCenter;
-    justify-content: space-between;
-}
-
-.description__price {
-    text-align: left;
-    font-weight: bold;
-
-    .price__price {
-        font-size: 3rem;
-        margin-top: .5rem;
+    .description__title {
+        font-size: 2rem;
+        margin: 1.5rem 0;
     }
 
-    .price__currency {
-        font-size: 1.8rem;
+    .author__description {
+        font-size: 1.5rem;
+        opacity: .9;
+    }
+
+    .author__name {
+        @include textStyle($grayColor, 1.1rem);
+        margin-bottom: .5rem;
+        display: block;
+    }
+
+    .description__other {
+        @include alignCenter;
+        justify-content: space-between;
+    }
+
+    .description__price {
+        text-align: left;
+        font-weight: bold;
+
+        .price__price {
+            font-size: 3rem;
+            margin-top: .5rem;
+        }
+
+        .price__currency {
+            font-size: 1.8rem;
+        }
     }
 }
