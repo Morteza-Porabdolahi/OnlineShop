@@ -1,6 +1,7 @@
 .product__description {
     position: absolute;
     background-color: $textColor;
+    pointer-events: none;
     border: 1px solid $blackColor;
     padding: 1rem;
     width: 50rem;

@@ -360,3 +360,38 @@ a {
 .title-icon {
   @include textStyle($themeColor, 2rem);
 }
+
+.tooltip {
+  background-color: $textColor;
+  border-radius: 5px;
+  padding: .7rem 1.5rem;
+  position: absolute;
+  width: max-content;
+  top: -.5rem;
+  left: 2.2rem;
+  display: none;
+
+  &__arrow {
+    position: absolute;
+    width: .8rem;
+    height: .8rem;
+    background-color: $textColor;
+    left: -.4rem;
+    top: 50%;
+    transform: rotate(45deg) translate(-50%, -50%);
+  }
+
+  a {
+    @include textStyle($whiteColor, 1.6rem, 100);
+    vertical-align: middle;
+    transition: opacity .3s;
+
+    &:hover {
+      opacity: .7;
+    }
+
+    &:not(:last-of-type) {
+      margin-right: .7rem;
+    }
+  }
+}

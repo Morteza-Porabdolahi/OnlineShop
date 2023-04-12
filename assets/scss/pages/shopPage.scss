@@ -103,6 +103,11 @@
             width: 25%;
             padding: 3rem 0;
 
+            .aside {
+                position: sticky;
+                top: 0;
+            }
+
             .aside>div {
                 box-shadow: $mediumBoxShadow;
                 background-color: $whiteColor;

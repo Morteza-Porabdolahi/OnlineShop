@@ -171,12 +171,19 @@
       transition: translate .3s;
     }
 
+    .title__icon {
+      position: relative;
+      @include showToolTipOnHover;
+
+      .tooltip {}
+    }
+
     .description__title {
       display: flex;
       justify-content: space-between;
       gap: 1rem;
 
-      a {
+      >a {
         @include textStyle($textColor, 1.5rem);
         @include textHover;
         line-height: 1.5;
@@ -327,6 +334,11 @@
     .btns__share,
     .btns__comment {
       transition: color .3s;
+    }
+
+    .btns__share {
+      position: relative;
+      @include showToolTipOnHover;
     }
 
     .btns__share:hover,

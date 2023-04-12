@@ -69,3 +69,11 @@
   -webkit-line-clamp: $lineClamp;
   line-clamp: $lineClamp;
 }
+
+@mixin showToolTipOnHover {
+  &:hover {
+    .tooltip {
+      display: block;
+    }
+  }
+}
