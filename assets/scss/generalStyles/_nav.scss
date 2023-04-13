@@ -185,22 +185,30 @@
         }
 
         .register-btn {
-          border: 1px solid #e0e0e2;
+          border: 1px solid $creamColor;
           padding: .7rem 1rem;
           color: $textColor;
-          transition: color .3s;
+          display: flex;
+          gap: .7rem;
+
+          a,
+          span {
+            transition: color .3s;
+          }
 
           &:hover {
-            color: $grayerColor;
+
+            a,
+            span {
+              color: $grayerColor;
+            }
           }
 
-          span:first-child {
-            vertical-align: middle;
+          span {
             font-size: 1.9rem;
-            margin-left: .5rem;
           }
 
-          span:nth-child(2) {
+          a {
             font-size: 1.6rem;
           }
         }

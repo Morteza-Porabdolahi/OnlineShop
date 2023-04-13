@@ -487,19 +487,19 @@
                 <section class="main__forms">
                     <section class="forms__form-container">
                         <h2 class="form-container__title">ورود</h2>
-                        <form class="form-container__form">
+                        <form class="form-container__form" id="login-form">
                             <div class="form__input-container">
                                 <p class="input-container__title">
                                     نام کاربری یا آدرس ایمیل
                                     <span class="required">*</span>
                                 </p>
-                                <input type="text" class="input-container__input">
+                                <input type="text" class="input-container__input" name="emailOrName">
                             </div>
                             <div class="form__input-container">
                                 <p class="input-container__title">گذرواژه
                                     <span class="required">*</span>
                                 </p>
-                                <input type="text" class="input-container__input">
+                                <input type="password" name="password" class="input-container__input">
                             </div>
                             <div class="form__options">
                                 <label for="remember-me" class="options__remember">
@@ -518,18 +518,24 @@
                     </section>
                     <section class="forms__form-container">
                         <h2 class="form-container__title">عضویت</h2>
-                        <form class="form-container__form">
+                        <form class="form-container__form" id="register-form">
+                            <div class="form__input-container">
+                                <p class="input-container__title">نام کاربری
+                                    <span class="required">*</span>
+                                </p>
+                                <input type="text" class="input-container__input" name="name">
+                            </div>
                             <div class="form__input-container">
                                 <p class="input-container__title">آدرس ایمیل
                                     <span class="required">*</span>
                                 </p>
-                                <input type="text" class="input-container__input">
+                                <input type="email" class="input-container__input" name="email">
                             </div>
                             <div class="form__input-container">
                                 <p class="input-container__title">گذرواژه
                                     <span class="required">*</span>
                                 </p>
-                                <input type="text" class="input-container__input">
+                                <input type="password" class="input-container__input" name="password">
                             </div>
                             <div class="form__options">
                                 <p class="options__warning">
@@ -768,9 +774,13 @@
 
     <script>
         let $ = document;
+        const apiUrl = "127.0.0.1:3000";
     </script>
     <script src="/assets/js/nav.js"></script>
     <script src="/assets/js/modal.js"></script>
+    <script src="/assets/js/register.js"></script>
+    <script src="/assets/js/login.js"></script>
+
 </body>
 
 </html>
