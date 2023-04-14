@@ -11,7 +11,7 @@ async function handleLoginFormSubmit(e) {
     }
 
     try {
-        const response = await fetch(`http://127.0.0.1:3000/users/login`, {
+        const response = await fetch(`${apiUrl}/users/login`, {
             body: JSON.stringify(user),
             method: 'POST',
             headers: { "Content-Type": "application/json" },
