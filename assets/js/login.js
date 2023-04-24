@@ -6,7 +6,7 @@ async function handleLoginFormSubmit(e) {
     e.preventDefault();
     const { emailOrName, password } = loginForm;
     const user = {
-        emailOrName: emailOrName.value,
+        email: emailOrName.value,
         password: password.value,
     }
 

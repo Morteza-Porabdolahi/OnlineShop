@@ -30,7 +30,7 @@ const scrollBarSlider = new Swiper('.scrollbar-swiper', {
 });
 
 // --------------------------------------
-let allProducts = [];
+let allProducts = fetchAllProducts();
 
 // async function create() {
 //     const userToken = localStorage.getItem('token');
@@ -57,30 +57,6 @@ let allProducts = [];
 
 // create()
 
-async function fetchAllProducts() {
-    const userToken = localStorage.getItem('token');
-    if (userToken) {
-        try {
-            const response = await fetch(`${apiUrl}/items`, {
-                method: 'GET',
-                headers: {
-                    "Authorization": `Bearer ${userToken}`
-                }
-            });
-
-            if (response.status === 200) {
-                const products = await response.json();
-
-                allProducts = products;
-                insertNewProducts();
-                insertBestSellingProducts();
-            }
-
-        } catch (err) {
-            if (err) throw err;
-        }
-    }
-}
 
 function insertBestSellingProducts() {
     const bestSellingProductsContainer = $.querySelector('.bestselling__products');
@@ -134,22 +110,3 @@ function insertNewProducts() {
 
 }
 
-async function addProductInCart(productId, quantity) {
-    const userToken = localStorage.getItem('token');
-    if (userToken) {
-        const cartProduct = {
-            itemId: productId,
-            quantity,
-        }
-        const response = await fetch(`${apiUrl}/cart`, {
-            method: "POST",
-            headers: {
-                "Authorization": `Bearer ${userToken}`,
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(cartProduct)
-        });
-        console.log(await response.json())
-    }
-}
-fetchAllProducts();
