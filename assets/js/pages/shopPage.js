@@ -43,6 +43,7 @@ function handleProgressWidth() {
 
 // -----------------------------
 const productsContainer = $.querySelector(".products-container__products");
+let allProducts;
 
 function insertNewProducts(products) {
   const productTemplate = $.querySelector(
@@ -76,9 +77,12 @@ function insertNewProducts(products) {
   });
 }
 
-(async function() {
-  insertNewProducts(await fetchAllProducts());
-})();
+window.onload = async function () {
+  const response = await fetchAllProducts();
+  allProducts = await response.json();
+
+  insertNewProducts(allProducts);
+}
 
 // ------------- Filter Btns -------------- //
 
@@ -114,7 +118,8 @@ function handleProductsGrid(e) {
 }
 
 async function handleShowingProductNumber(e) {
-  const allProducts = await fetchAllProducts();
+  const response = await fetchAllProducts()
+  const allProducts = response.json();
   const clickedBtn = e.target.closest("span");
   const clickedBtnNumDataset = clickedBtn.dataset.num;
 
@@ -135,18 +140,12 @@ async function handleShowingProductNumber(e) {
   filterProductsByPrice();
 }
 
-let allProducts;
-
-(async function() {
-  allProducts = await fetchAllProducts();
-})();
-
 function filterProductsByPrice() {
-  insertNewProducts(
-    allProducts.filter(
-      product =>
-        product.price <= maxRangeInput.value &&
-        product.price >= minRangeInput.value
-    )
+  const filteredProducts = allProducts.filter(
+    product =>
+      product.price <= maxRangeInput.value &&
+      product.price >= minRangeInput.value
   );
+
+  insertNewProducts(filteredProducts);
 }

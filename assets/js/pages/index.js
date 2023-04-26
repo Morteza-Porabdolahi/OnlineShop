@@ -30,8 +30,6 @@ const scrollBarSlider = new Swiper('.scrollbar-swiper', {
 });
 
 // --------------------------------------
-let allProducts = fetchAllProducts();
-
 // async function create() {
 //     const userToken = localStorage.getItem('token');
 //     if (userToken) {
@@ -58,11 +56,11 @@ let allProducts = fetchAllProducts();
 // create()
 
 
-function insertBestSellingProducts() {
+function insertBestSellingProducts(products) {
     const bestSellingProductsContainer = $.querySelector('.bestselling__products');
     const productTemplate = $.querySelector('.bestselling__products template');
 
-    allProducts.forEach(product => {
+    products.forEach(product => {
         const cloneTemp = productTemplate.content.cloneNode(true);
         const newDiv = $.createElement('div');
 
@@ -85,11 +83,11 @@ function insertBestSellingProducts() {
     setPopUpForProducts(products);
 }
 
-function insertNewProducts() {
+function insertNewProducts(products) {
     const newProductsContainer = $.querySelector('.new-temps__temps .swiper-wrapper');
     const productTemplate = $.querySelector('.new-temps__temps template');
 
-    allProducts.forEach(product => {
+    products.forEach(product => {
         const cloneTemp = productTemplate.content.cloneNode(true);
         const newDiv = $.createElement('div');
         const productTitle = cloneTemp.querySelector('.description__title > a');
@@ -108,5 +106,17 @@ function insertNewProducts() {
         newProductsContainer.append(newDiv);
     });
 
+}
+
+async function handleProductsShowing() {
+    const response = await fetchAllProducts();
+    const products = await response.json();
+
+    insertNewProducts(products);
+    insertBestSellingProducts(products);
+}
+
+window.onload = function () {
+    handleProductsShowing();
 }
 
