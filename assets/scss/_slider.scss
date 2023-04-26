@@ -1,0 +1,30 @@
+.swiper-wrapper {
+  padding: 1rem 0;
+}
+
+.my-own-pagination {
+  padding: 3rem 0 1rem 0;
+  text-align: center;
+}
+
+.bullet {
+  display: inline-block;
+  margin: 0 .5rem;
+  width: 6px;
+  height: 6px;
+  background-color: $creamColor;
+  border-radius: 50%;
+  transition: scale .1s;
+
+  &:hover {
+    background-color: transparent;
+    border: 1px solid $blackColor;
+    scale: 1.5;
+  }
+}
+
+.active-bullet {
+  border: 1px solid $blackColor;
+  background-color: transparent;
+  scale: 1.5;
+}

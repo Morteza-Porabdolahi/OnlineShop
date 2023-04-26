@@ -1,251 +1,283 @@
-@import "../variables", "../mediaQueries/navQuery", "../mixins";
+@import "../mediaQueries/navQuery";
 
 .header {
-  &__social {
-    display: flex;
-    justify-content: space-between;
-    padding: 1.8rem;
+  &__nav-container {
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: 3;
 
-    .social__medias,
-    .social__nav {
+    .nav-container__social {
       display: flex;
-      font-size: 1.5rem;
-    }
+      justify-content: space-between;
+      padding: 1.8rem;
 
-    .social__medias {
-      gap: 1rem;
-
-      a {
-        color: rgba(0, 0, 0, 60%);
+      .social__medias,
+      .social__nav {
+        display: flex;
+        font-size: 1.5rem;
       }
 
-      a:hover {
-        color: rgba(0, 0, 0, 80%);
-      }
-    }
-
-    .social__nav {
-      gap: 3rem;
-      a:hover {
-        color: $grayerColor;
-      }
-    }
-
-    .social__nav a,
-    .social__medias a {
-      transition: color .3s;
-    }
-  }
-
-  &__nav {
-    .nav__top {
-      display: flex;
-      padding: 2rem 1rem;
-      border-radius: 10px;
-      box-shadow: $boxShdow;
-      background-color: $whiteColor;
-      transition: padding .3s;
-
-      .top__right,
-      .top__left {
-        @include alignCenter;
-        width: 50%;
-      }
-
-      .top__left {
+      .social__medias {
         gap: 1rem;
-        justify-content: left;
+
+        a {
+          color: rgba(0, 0, 0, 60%);
+        }
+
+        a:hover {
+          color: rgba(0, 0, 0, 80%);
+        }
       }
 
-      .top__right > img {
-        max-width: 10.7rem;
+      .social__nav {
+        gap: 3rem;
+
+        a {
+          color: $textColor;
+        }
+
+        a:hover {
+          color: $grayerColor;
+        }
       }
 
-      .products-category:hover > .products-category__list {
-        @include showTransitionedList;
+      .social__nav a,
+      .social__medias a {
+        transition: color .3s;
       }
+    }
 
-      .products-category {
-        @include alignCenter;
-        padding: 1rem 0;
-        margin-right: 2.5rem;
-        position: relative;
+    .nav-container__nav {
+      .nav__top {
+        display: flex;
+        padding: 2rem 1rem;
+        border-radius: 10px;
+        box-shadow: $mediumBoxShadow;
+        background-color: $whiteColor;
+        transition: padding .3s;
 
-        &__icon {
-          font-size: 2.3rem;
+        .top__right,
+        .top__left {
+          @include alignCenter;
+          width: 50%;
         }
 
-        &__title {
-          font-size: 1.6rem;
-          padding: 0 1rem 0 4rem;
+        .top__left {
+          gap: 1rem;
+          justify-content: left;
         }
 
-        &__arrow {
-          font-size: 3rem;
+        .top__right>img {
+          max-width: 10.7rem;
         }
 
-        &__list {
-          @include transitionList;
-          position: absolute;
-          background-color: $whiteColor;
-          top: 4.5rem;
-          left: 0;
-          right: 0;
-          box-shadow: $boxShdow;
-          border-radius: 5px;
-          z-index: 1;
+        .products-category:hover>.products-category__list {
+          @include showTransitionedList;
         }
 
-        &__list .outer-link {
-          @include textStyle($textColor,1.5rem,bold);
+        .products-category {
+          @include alignCenter;
+          padding: 1rem 0;
+          margin-right: 2.5rem;
+          position: relative;
+
+          &__icon {
+            font-size: 2.3rem;
+          }
+
+          &__title {
+            font-size: 1.6rem;
+            padding: 0 1rem 0 4rem;
+          }
+
+          &__arrow {
+            font-size: 3rem;
+          }
+
+          &__list {
+            @include navBarListStyles;
+            position: absolute;
+            background-color: $whiteColor;
+            top: 4.5rem;
+            left: 0;
+            right: 0;
+            box-shadow: $mediumBoxShadow;
+            border-radius: 5px;
+            z-index: 1;
+          }
+
+          &__list .outer-link {
+            @include textStyle($textColor, 1.5rem);
+            @include alignCenter;
+            justify-content: space-between;
+            transition: color .3s;
+
+            &:hover {
+              color: $grayerColor;
+            }
+
+            span {
+              font-size: 2rem;
+              color: $grayColor;
+            }
+          }
+
+          &__list .inner-link {
+            @include textStyle($grayerColor, 1.5rem);
+            padding-bottom: 2rem;
+            display: inline-block;
+            transition: color .3s;
+
+            &:hover {
+              color: $textColor;
+            }
+          }
+
+          .outer-items {
+            padding: 1.8rem 1.9rem;
+            position: relative;
+
+            &:hover>.inner-lists {
+              @include showTransitionedList;
+            }
+
+            &:not(:last-child) {
+              border-bottom: 1px solid rgba(0, 0, 0, 10%);
+            }
+          }
+
+          .inner-lists {
+            position: absolute;
+            top: .5rem;
+            left: -23rem;
+            width: 23rem;
+            background-color: $whiteColor;
+            z-index: 2;
+            box-shadow: $mediumBoxShadow;
+            padding: 2rem 2rem 0 10rem;
+            border-radius: 5px;
+            @include navBarListStyles;
+          }
+        }
+
+        .search-container {
+          width: 50%;
+          background-color: $bgColor;
+          padding: 1.2rem 1.5rem;
+          border-radius: 10px;
           @include alignCenter;
           justify-content: space-between;
-          transition: color .3s;
+
+          span {
+            @include textStyle($grayerColor, 2rem);
+          }
+
+          &__input {
+            border: 0;
+            width: 100%;
+            padding: 0;
+          }
+
+          &__input::placeholder {
+            font-size: 1.5rem;
+          }
+        }
+
+        .register-btn {
+          border: 1px solid $creamColor;
+          padding: .7rem 1rem;
+          color: $textColor;
+          display: flex;
+          gap: .7rem;
+
+          a,
+          span {
+            transition: color .3s;
+          }
 
           &:hover {
-            color: $grayerColor;
+
+            a,
+            span {
+              color: $grayerColor;
+            }
           }
 
           span {
-            font-size: 2rem;
-            color: $grayColor;
+            font-size: 1.9rem;
+          }
+
+          a {
+            font-size: 1.6rem;
           }
         }
 
-        &__list .inner-link {
-          @include textStyle($grayerColor,1.5rem);
-          padding-bottom: 2rem;
-          display: inline-block;
-          transition: color .3s;
+        .additional-icons {
+          display: flex;
+          margin-top: 1rem;
+          @include textStyle($grayerColor, 2.5rem);
 
-          &:hover {
-            color: $textColor;
+          &__heart-icon,
+          &__basket-icon {
+            position: relative;
+            margin-left: 2rem;
+            color: $grayerColor;
+            transition: opacity .3s;
+            cursor: pointer;
+
+            &:hover {
+              opacity: .6;
+            }
           }
-        }
 
-        .outer-items {
-          padding: 1.8rem 1.9rem;
-          position: relative;
-
-          &:hover > .inner-lists {
-            @include showTransitionedList;
+          sup {
+            @include textStyle($whiteColor, 1.2rem);
+            position: absolute;
+            top: -2px;
+            left: -5px;
+            background-color: $themeColor;
+            border-radius: 50%;
+            padding: .2rem .4rem 0 .4rem;
           }
-
-          &:not(:last-child) {
-            border-bottom: 1px solid rgba(0, 0, 0, 10%);
-          }
-        }
-
-        .inner-lists {
-          position: absolute;
-          top: .5rem;
-          left: -23rem;
-          width: 23rem;
-          background-color: $whiteColor;
-          z-index: 2;
-          box-shadow: $boxShdow;
-          padding: 2rem 2rem 0 10rem;
-          border-radius: 5px;
-          @include transitionList;
         }
       }
 
-      .search-container {
-        width: 45%;
-        background-color: $bgColor;
-        padding: 1.2rem 1.5rem;
-        border-radius: 10px;
-        @include alignCenter;
-        justify-content: space-between;
+      .nav__bottom {
+        background-color: #55606e;
+        border-radius: 0 0 10px 10px;
+        width: 126rem;
+        margin: 0 auto;
+        padding: 1.2rem 3rem;
 
-        span {
-          @include textStyle(#777,2rem);
-        }
+        .bottom__list {
+          @include alignCenter;
+          gap: 3.5rem;
+          padding: .6rem 0;
 
-        &__input {
-          border: 0;
-          color: #777;
-          background-color: transparent;
-          width: 100%;
-        }
+          a {
+            @include textStyle($whiteColor, 1.6rem);
+            transition: opacity .3s;
 
-        &__input::placeholder {
-          font-size: 1.5rem;
-        }
-      }
-
-      .register-btn {
-        background-color: transparent;
-        border: 1px solid #e0e0e2;
-        border-radius: 5px;
-        padding: .7rem 1rem;
-        color: $textColor;
-        transition: color .3s;
-
-        &:hover {
-          color: $grayerColor;
-        }
-
-        span:first-child {
-          vertical-align: middle;
-          font-size: 1.9rem;
-          margin-left: .5rem;
-        }
-
-        span:nth-child(2) {
-          font-size: 1.6rem;
-        }
-      }
-
-      .additional-icons {
-        display: flex;
-        margin-top: 1rem;
-        @include textStyle($grayerColor,2.5rem);
-
-        &__heart-icon,
-        &__basket-icon {
-          position: relative;
-          margin-left: 2rem;
-          transition: opacity .3s;
-
-          &:hover {
-            opacity: .6;
+            &:hover {
+              opacity: .8;
+            }
           }
-        }
-
-        sup {
-          @include textStyle($whiteColor,1.2rem);
-          position: absolute;
-          top: -2px;
-          left: -5px;
-          background-color: $themeColor;
-          border-radius: 50%;
-          padding: .2rem .4rem 0 .4rem;
         }
       }
     }
+  }
 
+  &__nav-container--sticked {
+    position: fixed;
+
+    .nav__top {
+      padding: 1rem 0 !important;
+    }
+
+    .nav-container__social,
     .nav__bottom {
-      background-color: #55606e;
-      border-radius: 0 0 10px 10px;
-      width: 126rem;
-      margin: 0 auto;
-      padding: 1.2rem 3rem;
-
-      .bottom__list {
-        @include alignCenter;
-        gap: 3.5rem;
-        padding: .6rem 0;
-
-        a {
-          @include textStyle($whiteColor,1.6rem);
-          transition: opacity .3s;
-
-          &:hover {
-            opacity: .8;
-          }
-        }
-      }
+      display: none;
     }
   }
 }

@@ -1,0 +1,171 @@
+@import "../variables",
+"../mixins",
+"../generalStyles/footer", '../generalStyles/pagesTitle';
+
+.main {
+
+    .main__intro {
+        padding: 0;
+    }
+
+    .bill-container__bill {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .bill-container__discount {
+        margin: 5rem 0;
+        font-size: 1.8rem;
+
+        .discount__icon {
+            font-size: 1.1rem;
+            border: 1px solid $textColor;
+            border-radius: 3px;
+            padding: 0 .2rem;
+            margin-left: 1rem;
+        }
+
+        .discount__input-switcher {
+            color: $themeColor;
+            margin-right: .5rem;
+            cursor: pointer;
+        }
+    }
+
+    .bill__form-container {
+        width: 57%;
+
+        h2 {
+            margin-bottom: 2rem;
+            font-size: 3rem;
+        }
+
+        .inputs__fullname-inputs {
+            @include alignCenter;
+            gap: 4rem;
+
+            .input-container {
+                width: 50%;
+            }
+        }
+
+        .input-container {
+            margin-top: 2rem;
+
+            label {
+                font-size: 1.7rem;
+                display: block;
+                margin-bottom: .8rem;
+
+                span {
+                    @include textStyle(red, 2.4rem);
+                }
+            }
+
+            input {
+                padding: .8rem 1.5rem;
+                width: 100%;
+                font-size: 1.5rem;
+            }
+        }
+    }
+
+    .bill__order-box {
+        width: 40%;
+        border: 2px solid $themeColor;
+        border-radius: 10px;
+        padding: 3rem;
+
+        h2 {
+            font-size: 2.8rem;
+            margin-bottom: 2rem;
+        }
+
+        .order-box__table {
+            display: block;
+
+            thead,
+            tbody {
+                width: 100%;
+                display: block;
+            }
+
+            td {
+                font-size: 1.6rem;
+            }
+
+            tr {
+                width: 100%;
+                padding: 1.5rem 0;
+                display: flex;
+                justify-content: space-between;
+                border-bottom: 1px solid #ddd;
+            }
+
+            .product-name,
+            .product-price {
+                font-size: 1.7rem;
+            }
+
+            .product-name {
+                color: $grayerColor;
+            }
+
+            .product-price,
+            .sum-of-prices {
+                color: $themeColor;
+            }
+
+        }
+
+        .order-box__description {
+            font-size: 1.7rem;
+            line-height: 1.5;
+            word-spacing: .2rem;
+            padding: 2rem 0;
+
+            a {
+                color: $themeColor;
+                font-weight: bold;
+            }
+        }
+
+        .order-box__submit-btn {
+            width: 100%;
+            font-size: 1.8rem;
+            padding: 1rem 0;
+            @include greenButtonStyles;
+        }
+    }
+
+    .discount__discount-input-container {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height .3s;
+    }
+
+    .discount-input-container__input-container {
+        border: 2px solid $creamColor;
+        padding: 3rem 3.5rem;
+        width: fit-content;
+        border-radius: 10px;
+        margin-top: 3rem;
+
+        p {
+            @include textStyle($grayerColor, 1.7rem);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        input {
+            padding: .8rem 1.7rem;
+            font-size: 1.6rem;
+        }
+
+        button {
+            font-size: 1.5rem;
+            padding: .8rem 1.7rem;
+            @include greenButtonStyles;
+        }
+    }
+}

@@ -1,4 +1,8 @@
-@import "remixicon", "reset", "generalStyles/nav";
+@import "./remixicon", "./variables", "./mixins",
+"./reset",
+"./generalStyles/nav",
+"./slider",
+"./generalStyles/footer", "./generalStyles/quantityStyles";
 
 html {
   box-sizing: border-box;
@@ -9,14 +13,16 @@ html {
 *::before,
 *::after {
   box-sizing: inherit;
+  margin: 0;
+  padding: 0;
 }
 
 @font-face {
   font-family: Yekanbakh;
   src: local('Yekan Bakh'),
-    url('/assets/fonts/YekanBakh-Regular.ttf') format('truetype'),
-    url('/assets/fonts/YekanBakh-Regular.woff') format('woff'),
-    url('/assets/fonts/YekanBakh-Regular.woff2') format('woff2');
+    url('/assets/fonts/YekanBakh-Medium.ttf') format('truetype'),
+    url('/assets/fonts/YekanBakh-Medium.woff') format('woff'),
+    url('/assets/fonts/YekanBakh-Medium.woff2') format('woff2');
 }
 
 body {
@@ -24,41 +30,372 @@ body {
   color: $textColor;
 }
 
-.website-wrapper {
-  background-color: #f3f4f6;
-}
-
 img {
   max-width: 100%;
   max-height: 100%;
 }
 
-input,
 button {
+  cursor: pointer;
+  transition: color .3s, background-color .3s;
+}
+
+input,
+button,
+textarea {
   outline: none;
-  font-family: yekanbakh;
+  border: 0;
+  font-family: Yekanbakh;
+  border-radius: 5px;
+  background-color: transparent;
+}
+
+input:not([type="checkbox"], [type="radio"], [type="range"]),
+textarea {
+  border: 1px solid $creamColor;
+  padding: .8rem 1.2rem;
+  @include textStyle($grayerColor, 1.5rem);
+
+  &::placeholder {
+    font-family: Yekanbakh;
+    @include textStyle($grayColor, 1.4rem);
+  }
+}
+
+.required {
+  @include textStyle(red, 2.5rem);
 }
 
 a {
   text-decoration: none;
+  color: $textColor;
 }
 
-button,
-span {
-  cursor: pointer;
+.website-wrapper {
+  background-color: #f3f4f6;
 }
 
 .vertical-divider {
-  width: 2rem;
-  height: 1px;
+  width: 3rem;
+  height: .09px;
   transform: rotate(90deg);
-  background-color: $creamColor;
+  background-color: #ddd;
 }
 
-.hidden {
+.modal-left {
+  left: -70rem;
+}
+
+.modal-right {
+  right: -70rem;
+}
+
+.modal-container__modal {
+  width: 26%;
+  background-color: $whiteColor;
+  padding: 3rem;
+
+  .modal__modal-header {
+    @include alignCenter;
+    justify-content: space-between;
+    border-bottom: 1px solid $creamColor;
+    padding-bottom: 2rem;
+    color: $textColor;
+
+    h4 {
+      font-size: 2.2rem;
+    }
+
+    .close-btn {
+      cursor: pointer;
+      font-size: 2.5rem;
+      margin-left: .5rem;
+      transition: color .3s;
+
+      &:hover {
+        color: $grayerColor;
+      }
+
+      span {
+        font-size: 1.8rem;
+      }
+    }
+  }
+
+  .modal__modal-body {
+    border-bottom: 1px solid $creamColor;
+    padding: 2rem 0;
+  }
+}
+
+.modal-container,
+.modal-container__modal {
+  position: fixed;
+  bottom: 0;
+  top: 0;
+}
+
+.modal-container {
+  right: 0;
+  left: 0;
   display: none;
+  animation: opacityZeroToOne .3s;
+  z-index: 3;
+  background-color: rgba(0, 0, 0, .6);
 }
 
-.show-block {
-  display: block;
+.modal-container__login-modal {
+  .modal-body__form {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .input-container__title {
+    font-size: 1.7rem;
+    display: block;
+    margin-bottom: .5rem;
+  }
+
+  .input-container__input {
+    padding: .6rem 1.5rem;
+    font-size: 1.5rem;
+    width: 100%
+  }
+
+  .form__forgot-pass {
+    @include textStyle($themeColor, 1.7rem);
+  }
+
+  .form__remember-me {
+    span {
+      font-size: 1.5rem;
+    }
+
+    input {
+      vertical-align: middle;
+      margin-left: .5rem;
+    }
+  }
+
+  .form__submit-btn {
+    font-size: 1.6rem;
+    padding: .7rem 1.5rem;
+    width: fit-content;
+    @include greenButtonStyles;
+  }
+}
+
+.modal-container__login-modal .modal__modal-footer,
+.modal-container__basket-modal .modal-body__no-products {
+  @include alignCenter;
+  justify-content: center;
+  flex-direction: column;
+  gap: 2rem;
+  padding-top: 2rem;
+
+  span {
+    @include textStyle($creamColor, 10rem);
+  }
+
+  h5 {
+    font-size: 1.8rem;
+  }
+
+  a {
+    font-size: 1.5rem;
+    border-radius: 5px;
+    padding: 1rem 1.5rem;
+    @include orangeButtonStyles;
+  }
+}
+
+.modal-container__basket-modal {
+  padding: 3rem 2rem;
+
+  .modal__modal-body {
+    border: 0;
+
+    .modal-body__no-products {
+      display: none;
+    }
+
+    .show-products__basket-products {
+      max-height: 32rem;
+      overflow: auto;
+      padding-left: 1rem;
+
+      &::-webkit-scrollbar {
+        width: 5px;
+      }
+
+      &::-webkit-scrollbar-track {
+        background-color: $bgColor;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: $creamColor;
+      }
+    }
+
+    .basket-products__basket-product {
+      display: flex;
+      gap: 1.5rem;
+
+      &:not(:last-child) {
+        border-bottom: 1px solid $creamColor;
+        padding-bottom: 1.5rem;
+      }
+
+      &:not(:first-child) {
+        padding-top: 1.5rem;
+      }
+
+      .basket-product__img-container {
+        width: 9rem;
+        height: 7rem;
+        overflow: hidden;
+        border-radius: 5px;
+
+        img {
+          transform: scaleX(2);
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+      .title-container__title {
+        display: flex;
+        gap: .7rem;
+        line-height: 1.5;
+
+        span,
+        a {
+          transition: color .3s;
+        }
+
+        span {
+          cursor: pointer;
+
+          &:hover {
+            color: $grayColor
+          }
+        }
+
+        a {
+          font-size: 1.7rem;
+          @include textHover;
+        }
+      }
+
+      .title-container__product-price {
+        @include textStyle($themeColor, 1.7rem);
+
+        p>span {
+          color: $grayerColor;
+        }
+      }
+    }
+
+
+  }
+
+  .checkout__buy-completion {
+
+    button {
+      width: 100%;
+      font-size: 1.5rem;
+      padding: .9rem 0;
+      margin-top: 1rem;
+    }
+
+    .buy-completion__show-basket {
+      border: 1px solid $creamColor;
+
+      a {
+        color: $textColor;
+      }
+    }
+
+    .buy-completion__checkout-btn {
+      @include greenButtonStyles;
+
+      a {
+        color: $whiteColor
+      }
+    }
+
+  }
+
+  .checkout__price-sum {
+    @include alignCenter;
+    justify-content: space-between;
+    font-size: 1.8rem;
+    border: 1px solid $creamColor;
+    border-width: 1px 0;
+    padding: 1.8rem 0;
+    margin-top: 1.5rem;
+  }
+
+  .price-sum__title {
+    color: $textColor;
+  }
+
+  .price-sum__price {
+    color: $themeColor;
+  }
+
+}
+
+@keyframes opacityZeroToOne {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.title-icon {
+  @include textStyle($themeColor, 2rem);
+}
+
+.tooltip {
+  background-color: $textColor;
+  border-radius: 5px;
+  padding: .7rem 1.5rem;
+  position: absolute;
+  width: max-content;
+  top: -.5rem;
+  left: 2.2rem;
+  display: none;
+
+  &__arrow {
+    position: absolute;
+    width: .8rem;
+    height: .8rem;
+    background-color: $textColor;
+    left: -.4rem;
+    top: 50%;
+    transform: rotate(45deg) translate(-50%, -50%);
+  }
+
+  a {
+    @include textStyle($whiteColor, 1.6rem, 100);
+    vertical-align: middle;
+    transition: opacity .3s;
+
+    &:hover {
+      opacity: .7;
+    }
+
+    &:not(:last-of-type) {
+      margin-right: .7rem;
+    }
+  }
+}
+
+template {
+  display: none !important;
 }

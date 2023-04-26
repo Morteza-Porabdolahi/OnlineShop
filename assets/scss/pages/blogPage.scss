@@ -1,0 +1,145 @@
+@import "../variables", "../mixins", "../generalStyles/pagesTitle", "../generalStyles/BlogAndSingleBlogPage";
+
+.main {
+    &__body {
+        display: flex;
+        gap: 3rem;
+        padding: 0 1.5rem;
+
+        .body__posts-section {
+            width: 75%;
+            @include alignCenter;
+            flex-direction: column;
+
+            .posts-section__load-btn {
+                padding: .8rem 2.8rem;
+                border: 1px solid $creamColor;
+                font-size: 1.5rem;
+                margin-top: 2.5rem;
+                transition: border-color .3s;
+
+                &:hover {
+                    border-color: $grayColor;
+                }
+            }
+
+            .posts-section__posts {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2rem;
+                padding: 3rem 0;
+            }
+
+            .posts__post {
+                box-shadow: $mediumBoxShadow;
+                background-color: $whiteColor;
+                border-radius: 10px;
+                overflow: hidden;
+                cursor: pointer;
+                transition: transform .3s;
+            }
+
+            .post__img-container {
+                position: relative;
+                overflow: hidden;
+
+                img {
+                    transition: transform .3s;
+                    scale: 1.2;
+                }
+            }
+
+            .posts__post:hover {
+                transform: translateY(-.5rem);
+
+                .post__img-container {
+                    img {
+                        transform: translateX(-1rem) translateY(-1rem);
+                    }
+                }
+
+                .img-container__layer {
+                    opacity: 1;
+                }
+            }
+
+            .img-container__layer {
+                position: absolute;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                right: 0;
+                background-color: rgba(0, 0, 0, 30%);
+                @include alignCenter;
+                justify-content: center;
+                opacity: 0;
+                transition: opacity .3s;
+
+                a {
+                    @include textStyle($whiteColor, 2rem);
+                }
+            }
+
+            .post__title {
+                font-size: 1.9rem;
+                @include textHover;
+                line-height: 1.2;
+            }
+
+            .post__btns {
+                @include alignCenter;
+                justify-content: space-between;
+            }
+
+            .btns {
+                @include alignCenter;
+                color: $grayColor;
+                font-size: 1.8rem;
+                gap: 1rem;
+            }
+
+            .btns__share,
+            .btns__comment {
+                transition: color .3s;
+
+                &:hover {
+                    color: $textColor;
+
+                }
+            }
+
+            .btns__comment {
+                display: flex;
+
+                sup {
+                    font-size: 1.3rem;
+                }
+            }
+
+            .post__summary {
+                @include textStyle($grayerColor, 1.5em);
+                margin: 1.5rem 0;
+                @include truncateText(2.5rem, 2);
+            }
+
+            .post__description {
+                padding: 2rem;
+            }
+
+            .post__author {
+                img {
+                    border-radius: 50%;
+                    width: 3rem;
+                    height: 3rem;
+                    vertical-align: middle;
+                }
+
+                span {
+                    font-size: 1.5rem;
+                    margin-right: 1rem;
+                }
+            }
+
+        }
+    }
+}

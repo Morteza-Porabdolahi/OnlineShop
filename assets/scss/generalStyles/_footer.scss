@@ -1,0 +1,258 @@
+.footer {
+  padding: 8rem 0 4rem 0;
+
+  &__about {
+    padding: 0 4rem;
+    display: flex;
+
+    .about__box {
+      @include alignCenter;
+      flex-direction: column;
+      width: calc(100% /4);
+      gap: 1.5rem;
+
+      .box__title {
+        @include textStyle($grayerColor, 2.5rem);
+      }
+
+      .box__desc {
+        @include textStyle($grayColor, 1.9rem);
+      }
+
+      svg {
+        width: 7rem;
+        height: 7rem;
+      }
+    }
+  }
+
+  &__newsletter {
+    padding: 4rem 2rem 4rem 2rem;
+
+    .newsletter__container {
+      background-color: $whiteColor;
+      border-radius: 10px;
+      padding: 2.5rem 3rem 2.5rem 4rem;
+      box-shadow: $mediumBoxShadow;
+      @include alignCenter;
+    }
+
+    .newsletter__social {
+      @include alignCenter;
+      gap: 1rem;
+      width: 30%;
+
+      .social__aparat {
+        background-color: #ffe9e9;
+
+        svg {
+          width: 2.5rem;
+          height: 2.5rem;
+        }
+      }
+
+      .social__instagram {
+        background-color: #ffe3ed;
+        color: #e54787;
+      }
+
+      .social__telegram {
+        color: #7dc3ff;
+      }
+
+      .social__telegram,
+      .social__youtube {
+        background-color: #dbf5ff;
+      }
+
+      .social__twitter {
+        background-color: #e3fefe;
+        color: #18e3ff;
+      }
+
+      .social__youtube {
+        color: #18c4ff;
+      }
+
+      div {
+        @include alignCenter;
+        justify-content: center;
+        border-radius: 10px;
+        width: 50px;
+        height: 50px;
+      }
+
+      div:not(:first-child) {
+        font-size: 2.8rem;
+      }
+    }
+
+    .newsletter {
+      @include alignCenter;
+      gap: 10rem;
+      width: 75%;
+
+      .newsletter__input-container {
+        width: 75%;
+        display: flex;
+      }
+
+      .input-container__btn {
+        border: 0;
+        background-color: $themeColor;
+        border-radius: 5px 0 0 5px;
+        @include textStyle($whiteColor, 1.5rem);
+        padding: .8rem 2rem;
+        transition: background-color .3s;
+
+        &:hover {
+          background-color: rgb(223, 134, 1);
+        }
+      }
+
+      .input-container__input {
+        border-radius: 0 5px 5px 0;
+        padding: 0 1.5rem;
+        border: 1px solid $creamColor;
+        border-left: 0;
+        width: 100%;
+        @include textStyle($grayerColor, 1.5rem);
+
+        &::placeholder {
+          @include textStyle($grayColor, 1.5rem);
+        }
+      }
+
+      .newsletter__title {
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
+    }
+  }
+
+  &__addresses {
+    display: flex;
+    justify-content: space-between;
+    padding: 4rem 4rem 5rem 15rem;
+
+    p {
+      span {
+        @include textStyle($themeColor, 2rem);
+        vertical-align: middle;
+        margin-left: .5rem;
+      }
+
+      @include textStyle($grayerColor, 1.6rem, bold);
+    }
+
+    .addresses__lists {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .lists__list {
+      .list__title {
+        margin-bottom: 2rem;
+
+        span:nth-child(2) {
+          font-size: 1.8rem;
+          font-weight: bold;
+          margin-right: 1rem;
+        }
+
+        p {
+          @include textStyle($grayerColor, 1.4rem);
+          margin-top: .5rem;
+        }
+      }
+
+      .list__title>span:first-child,
+      .list__item>span:first-child {
+        @include textStyle($themeColor, 2rem);
+        vertical-align: middle;
+      }
+
+      .list__item {
+        display: flex;
+        align-items: center;
+        gap: .5rem;
+        margin-bottom: 1.5rem;
+
+        span:nth-child(2),
+        address {
+          font-size: 1.6rem;
+          color: $grayerColor;
+        }
+
+        address {
+          display: inline-block;
+          width: 40rem;
+          line-height: 1.5;
+        }
+      }
+    }
+  }
+
+  &__copyright {
+    text-align: center;
+
+    .copyright__list {
+      @include alignCenter;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+
+      li {
+        position: relative;
+
+        &:first-child::before {
+          content: '';
+        }
+
+        &::before {
+          content: "\2022";
+          /* Add content: \2022 is the CSS Code/unicode for a bullet */
+          color: $grayColor;
+          /* Change the color */
+          display: inline-block;
+          width: 2rem;
+          margin-left: .8rem;
+          vertical-align: middle;
+        }
+
+        a.active::after {
+          width: 100%;
+        }
+
+        a {
+          @include textStyle($textColor , 1.5rem, bold);
+          position: relative;
+          transition: color .3s;
+
+          &:hover::after {
+            width: 100%;
+          }
+
+          &:hover {
+            color: $grayerColor;
+          }
+
+          &::after {
+            content: '';
+            width: 0;
+            transition: width .6s cubic-bezier(.19, 1, .22, 1);
+            height: 3px;
+            position: absolute;
+            bottom: -1rem;
+            right: 0;
+            background-color: $themeColor;
+          }
+        }
+      }
+    }
+
+    p {
+      @include textStyle($grayerColor, 1.4rem);
+    }
+  }
+}
