@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "sass --watch assets/scss:assets/css --style=compressed"
+    "dev" : "vite dev --PORT=2000",
+    "build" : "vite build",
+    "start-sass": "sass --watch assets/scss:assets/css --style=compressed"
   },
   "keywords": [],
   "author": "Morteza",
