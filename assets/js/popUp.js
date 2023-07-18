@@ -1,10 +1,12 @@
-function setPopUpForProducts(products) {
+import { $$ } from "./utils/utils";
+import { computePosition, shift, flip, offset } from "@floating-ui/dom";
+
+export function setupPopupsForProducts() {
     const events = [["mouseenter", showPopUp], ["mouseleave", hidePopUp]];
-    const { computePosition, shift, flip, offset } = window.FloatingUIDOM;
     let popUpElem;
     let productElem;
 
-    products.forEach(product => {
+    $$.querySelectorAll('.products__product').forEach(product => {
         events.forEach(([evName, callback]) => {
             product.addEventListener(evName, callback);
         });

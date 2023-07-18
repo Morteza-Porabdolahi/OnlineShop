@@ -1,122 +1,86 @@
-let products = $.querySelectorAll('.products__product');
+import Swiper from "swiper"
+import { createProduct, fetchAllProducts } from "../api/product";
+import { $$, getUserToken } from '../utils/utils';
+import { setupPopupsForProducts } from '../popUp';
 
-// Posts and Products Slider
-const swiper = new Swiper('.swiper', {
-    // Optional parameters
-    direction: 'horizontal',
-    slidesPerView: 4,
-    spaceBetween: 20,
-
-    // If we need pagination
-    pagination: {
-        el: '.my-own-pagination',
-        clickable: true,
-        bulletClass: "bullet",
-        bulletActiveClass: "active-bullet",
-        type: 'bullets',
-    },
-});
-
-const scrollBarSlider = new Swiper('.scrollbar-swiper', {
-    // Optional parameters
-    direction: 'horizontal',
-    slidesPerView: 4,
-    spaceBetween: 20,
-
-    scrollbar: {
-        el: '.swiper-scrollbar',
-        enabled: false,
+(function () {
+    const sameSwiperSettings = {
+        direction: 'horizontal',
+        slidesPerView: 4,
+        spaceBetween: 20,
     }
-});
 
-// --------------------------------------
-// async function create() {
-//     const userToken = localStorage.getItem('token');
-//     if (userToken) {
-//         try {
-//             await fetch(`http://127.0.0.1:3000/items`, {
-//                 method: 'POST',
-//                 headers: {
-//                     "Authorization": `Bearer ${userToken}`,
-//                     "Content-Type": "application/json"
-//                 },
-//                 body: JSON.stringify({
-//                     name: 'قالب فروشگاهی قطعات خودرو پارتدو، Partdo',
-//                     description: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است.',
-//                     category: 'wp-template',
-//                     price: 300000,
-//                 })
-//             });
-//         } catch (err) {
-//             if (err) throw err;
-//         }
-//     }
-// }
-
-// create()
-
-
-function insertBestSellingProducts(products) {
-    const bestSellingProductsContainer = $.querySelector('.bestselling__products');
-    const productTemplate = $.querySelector('.bestselling__products template');
-
-    products.forEach(product => {
-        const cloneTemp = productTemplate.content.cloneNode(true);
-        const newDiv = $.createElement('div');
-
-        const productImageLink = cloneTemp.querySelector('a');
-        const productTitle = cloneTemp.querySelector('.description__title');
-        const productPrice = cloneTemp.querySelector('.price__price');
-
-        productImageLink.href = `/pages/singleProductPage.html?id=${product._id}`
-        productTitle.textContent = product.name;
-        productPrice.textContent = `${product[product.newPrice ? "newPrice" : 'price'].toLocaleString('fa')}`;
-
-        newDiv.className = 'products__product';
-
-        newDiv.append(cloneTemp);
-
-        bestSellingProductsContainer.append(newDiv);
+    // Posts and Products Slider
+    new Swiper('.swiper', {
+        ...sameSwiperSettings,
+        pagination: {
+            el: '.my-own-pagination',
+            clickable: true,
+            bulletClass: "bullet",
+            bulletActiveClass: "active-bullet",
+            type: 'bullets',
+        },
     });
 
-    products = $.querySelectorAll('.products__product');
-    setPopUpForProducts(products);
-}
 
-function insertNewProducts(products) {
-    const newProductsContainer = $.querySelector('.new-temps__temps .swiper-wrapper');
-    const productTemplate = $.querySelector('.new-temps__temps template');
 
-    products.forEach(product => {
-        const cloneTemp = productTemplate.content.cloneNode(true);
-        const newDiv = $.createElement('div');
-        const productTitle = cloneTemp.querySelector('.description__title > a');
-        const productNewPrice = cloneTemp.querySelector('.price__new-price');
-        const productPrice = cloneTemp.querySelector('.price__price');
-        const addToCartBtn = cloneTemp.querySelector('.description__add-to-basket');
+    function formatPrice(price) {
+        return new Intl.NumberFormat('fa-IR', { currency: 'IRR', style: 'currency' }).format(price);
+    }
 
-        addToCartBtn.onclick = () => addProductInCart(product._id, 1);
-        productTitle.textContent = product.name;
-        productTitle.href = `/pages/singleProductPage.html?id=${product._id}`
-        productNewPrice.textContent = `${product[product.newPrice ? "newPrice" : "price"].toLocaleString('fa')}تومان`;
-        productPrice.textContent = product.newPrice ? `${product.price.toLocaleString('fa')} تومان` : '';
-        newDiv.className = 'temps__temp swiper-slide';
+    async function getAllProducts() {
+        const [{ value: response }] = await Promise.allSettled([fetchAllProducts()]);
 
-        newDiv.append(cloneTemp);
-        newProductsContainer.append(newDiv);
-    });
+        createBestSellingElements(response.data);
+        createNewThemesElements(response.data, '.new-temps');
+        createNewThemesElements(response.data, '.essential-temps');
+    }
 
-}
+    function createBestSellingElements(products = []) {
+        let productTemplate = $$.querySelector(`.bestselling__products template`).content.cloneNode(true);
+        const fragment = $$.createDocumentFragment();
 
-async function handleProductsShowing() {
-    const response = await fetchAllProducts();
-    const products = await response.json();
+        products.forEach(({ imageUrl, title, description, price, _id }) => {
+            productTemplate.querySelector('a[href]').href = `/pages/singleProductPage.html?id=${_id}`;
+            productTemplate.querySelector('.product__img').src = imageUrl;
+            productTemplate.querySelector('.product__img').alt = description;
+            productTemplate.querySelector('.description__image').src = imageUrl;
+            productTemplate.querySelector('.description__image').alt = description;
+            productTemplate.querySelector('.description__title').src = title;
+            productTemplate.querySelector('.price__price').textContent = price;
 
-    insertNewProducts(products);
-    insertBestSellingProducts(products);
-}
+            productTemplate = productTemplate.cloneNode(true);
+            fragment.append(productTemplate);
+        });
 
-window.onload = function () {
-    handleProductsShowing();
-}
+        appendProductsToContainer(fragment, '.bestselling__products');
+    }
 
+    function createNewThemesElements(products = [], containerClass = "") {
+        let productTemplate = $$.querySelector(`${containerClass} template`).content.cloneNode(true);
+        const fragment = $$.createDocumentFragment();
+
+        products.forEach(({ discount, price, imageUrl, description, title, _id }) => {
+            productTemplate.querySelector('a[href]').href = `/pages/singleProductPage.html?id=${_id}`;
+            productTemplate.querySelector('img').src = imageUrl;
+            productTemplate.querySelector('img').alt = description;
+            productTemplate.querySelector('.description__title').src = title;
+            if (discount) productTemplate.querySelector('.price__price').textContent = formatPrice(((100 - discount) / 100) * price);
+            productTemplate.querySelector('.price__new-price').textContent = formatPrice(price);
+
+
+            productTemplate = productTemplate.cloneNode(true);
+            fragment.append(productTemplate);
+        });
+
+        appendProductsToContainer(fragment, containerClass);
+    }
+
+    function appendProductsToContainer(fragment, containerClass = "") {
+        $$.querySelector(containerClass).append(fragment);
+
+        if(containerClass == '.bestselling__products') setupPopupsForProducts();
+    }
+
+    getAllProducts();
+})()

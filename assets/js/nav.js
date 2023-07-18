@@ -1,7 +1,11 @@
-const navContainerElem = $.querySelector('.header__nav-container');
+import { $$ } from './utils/utils';
 
-function handleNavBarPosition() {
-    navContainerElem.classList[window.scrollY > navContainerElem.offsetTop ? 'add' : 'remove']('header__nav-container--sticked')
-}
+(function () {
+    const navContainerElem = $$.querySelector('.header__nav-container');
 
-window.addEventListener('scroll', handleNavBarPosition);
+    function handleNavBarPosition() {
+        navContainerElem.classList[window.scrollY > navContainerElem.offsetTop ? 'add' : 'remove']('header__nav-container--sticked')
+    }
+
+    window.addEventListener('scroll', handleNavBarPosition);
+})()

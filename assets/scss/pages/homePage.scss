@@ -142,17 +142,21 @@
 
     .bestselling__products {
       display: grid;
-      grid-template-rows: 1fr 1fr;
-      grid-template-columns: repeat(10, 1fr);
+      grid-template-columns: repeat(6, 1fr);
       gap: 2.5rem 2rem;
     }
 
     .products__product {
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 8%);
-      padding: 1.5rem;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 20%);
       border-radius: 10px;
+      overflow: hidden;
       cursor: pointer;
       position: relative;
+    }
+
+    .product__img{
+      width: 100%;
+      height: 100%;
     }
   }
 
