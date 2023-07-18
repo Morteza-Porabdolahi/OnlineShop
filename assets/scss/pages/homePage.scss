@@ -18,7 +18,7 @@
 
     .search-input__left {
       @include alignCenter;
-      gap: .8rem;
+      gap: .8rem; 
     }
 
     .search-input__category-selector {
@@ -193,6 +193,11 @@
 
       span {
         @include textStyle($grayColor, 1.9rem);
+      }
+
+      span.liked::before{
+        content: '\ee0a';
+        color: #ff0030;
       }
     }
 

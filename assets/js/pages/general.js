@@ -1,4 +1,6 @@
 import { parseJwt, $$ } from '../utils/utils';
+import { getUserCart, removeItemFromUserCart, manipulateQuantity } from '../api/cart';
+import { formatPrice } from '../utils/utils';
 
 (function () {
   const userToken = localStorage.getItem("token");
@@ -12,11 +14,10 @@ import { parseJwt, $$ } from '../utils/utils';
       location.reload();
     } else {
       changeNavBtnText(user);
+      getUserBasketItems();
     }
   }
 })()
-
-// fillUserBasketModal();
 
 function changeNavBtnText(user) {
   const navUserBtn = $$.querySelector(".register-btn");
@@ -28,102 +29,81 @@ function changeNavBtnText(user) {
   navUserBtn.classList.remove("modal-btn");
 }
 
-// const priceSumOfBasket = $.getElementById("basket-sum");
+async function getUserBasketItems() {
+  try {
+    const { data } = await getUserCart();
 
-// async function fillUserBasketModal() {
-//   const response = await handleUserBasket();
-//   const { bill, items } = await response.json();
+    createBasketElements(data)
+  } catch (e) {
+    console.log(e);
+  }
+}
 
-//   const basketProductsContainer = $.querySelector(".modal-body__show-products");
-//   const basketProducts = $.querySelector(".show-products__basket-products");
-//   const basketNoProducts = $.querySelector(".modal-body__no-products");
-//   const templateBasketProduct = $.querySelector(
-//     ".show-products__basket-products > template"
-//   );
+function createBasketElements(items = []) {
+  if (items.length <= 0) {
+    return;
+  }
 
-//   if (items.length <= 0) {
-//     basketProductsContainer.style.display = "none";
-//     basketNoProducts.style.display = "flex";
-//   } else {
-//     items.forEach(item => {
-//       const tempClone = templateBasketProduct.content.cloneNode(true);
-//       const numberProductQuantity = tempClone.querySelector(
-//         ".number-of-product__number"
-//       );
-//       const productQuantity = tempClone.querySelector(".number-of-product");
+  const basketProductsContainer = $$.querySelector(".modal-body__show-products");
 
-//       tempClone.querySelector(".number-of-product__remove").onclick = () =>
-//         removeProductQuantity(item, productQuantity, numberProductQuantity);
-//       tempClone.querySelector(".number-of-product__add").onclick = () =>
-//         addProductQuantity(item, productQuantity, numberProductQuantity);
-//       tempClone.querySelector(".title__remove").onclick = () =>
-//         removeProductFromBasket(item.itemId);
+  let basketProductTemplate = basketProductsContainer.querySelector("template").content;
 
-//       productQuantity.textContent = item.quantity;
-//       numberProductQuantity.textContent = item.quantity;
-//       tempClone.querySelector(".title__text").textContent = item.name;
-//       tempClone.querySelector(
-//         ".product-price__price"
-//       ).textContent = item.price.toLocaleString("fa");
+  const fragment = $$.createDocumentFragment();
 
-//       basketProducts.append(tempClone);
-//     });
+  items.forEach(({ quantity, price, name, _id: itemId, imageUrl }) => {
+    basketProductTemplate.querySelector(".number-of-product__remove").addEventListener('click', () => handleItemQuantity(quantity - 1, price, itemId))
+    basketProductTemplate.querySelector(".number-of-product__add").addEventListener('click', () => handleItemQuantity(quantity + 1, price, itemId))
+    basketProductTemplate.querySelector(".title__remove").addEventListener('click', () => removeItemFromUserCart(itemId));
 
-//     priceSumOfBasket.textContent = bill.toLocaleString("fa");
-//   }
-// }
+    basketProductTemplate.querySelector('.img-container__img').src = imageUrl;
+    basketProductTemplate.querySelector('.img-container__img').alt = name;
 
-// async function removeProductFromBasket(itemId) {
-//   const response = await removeProduct(itemId);
-//   if (response.status === 200) {
-//     fillUserBasketModal();
-//   }
-// }
+    basketProductTemplate.querySelector(".number-of-product__number").textContent = quantity;
+    basketProductTemplate.querySelector(".number-of-product").textContent = quantity;
 
-// async function addProductQuantity(
-//   product,
-//   productQuantity,
-//   numberProductQuantity
-// ) {
-//   const response = await handleUserBasket();
-//   const { bill, items } = await response.json();
-//   const item = items.find(item => item.itemId === product.itemId);
+    basketProductTemplate.querySelector(".title__text").textContent = name;
 
-//   await addProductInCart(product.itemId, item.quantity + 1);
+    basketProductTemplate.querySelector(".product-price__price").textContent = formatPrice(price);
 
-//   numberProductQuantity.textContent = item.quantity + 1;
-//   productQuantity.textContent = item.quantity + 1;
-//   priceSumOfBasket.textContent = (bill + product.price).toLocaleString("fa");
-// }
+    fragment.append(basketProductTemplate);
+    basketProductTemplate = basketProductTemplate.cloneNode(true);
+  });
 
-// async function removeProductQuantity(
-//   product,
-//   productQuantity,
-//   numberProductQuantity
-// ) {
-//   if (+numberProductQuantity.textContent > 1) {
-//     const response = await handleUserBasket();
-//     const { bill, items } = await response.json();
-//     const item = items.find(item => item.itemId === product.itemId);
+  $$.querySelector('.price-sum__price').textContent = formatPrice(sumCartProductsPrice(items));
+  appendProductsIntoCart(fragment);
+}
 
-//     await addProductInCart(product.itemId, item.quantity - 1);
+function sumCartProductsPrice(items = []) {
+  return items.reduce((acc, curr) => acc + curr.bill, 0);
+}
 
-//     numberProductQuantity.textContent = item.quantity - 1;
-//     productQuantity.textContent = item.quantity - 1;
-//     priceSumOfBasket.textContent = (bill - product.price).toLocaleString("fa");
-//   }
-// }
+function appendProductsIntoCart(fragment) {
+  const basketProductsElem = $$.querySelector('.show-products__basket-products');
+  const basketNoProducts = $$.querySelector(".modal-body__no-products");
 
-// function removeProduct(itemId) {
-//   const userToken = localStorage.getItem("token");
-//   if (userToken) {
-//     const response = fetch(`${apiUrl}/cart?itemId=${itemId}`, {
-//       method: "DELETE",
-//       headers: {
-//         Authorization: `Bearer ${userToken}`,
-//         "Content-Type": "application/json"
-//       }
-//     });
-//     return response;
-//   }
-// }
+  basketProductsElem.innerHTML = '';
+  basketProductsElem.append(fragment);
+
+  basketNoProducts.style.display = 'none';
+  basketProductsElem.style.display = 'flex';
+}
+
+async function removeProductFromBasket(itemId = "") {
+  try {
+    const { data } = await removeProductFromCart(itemId);
+
+    getUserBasketItems();
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+async function handleItemQuantity(quantity, price, itemId = "") {
+  try {
+    if (quantity <= 0) return await removeItemFromUserCart(itemId);
+
+    await manipulateQuantity(itemId, { quantity, bill: quantity * price });
+  } catch (e) {
+    console.log(e);
+  }
+}

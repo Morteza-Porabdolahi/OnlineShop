@@ -1,7 +1,9 @@
 import Swiper from "swiper"
 import { createProduct, fetchAllProducts } from "../api/product";
-import { $$, getUserToken } from '../utils/utils';
+import { $$, getUserToken, formatPrice } from '../utils/utils';
 import { setupPopupsForProducts } from '../popUp';
+import { addItemInUserCart } from "../api/cart";
+import { toggleUserWish, getUserWishes } from "../api/wishlist";
 
 (function () {
     const sameSwiperSettings = {
@@ -22,18 +24,12 @@ import { setupPopupsForProducts } from '../popUp';
         },
     });
 
-
-
-    function formatPrice(price) {
-        return new Intl.NumberFormat('fa-IR', { currency: 'IRR', style: 'currency' }).format(price);
-    }
-
     async function getAllProducts() {
         const [{ value: response }] = await Promise.allSettled([fetchAllProducts()]);
 
         createBestSellingElements(response.data);
-        createNewThemesElements(response.data, '.new-temps');
-        createNewThemesElements(response.data, '.essential-temps');
+        createNewAndEssentialElems(response.data, '.new-temps');
+        createNewAndEssentialElems(response.data, '.essential-temps');
     }
 
     function createBestSellingElements(products = []) {
@@ -56,30 +52,46 @@ import { setupPopupsForProducts } from '../popUp';
         appendProductsToContainer(fragment, '.bestselling__products');
     }
 
-    function createNewThemesElements(products = [], containerClass = "") {
+    function createNewAndEssentialElems(products = [], containerClass = "") {
         let productTemplate = $$.querySelector(`${containerClass} template`).content.cloneNode(true);
         const fragment = $$.createDocumentFragment();
 
+        let isProductWishlisted;
+
         products.forEach(({ discount, price, imageUrl, description, title, _id }) => {
-            productTemplate.querySelector('a[href]').href = `/pages/singleProductPage.html?id=${_id}`;
+            productTemplate.querySelector('.title').href = `/pages/singleProductPage.html?id=${_id}`;
+            productTemplate.querySelector('.title').textContent = title;
+
             productTemplate.querySelector('img').src = imageUrl;
             productTemplate.querySelector('img').alt = description;
-            productTemplate.querySelector('.description__title').src = title;
+
             if (discount) productTemplate.querySelector('.price__price').textContent = formatPrice(((100 - discount) / 100) * price);
             productTemplate.querySelector('.price__new-price').textContent = formatPrice(price);
 
+            productTemplate.querySelector('.add-to-basket__title').addEventListener('click', () => addItemInUserCart(_id));
+            productTemplate.querySelector('.like-btn').addEventListener('click', () => toggleUserWish(_id));
 
-            productTemplate = productTemplate.cloneNode(true);
+            isProductInWishlist(_id).then(boolean => {
+                if (boolean) $$.querySelector(`${containerClass} .like-btn:last-of-type`).classList.add('liked');
+            })
+
             fragment.append(productTemplate);
+            productTemplate = productTemplate.cloneNode(true);            
         });
 
         appendProductsToContainer(fragment, containerClass);
     }
 
-    function appendProductsToContainer(fragment, containerClass = "") {
-        $$.querySelector(containerClass).append(fragment);
+    function isProductInWishlist(productId = "") {
+        const response = getUserWishes();
 
-        if(containerClass == '.bestselling__products') setupPopupsForProducts();
+        return response.then(({ data }) => data.some(wishlist => wishlist.productId == productId));
+    }
+
+    function appendProductsToContainer(fragment, containerClass = "") {
+        $$.querySelector(containerClass).append(fragment);        
+
+        if (containerClass == '.bestselling__products') setupPopupsForProducts();
     }
 
     getAllProducts();

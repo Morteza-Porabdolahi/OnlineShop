@@ -18,4 +18,8 @@ export const parseJwt = (token) => {
 	return JSON.parse(jsonPayload);
 }
 
+export function formatPrice(price) {
+	return new Intl.NumberFormat('fa-IR', { currency: 'IRR', style: 'currency' }).format(price);
+}
+
 

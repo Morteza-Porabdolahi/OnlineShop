@@ -217,9 +217,13 @@ a {
     border: 0;
 
     .modal-body__no-products {
-      display: none;
+      display: flex;
     }
 
+    .modal-body__show-products{
+      display: none;
+    }
+    
     .show-products__basket-products {
       max-height: 32rem;
       overflow: auto;
