@@ -372,7 +372,7 @@
                                 <span class="number-of-products__number">همه</span>
                             </div>
                             <div class="options__products-grid">
-                                <span class="products-grid__square columns_2">
+                                <span class="products-grid__square" data-columns="2">
                                     <svg version="1.1" id="Layer_1_3785" xmlns="http://www.w3.org/2000/svg"
                                         xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="19px"
                                         height="19px" viewBox="0 0 19 19" enable-background="new 0 0 19 19"
@@ -383,7 +383,7 @@
                                         <path d="M17,12v5h-5v-5H17 M19,10h-9v9h9V10L19,10z"></path>
                                     </svg>
                                 </span>
-                                <span class="products-grid__square products-grid__square--active columns_3">
+                                <span class="products-grid__square products-grid__square--active" data-columns="3">
                                     <svg version="1.1" id="Layer_1_4148" xmlns="http://www.w3.org/2000/svg"
                                         xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="19px"
                                         height="19px" viewBox="0 0 19 19" enable-background="new 0 0 19 19"
@@ -399,7 +399,7 @@
                                         <rect x="14" y="14" width="5" height="5"></rect>
                                     </svg>
                                 </span>
-                                <span class="products-grid__square columns_4">
+                                <span class="products-grid__square" data-columns="4">
                                     <svg version="1.1" id="Layer_1_8342" xmlns="http://www.w3.org/2000/svg"
                                         xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="19px"
                                         height="19px" viewBox="0 0 19 19" enable-background="new 0 0 19 19"
@@ -433,8 +433,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="products-container__products columns_3">
-                            <template>
+                                                    <template>
                                 <div class="products__prodcut">
                                     <div class="product-bg"></div>
                                     <div class="product__img-container">
@@ -451,10 +450,10 @@
                                             </a>
                                             <div class="prices-title__prices">
                                                 <span class="prices__real-price">
-                                                    345,000 تومان
+
                                                 </span>
                                                 <span class="prices__new-price">
-                                                    329,000 تومان
+
                                                 </span>
                                             </div>
                                         </div>
@@ -481,6 +480,8 @@
                                     </div>
                                 </div>
                             </template>
+                        <div class="products-container__products columns_3">
+
 
                         </div>
                     </section>
@@ -492,11 +493,11 @@
                                     <h3>وضعیت موجودی</h3>
                                 </div>
                                 <div class="stock__special-sale">
-                                    <input type="checkbox" class="speacial-sale__input" id="special-sale">
+                                    <input type="checkbox" value="specialSale" class="speacial-sale__input stock-input" id="special-sale">
                                     <label for="special-sale">فروش ویژه</label>
                                 </div>
                                 <div class="stock__available">
-                                    <input type="checkbox" class="available__input" id="available">
+                                    <input type="checkbox" value="available" class="stock-input available__input" id="available">
                                     <label for="available">موجود</label>
                                 </div>
                             </div>
@@ -511,21 +512,21 @@
                                             <div class="progress"></div>
                                         </div>
                                         <div class="min-range-container">
-                                            <input type="range" class="range-input min-range" step="1000" min="29000"
-                                                value="29000" max="599000">
+                                            <input type="range" class="range-input min-range" step="10000" min="100000"
+                                                value="100000" max="5990000">
                                         </div>
                                         <div class="max-range-container">
-                                            <input type="range" class="range-input max-range" step="1000" value="599000"
-                                                min="29000" max="599000">
+                                            <input type="range" class="range-input max-range" step="10000" value="5990000"
+                                                min="290000" max="5990000">
                                         </div>
 
                                     </div>
                                     <p class="container__range">
                                         <span class="range__title">قیمت :</span>
                                         <span class="range__start">
-                                            <span class="start__price">29000</span> تومان - </span>
+                                            <span class="start__price">100000</span> ریال</span>
                                         <span class="range__end">
-                                            <span class="end__price">599000</span> تومان
+                                            <span class="end__price">5990000</span> ریال
                                         </span>
                                     </p>
                                     <button class="container__filter-btn">
@@ -541,22 +542,22 @@
                                 </div>
                                 <ul class="products-category__list">
                                     <li class="list__item">
-                                        <a href="#" class="item__title--active item__title">
+                                        <a href="/pages/shopPage.html?category=wp-plugins" class="item__title">
                                             افزونه وردپرس
                                         </a>
                                     </li>
                                     <li class="list__item">
-                                        <a href="#" class="item__title">
+                                        <a href="/pages/shopPage.html" class="item__title">
                                             بدون دسته بندی
                                         </a>
                                     </li>
                                     <li class="list__item">
-                                        <a href="#" class="item__title">
+                                        <a href="/pages/shopPage.html?category=wp-theme" class="item__title">
                                             قالب وردپرس
                                         </a>
                                     </li>
                                     <li class="list__item">
-                                        <a href="#" class="item__title">
+                                        <a href="/pages/shopPage.html?category=graphic" class="item__title">
                                             گرافیک
                                         </a>
                                     </li>
@@ -790,7 +791,7 @@
         </section>
     </section>
 
-    <script src="/assets/js/pages/shopPage.js"></script>
+    <script src="/assets/js/pages/shopPage.js" type="module"></script>
     <script src="/assets/js/pages/general.js" type="module"></script>
     <script src="/assets/js/nav.js" type="module"></script>
     <script src="/assets/js/modal.js" type="module"></script>
