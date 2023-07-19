@@ -5,5 +5,9 @@ export function toggleUserWish(productId = ""){
 }
 
 export function getUserWishes(){
-	return axios.get(`/users/user/wishlist`);
+	return axios.get('/users/user/wishlist');
+}
+
+export function deleteUserWish(productId = ""){
+	return axios.delete(`/users/user/wishlist/${productId}`);
 }

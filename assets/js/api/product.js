@@ -4,6 +4,10 @@ export function fetchAllProducts() {
   return axios.get('/products');
 }
 
-export async function createProduct(product = {}) {
+export function createProduct(product = {}) {
   return axios.post('/products', product);
+}
+
+export function fetchProduct(productId = "") {
+  return axios.get(`/products/${productId}`);
 }
