@@ -55,7 +55,7 @@ import { toggleUserWish, getUserWishes } from "../api/wishlist";
         const fragment = $$.createDocumentFragment();
 
         products.forEach(({ imageUrl, title, description, price, _id }) => {
-            productTemplate.querySelector('a[href]').href = `/pages/singleProductPage.html?id=${_id}`;
+            productTemplate.querySelector('a[href]').href = `/pages/singleProductPage.html?productId=${_id}`;
             productTemplate.querySelector('.product__img').src = imageUrl;
             productTemplate.querySelector('.product__img').alt = description;
             productTemplate.querySelector('.description__image').src = imageUrl;
@@ -77,7 +77,7 @@ import { toggleUserWish, getUserWishes } from "../api/wishlist";
         let isProductWishlisted;
 
         products.forEach(({ discount, price, imageUrl, description, title, _id }) => {
-            productTemplate.querySelector('.title').href = `/pages/singleProductPage.html?id=${_id}`;
+            productTemplate.querySelector('.title').href = `/pages/singleProductPage.html?productId=${_id}`;
             productTemplate.querySelector('.title').textContent = title;
 
             productTemplate.querySelector('img').src = imageUrl;
