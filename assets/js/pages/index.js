@@ -6,15 +6,20 @@ import { addItemInUserCart } from "../api/cart";
 import { toggleUserWish, getUserWishes } from "../api/wishlist";
 
 (function () {
-    const sameSwiperSettings = {
+    const headerSearchInput = $$.querySelector('.body__search-input > input');
+    const categoryTitle = $$.querySelector('.category-selector__title');
+    const headerSearchIcon = $$.querySelector('.search-input__search-icon');
+    const categoryItems = $$.querySelectorAll('.list-container__list > li[data-category]');
+
+    categoryItems.forEach(categoryItem => categoryItem.addEventListener('click', handleCategoryItem));
+
+    headerSearchInput.addEventListener('keydown', handleHeaderSearchInput);
+    headerSearchIcon.addEventListener('click', handleHeaderSearchInput);
+
+    new Swiper('.swiper', {
         direction: 'horizontal',
         slidesPerView: 4,
         spaceBetween: 20,
-    }
-
-    // Posts and Products Slider
-    new Swiper('.swiper', {
-        ...sameSwiperSettings,
         pagination: {
             el: '.my-own-pagination',
             clickable: true,
@@ -23,6 +28,19 @@ import { toggleUserWish, getUserWishes } from "../api/wishlist";
             type: 'bullets',
         },
     });
+
+    function handleHeaderSearchInput(e){
+        if(e.type === 'click'){
+            location.href = `/pages/shopPage.html?q=${headerSearchInput.value}?category=${categoryTitle.dataset.category || ""}`;
+        }else if(e.key === 'Enter'){
+            location.href = `/pages/shopPage.html?q=${headerSearchInput.value}?category=${categoryTitle.dataset.category || ""}`;
+        }
+    }
+
+    function handleCategoryItem(e) {
+        categoryTitle.textContent = e.target.childNodes[0].textContent;
+        categoryTitle.setAttribute('data-category', e.target.dataset.category);
+    }
 
     async function getAllProducts() {
         const [{ value: response }] = await Promise.allSettled([fetchAllProducts()]);
