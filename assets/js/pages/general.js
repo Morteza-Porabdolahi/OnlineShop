@@ -3,6 +3,12 @@ import { getUserCart, removeItemFromUserCart, manipulateQuantity } from '../api/
 import { formatPrice } from '../utils/utils';
 
 (function () {
+  const searchInputElem = $$.querySelector('.search-container__input');
+  const searchIconElem = searchInputElem.nextElementSibling;
+
+  searchInputElem.addEventListener('keydown', handleUserSearch);
+  searchIconElem.addEventListener('click', handleUserSearch);
+
   const userToken = localStorage.getItem("token");
 
   if (userToken) {
@@ -18,6 +24,14 @@ import { formatPrice } from '../utils/utils';
     }
   }
 })()
+
+function handleUserSearch(e){
+  if(e.type === 'click'){
+    location.href = `/pages/shopPage.html?q=${e.target.previousElementSibling.value}`;
+  }else if(e.key === 'Enter'){
+    location.href = `/pages/shopPage.html?q=${e.target.value}`;
+  }
+}
 
 function changeNavBtnText(user) {
   const navUserBtn = $$.querySelector(".register-btn");
