@@ -1,6 +1,20 @@
+import { manipulateQuantity, removeItemFromUserCart } from "../api/cart";
+
 export const $$ = document;
 
-export const getUserToken = () => localStorage.getItem('token');
+export async function handleItemQuantity(quantity, price, itemId = "") {
+	try {
+		if (quantity <= 0) return await removeItemFromUserCart(itemId);
+
+		await manipulateQuantity(itemId, { quantity, bill: quantity * price });
+	} catch (e) {
+		console.log(e);
+	}
+}
+
+export function getUserToken() { 
+	return localStorage.getItem('token');
+};
 
 export const parseJwt = (token) => {
 	let base64Url = token.split(".")[1];

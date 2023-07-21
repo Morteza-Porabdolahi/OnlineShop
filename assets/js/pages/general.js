@@ -1,6 +1,6 @@
 import { parseJwt, $$ } from '../utils/utils';
-import { getUserCart, removeItemFromUserCart, manipulateQuantity } from '../api/cart';
-import { formatPrice } from '../utils/utils';
+import { getUserCart, removeItemFromUserCart } from '../api/cart';
+import { formatPrice, handleItemQuantity } from '../utils/utils';
 
 (function () {
   const searchInputElem = $$.querySelector('.search-container__input');
@@ -107,16 +107,6 @@ async function removeProductFromBasket(itemId = "") {
     const { data } = await removeProductFromCart(itemId);
 
     getUserBasketItems();
-  } catch (e) {
-    console.log(e);
-  }
-}
-
-async function handleItemQuantity(quantity, price, itemId = "") {
-  try {
-    if (quantity <= 0) return await removeItemFromUserCart(itemId);
-
-    await manipulateQuantity(itemId, { quantity, bill: quantity * price });
   } catch (e) {
     console.log(e);
   }
