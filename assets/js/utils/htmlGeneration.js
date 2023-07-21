@@ -19,7 +19,7 @@ export function generateElementsForProducts(product = {}, template) {
 	cloneTemplate.querySelector('.summary-btn__summary').textContent = product.description;
 
 	cloneTemplate.querySelector('.summary-btn__btn').addEventListener('click', () => addItemInUserCart(product._id))
-	if(deleteWishBtn) deleteWishBtn.addEventListener('click', () => deleteUserWish(product._id))
+	if (deleteWishBtn) deleteWishBtn.addEventListener('click', () => deleteUserWish(product._id))
 
 	return cloneTemplate;
 }
