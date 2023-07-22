@@ -166,37 +166,24 @@ async function createNewAndEssentialElem(product = {}, template) {
 
 async function handleUserFavourite(event, productId) {
   const likeButton = event.target;
+  const hasLiked = likeButton.classList.contains('liked');
+  const data = await (hasLiked ? removeUserFavourite : addUserFavourite)(
+      productId,
+  );
 
-  if (!likeButton.classList.contains('liked')) {
-    const data = await addUserFavourite(productId);
-
-    if (data.error) {
-      toast.error(data.error);
-    } else {
-      $$.querySelectorAll(`.temps__temp[data-id="${productId}"]`).forEach(
-          (temp) => {
-            temp.querySelector('.like-btn').classList.add('liked');
-          },
-      );
-
-      toast.success(data.message);
-      handleUserFavouritesLength();
-    }
+  if (data.error) {
+    toast.error(data.error);
   } else {
-    const data = await removeUserFavourite(productId);
+    $$.querySelectorAll(`.temps__temp[data-id="${productId}"]`).forEach(
+        (temp) => {
+          temp
+              .querySelector('.like-btn')
+              .classList[hasLiked ? 'remove' : 'add']('liked');
+        },
+    );
 
-    if (data.error) {
-      toast.error(data.error);
-    } else {
-      $$.querySelectorAll(`.temps__temp[data-id="${productId}"]`).forEach(
-          (temp) => {
-            temp.querySelector('.like-btn').classList.remove('liked');
-          },
-      );
-
-      toast.success(data.message);
-      handleUserFavouritesLength();
-    }
+    toast.success(data.message);
+    handleUserFavouritesLength();
   }
 }
 
