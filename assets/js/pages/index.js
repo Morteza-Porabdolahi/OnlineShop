@@ -1,7 +1,12 @@
 import Swiper from 'swiper';
 import 'swiper/css';
 
-import {$$, calculateRealProductPrice, formatPrice} from '../utils/utils';
+import {
+  $$,
+  calculateRealProductPrice,
+  formatPrice,
+  handleUserToken,
+} from '../utils/utils';
 import {setupPopups} from '../popUp';
 import {
   fetchAllProducts,
@@ -145,7 +150,7 @@ async function createNewAndEssentialElem(product = {}, template) {
   }
   cloneTemp.querySelector('.price__new-price').textContent = formatPrice(price);
 
-  if (await isProductFavourite(_id)) {
+  if (handleUserToken() && (await isProductFavourite(_id))) {
     cloneTemp.querySelector('.like-btn').classList.add('liked');
   }
 
@@ -175,6 +180,7 @@ async function handleUserFavourite(event, productId) {
       );
 
       toast.success(data.message);
+      handleUserFavouritesLength();
     }
   } else {
     const data = await removeUserFavourite(productId);
@@ -189,10 +195,9 @@ async function handleUserFavourite(event, productId) {
       );
 
       toast.success(data.message);
+      handleUserFavouritesLength();
     }
   }
-
-  handleUserFavouritesLength();
 }
 
 async function insertItemInUserCart(productId = '') {

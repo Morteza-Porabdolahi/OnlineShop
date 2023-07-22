@@ -49,6 +49,7 @@ import {toast} from '../utils/toast';
     });
 
     handleUserCart();
+    handleUserFavouritesLength();
   }
 })();
 
@@ -68,7 +69,6 @@ async function handleUserCart() {
   });
 
   appendCartItemsIntoDom(fragment);
-  handleUserFavouritesLength();
 }
 
 async function calculateSumOfTheCart() {
