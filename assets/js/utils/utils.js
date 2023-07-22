@@ -21,13 +21,13 @@ export function parseJwt(token) {
 }
 
 export function formatPrice(price) {
-  return new Intl.NumberFormat('fa-IR', {currency: 'IRR', style: 'currency'}).format(price);
+  return `${new Intl.NumberFormat('fa-IR').format(price)} تومان`;
 }
 
 export function handleUserToken() {
   const userToken = getUserToken();
 
-  if(!userToken) return;
+  if (!userToken) return;
 
   const {exp, user} = parseJwt(userToken);
   const nowDate = Date.now();
@@ -40,4 +40,7 @@ export function handleUserToken() {
   }
 }
 
+export function calculateRealProductPrice(price, discount) {
+  return ((100 - discount) / 100) * price;
+}
 

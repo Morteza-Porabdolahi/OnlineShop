@@ -8,7 +8,6 @@
 	<link rel="icon" type="image/x-icon" href="/images/metatheme-300x125.png">
 	<link rel="stylesheet" href="/assets/css/general.css">
 	<link rel="stylesheet" href="/assets/css/pages/homePage.css">
-	<link rel="stylesheet" href="/assets/css/swiper-bundle.min.css">
 </head>
 
 <body>
@@ -340,7 +339,7 @@
 															<span class="price-sum__title">جمع سبد خرید: </span>
 															<span class="price-sum__price">
 																<span id="basket-sum"></span>
-																تومان</span>
+																</span>
 														</div>
 														<div class="checkout__buy-completion">
 															<button class="buy-completion__show-basket">
@@ -580,31 +579,30 @@
 							<span class="ri-arrow-drop-left-line"></span>
 						</a>
 					</div>
-					<div class="bestselling__products">
-						<template>
-							<div class="products__product swiper-slide">
-								<a href="/pages/singleProductPage.html">
-									<img src="./images/cropped-apple-touch-icon.png" alt="Test Img"
-										class="product__img">
-								</a>
-								<div class="product__description">
-									<img src="./images/Untitled-2.jpg" alt="" class="description__image">
-									<div class="description__container">
-										<p class="description__title title">قالب وردپرس فروش دوره آموزشی استادیار</p>
-										<div class="description__other">
-											<div class="description__author">
-												<span class="author__name">توسط : وردپرس من !</span>
-												<span class="author__description">افزونه وردپرس قالب وردپرس</span>
-											</div>
-											<div class="description__price">
-												<span class="price__currency">ریال</span>
-												<p class="price__price">99000</p>
-											</div>
+					<template id="squareProductTemp">
+						<div class="products__product swiper-slide">
+							<a href="/pages/singleProductPage.html">
+								<img src="./images/cropped-apple-touch-icon.png" alt="Test Img" class="product__img">
+							</a>
+							<div class="product__description">
+								<img src="./images/Untitled-2.jpg" alt="" class="description__image">
+								<div class="description__container">
+									<p class="description__title title">قالب وردپرس فروش دوره آموزشی استادیار</p>
+									<div class="description__other">
+										<div class="description__author">
+											<span class="author__name">توسط : وردپرس من !</span>
+											<span class="author__description">افزونه وردپرس قالب وردپرس</span>
+										</div>
+										<div class="description__price">
+											<span class="price__currency">ریال</span>
+											<p class="price__price">99000</p>
 										</div>
 									</div>
 								</div>
 							</div>
-						</template>
+						</div>
+					</template>
+					<div class="bestselling__products">
 					</div>
 				</section>
 				<section class="main__new-temps">
@@ -617,29 +615,29 @@
 							<span class="ri-arrow-drop-left-line"></span>
 						</a>
 					</div>
-					<div class="new-temps__temps swiper">
-						<div class="swiper-wrapper new-temps">
-							<template>
-								<div class="temps__temp swiper-slide">
-									<img src="./images/63146da1cef0181f650a3095.png" alt="	test">
-									<div class="temp__description">
-										<div class="description__price-title">
-											<div class="description__title">
-												<a href="#" class="title">قالب فروشگاهی قطعات خودرو پارتدو</a>
-												<span class="like-btn ri-heart-3-line"></span>
-											</div>
-											<div class="description__price">
-												<p class="price__price"></p>
-												<p class="price__new-price"></p>
-											</div>
-										</div>
-										<div class="description__add-to-basket">
-											<span class="ri-shopping-basket-2-line add-to-basket__icon"></span>
-											<span class="add-to-basket__title">افزودن به سبد خرید</span>
-										</div>
+					<template id="productTemp">
+						<div class="temps__temp swiper-slide">
+							<img src="./images/63146da1cef0181f650a3095.png" alt="	test">
+							<div class="temp__description">
+								<div class="description__price-title">
+									<div class="description__title">
+										<a href="#" class="title">قالب فروشگاهی قطعات خودرو پارتدو</a>
+										<span class="like-btn ri-heart-3-line"></span>
+									</div>
+									<div class="description__price">
+										<p class="price__price"></p>
+										<p class="price__new-price"></p>
 									</div>
 								</div>
-							</template>
+								<div class="description__add-to-basket">
+									<span class="ri-shopping-basket-2-line add-to-basket__icon"></span>
+									<span class="add-to-basket__title">افزودن به سبد خرید</span>
+								</div>
+							</div>
+						</div>
+					</template>
+					<div class="new-temps__temps swiper">
+						<div class="swiper-wrapper new-temps">
 						</div>
 						<div class="my-own-pagination">
 						</div>
@@ -657,27 +655,6 @@
 					</div>
 					<div class="new-temps__temps swiper">
 						<div class="swiper-wrapper essential-temps">
-							<template>
-								<div class="temps__temp swiper-slide">
-									<img src="./images/63146da1cef0181f650a3095.png" alt="	test">
-									<div class="temp__description">
-										<div class="description__price-title">
-											<div class="description__title">
-												<a href="#" class="title">قالب فروشگاهی قطعات خودرو پارتدو</a>
-												<span class="like-btn ri-heart-3-line"></span>
-											</div>
-											<div class="description__price">
-												<p class="price__price"></p>
-												<p class="price__new-price"></p>
-											</div>
-										</div>
-										<div class="description__add-to-basket">
-											<span class="ri-shopping-basket-2-line add-to-basket__icon"></span>
-											<span class="add-to-basket__title">افزودن به سبد خرید</span>
-										</div>
-									</div>
-								</div>
-							</template>
 						</div>
 						<div class="my-own-pagination">
 						</div>

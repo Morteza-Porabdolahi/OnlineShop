@@ -1,4 +1,9 @@
-import {getUserCart, modernizeUserCartItem, removeItemFromUserCart, getUserFavourites} from '../api/api';
+import {
+  getUserCart,
+  modernizeUserCartItem,
+  removeItemFromUserCart,
+  getUserFavourites,
+} from '../api/api';
 import {$$, formatPrice, handleUserToken} from '../utils/utils';
 import {toast} from '../utils/toast';
 
@@ -6,7 +11,9 @@ import {toast} from '../utils/toast';
   const navContainerElem = $$.querySelector('.header__nav-container');
 
   function handleNavBarPosition() {
-    navContainerElem.classList[window.scrollY > navContainerElem.offsetTop ? 'add' : 'remove']('header__nav-container--sticked');
+    navContainerElem.classList[
+      window.scrollY > navContainerElem.offsetTop ? 'add' : 'remove'
+    ]('header__nav-container--sticked');
   }
 
   window.addEventListener('scroll', handleNavBarPosition);
@@ -61,6 +68,15 @@ async function handleUserCart() {
   });
 
   appendCartItemsIntoDom(fragment);
+  handleUserFavouritesLength();
+}
+
+async function calculateSumOfTheCart() {
+  const userCart = await getUserCart();
+  const sumElem = $$.getElementById('basket-sum');
+  const sumPrice = userCart.reduce((acc, curr) => acc + curr.bill, 0);
+
+  sumElem.textContent = formatPrice(sumPrice);
 }
 
 export function createUserCartElem(cartItem = {}, template) {
@@ -70,17 +86,32 @@ export function createUserCartElem(cartItem = {}, template) {
   cloneTemplate.querySelector('img').alt = cartItem.title;
 
   cloneTemplate.querySelector('.title__text').textContent = cartItem.title;
-  cloneTemplate.querySelector('.title__text').href = `/pages/singleProductPage.html?productId=${cartItem.productId}`;
+  cloneTemplate.querySelector(
+      '.title__text',
+  ).href = `/pages/singleProductPage.html?productId=${cartItem.productId}`;
 
-  cloneTemplate.querySelector('.number-of-product__number').textContent = cartItem.quantity;
-  cloneTemplate.querySelector('.number-of-product').textContent = cartItem.quantity;
+  cloneTemplate.querySelector('.number-of-product__number').textContent =
+    cartItem.quantity;
+  cloneTemplate.querySelector('.number-of-product').textContent =
+    cartItem.quantity;
 
-  cloneTemplate.querySelector('.product-price__price').textContent = formatPrice(cartItem.price);
+  cloneTemplate.querySelector('.product-price__price').textContent =
+    formatPrice(cartItem.price);
 
-  cloneTemplate.querySelector('.title__remove').addEventListener('click', (event) => removeCartItem(event, cartItem._id));
+  cloneTemplate
+      .querySelector('.title__remove')
+      .addEventListener('click', (event) => removeCartItem(event, cartItem._id));
 
-  cloneTemplate.querySelector('.number-of-product__remove').addEventListener('click', (event) => updateUserCartItem(event, cartItem, 'decrease'));
-  cloneTemplate.querySelector('.number-of-product__add').addEventListener('click', (event) => updateUserCartItem(event, cartItem, 'increase'));
+  cloneTemplate
+      .querySelector('.number-of-product__remove')
+      .addEventListener('click', (event) =>
+        updateUserCartItem(event, cartItem, 'decrease'),
+      );
+  cloneTemplate
+      .querySelector('.number-of-product__add')
+      .addEventListener('click', (event) =>
+        updateUserCartItem(event, cartItem, 'increase'),
+      );
 
   return cloneTemplate;
 }
@@ -93,16 +124,19 @@ async function updateUserCartItem(event, cartItem, mode = '') {
   }
 
   cartItem.bill = cartItem.quantity * cartItem.price;
-  const data = await modernizeUserCartItem({cartItem, mode});
+  const data = await modernizeUserCartItem({cartItem});
 
-  if (data.err) {
+  if (data.error) {
     toast.error(data.err);
   } else {
     event.target.parentElement.children[1].textContent = cartItem.quantity;
-    event.target.parentElement.nextElementSibling.querySelector('.number-of-product').textContent = cartItem.quantity;
+    event.target.parentElement.nextElementSibling.querySelector(
+        '.number-of-product',
+    ).textContent = cartItem.quantity;
+
+    calculateSumOfTheCart();
   }
 }
-
 
 async function removeCartItem(event, itemId = '') {
   const data = await removeItemFromUserCart(itemId);
@@ -111,30 +145,54 @@ async function removeCartItem(event, itemId = '') {
     toast.error(data.error);
   } else {
     event.target.closest('.basket-products__basket-product').remove();
+
+    toast.success(data.message);
+    handleCartContainerClass();
+    calculateSumOfTheCart();
+    handleUserCartItemsLength();
+  }
+}
+
+function handleCartContainerClass() {
+  const cartContainer = $$.querySelector('.modal-body__show-products');
+  const noProducts = $$.querySelector('.modal-body__no-products');
+  const cartItems = cartContainer.children[1].children.length;
+
+  if (cartItems > 0) {
+    cartContainer.style.display = 'block';
+    noProducts.style.display = 'none';
+  } else {
+    cartContainer.style.display = 'none';
+    noProducts.style.display = 'flex';
   }
 }
 
 export function appendCartItemsIntoDom(fragment) {
-  const cartContainer = $$.querySelector('.modal-body__show-products');
-  const cartItemsContainer = cartContainer.children[1];
+  const cartItemsContainer = $$.querySelector(
+      '.show-products__basket-products',
+  );
 
   cartItemsContainer.append(fragment);
 
-  if (getComputedStyle(cartContainer).display === 'none') {
-    cartContainer.style.display = 'block';
-  }
+  handleCartContainerClass();
+  calculateSumOfTheCart();
+  handleUserCartItemsLength();
 }
 
 export async function handleUserCartItemsLength() {
-  const basketNumberIcon = $$.querySelector('.additional-icons__basket-icon > sup');
+  const basketNumberIcon = $$.querySelector(
+      '.additional-icons__basket-icon > sup',
+  );
   const userCart = await getUserCart();
 
   basketNumberIcon.textContent = userCart.length;
-};
+}
 
 export async function handleUserFavouritesLength() {
-  const favouritesNumberIcon = $$.querySelector('.additional-icons__heart-icon > sup');
+  const favouritesNumberIcon = $$.querySelector(
+      '.additional-icons__heart-icon > sup',
+  );
   const userFavourites = await getUserFavourites();
 
   favouritesNumberIcon.textContent = userFavourites.length;
-};
+}

@@ -1,17 +1,17 @@
-import { axios } from "./interceptAxios";
+import {axios} from './interceptAxios';
 
-
-export async function addItemInUserCart(productId = "") {
+export async function addItemInUserCart(productId = '') {
   try {
     const response = await axios.post(`/cart/${productId}`);
 
     return response.data;
-  } catch (e) {
-    console.log(e);
+  } catch (err) {
+    console.log(err);
+    return {error: err.response.data.message || err.message};
   }
 }
 
-export async function removeItemFromUserCart(itemId = "") {
+export async function removeItemFromUserCart(itemId = '') {
   try {
     const response = await axios.delete(`/cart/${itemId}`);
 
@@ -29,17 +29,17 @@ export async function getUserCart() {
     return response.data;
   } catch (err) {
     console.log(err);
-    return {error: err.response.data.message || err.message};
+    return {error: err.response?.data.message || err.message};
   }
 }
 
-export async function modernizeUserCartItem(data){
-  try{
-    const response = await axios.put(`/cart`,data);
+export async function modernizeUserCartItem(data) {
+  try {
+    const response = await axios.put(`/cart`, data);
 
     return response.data;
-  }catch(err){
-   console.log(err);
+  } catch (err) {
+    console.log(err);
     return {error: err.response.data.message || err.message};
   }
 }

@@ -1,37 +1,40 @@
-import { axios } from "./interceptAxios";
+import {axios} from './interceptAxios';
 
-export async function addUserFavourite(productId = "") {
-	try {
-		const response = await axios.post(`/users/user/wishlist/${productId}`);
+export async function addUserFavourite(productId = '') {
+  try {
+    const response = await axios.post(`/wishlist/${productId}`);
 
-		return response.data;
-	} catch (e) {
-		console.log(e);
-	}
+    return response.data;
+  } catch (err) {
+    console.log(err);
+    return {error: err.response?.data.message || err.message};
+  }
 }
 
-export async function removeUserFavourite(productId = "") {
-	try {
-		const response = await axios.delete(`/users/user/wishlist/${productId}`);
+export async function removeUserFavourite(productId = '') {
+  try {
+    const response = await axios.delete(`/wishlist/${productId}`);
 
-		return response.data;
-	} catch (e) {
-		console.log(e);
-	}
+    return response.data;
+  } catch (err) {
+    console.log(err);
+    return {error: err.response.data.message || err.message};
+  }
 }
 
-export async function isProductFavourite(productId = "") {
-	const userFavourites = await getUserWishes();
+export async function isProductFavourite(productId = '') {
+  const userFavourites = await getUserFavourites();
 
-	return userFavourites.some(favourite => favourite.productId == productId);
+  return userFavourites.some((favourite) => favourite.productId == productId);
 }
 
 export async function getUserFavourites() {
-	try {
-		const response = await axios.get('/users/user/wishlist');
+  try {
+    const response = await axios.get('/wishlist');
 
-		return response.data;
-	} catch (e) {
-		console.log(e);
-	}
+    return response.data;
+  } catch (err) {
+    console.log(err);
+    return {error: err.response.data.message || err.message};
+  }
 }
