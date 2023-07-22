@@ -1,27 +1,43 @@
 export const $$ = document;
 
-export function getUserToken() { 
-	return localStorage.getItem('token');
+export function getUserToken() {
+  return localStorage.getItem('access_token');
 };
 
-export const parseJwt = (token) => {
-	let base64Url = token.split(".")[1];
-	let base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
-	let jsonPayload = decodeURIComponent(
-		window
-			.atob(base64)
-			.split("")
-			.map(function (c) {
-				return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
-			})
-			.join("")
-	);
+export function parseJwt(token) {
+  const base64Url = token.split('.')[1];
+  const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+  const jsonPayload = decodeURIComponent(
+      window
+          .atob(base64)
+          .split('')
+          .map(function(c) {
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+          })
+          .join(''),
+  );
 
-	return JSON.parse(jsonPayload);
+  return JSON.parse(jsonPayload);
 }
 
 export function formatPrice(price) {
-	return new Intl.NumberFormat('fa-IR', { currency: 'IRR', style: 'currency' }).format(price);
+  return new Intl.NumberFormat('fa-IR', {currency: 'IRR', style: 'currency'}).format(price);
+}
+
+export function handleUserToken() {
+  const userToken = getUserToken();
+
+  if(!userToken) return;
+
+  const {exp, user} = parseJwt(userToken);
+  const nowDate = Date.now();
+
+  if (nowDate >= exp * 1000) {
+    localStorage.removeItem('token');
+    location.href = '/pages/accountPage.html';
+  } else {
+    return user;
+  }
 }
 
 

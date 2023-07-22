@@ -7,6 +7,6 @@ const instance = axios.create({
   baseURL: API_URL,
 });
 
-instance.defaults.headers.common['Authorization'] = getUserToken();
+instance.defaults.headers.common['Authorization'] = `Bearer ${getUserToken()}`;
 
 export { instance as axios };

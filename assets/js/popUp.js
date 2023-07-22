@@ -1,7 +1,7 @@
 import { $$ } from "./utils/utils";
 import { computePosition, shift, flip, offset } from "@floating-ui/dom";
 
-export function setupPopupsForProducts() {
+export function setupPopups() {
     const events = [["mouseenter", showPopUp], ["mouseleave", hidePopUp]];
     let popUpElem;
     let productElem;

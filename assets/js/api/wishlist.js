@@ -26,7 +26,7 @@ export async function isProductFavourite(productId = "") {
 	return userFavourites.some(favourite => favourite.productId == productId);
 }
 
-export async function getUserWishes() {
+export async function getUserFavourites() {
 	try {
 		const response = await axios.get('/users/user/wishlist');
 
