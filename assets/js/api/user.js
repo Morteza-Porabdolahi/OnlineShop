@@ -1,39 +1,27 @@
-import { axios } from "./interceptAxios";
+import {axios} from './interceptAxios';
 
-export async function handleLoginFormSubmit(e) {
-  if (!localStorage.getItem("token")) {
-    e.preventDefault();
-    const { emailOrName, password } = this;
-    const user = {
-      email: emailOrName.value,
-      password: password.value,
-    };
+export async function loginUser(user = {}) {
+  try {
+    const response = await axios.post('/users/login', user, {
+      headers: {},
+    });
 
-    try {
-      const { data } = await axios.post('/users/login', user);
-
-      localStorage.setItem("token", data.token);
-      window.location.href = "/";
-    } catch (err) {
-      console.log(err);
-    }
+    return response.data;
+  } catch (err) {
+    console.log(err);
+    return {error: err.response.data.message || err.message}
   }
 }
 
-export async function handleRegisterFormSubmit(e) {
-  e.preventDefault();
-  const { name, password, email } = this;
-  const newUser = {
-    username: name.value,
-    password: password.value,
-    email: email.value,
-  };
-
+export async function registerUser(newUser = {}) {
   try {
-    const { data } = await axios.post('/users/register', newUser);
+    const response = await axios.post('/users/register', newUser, {
+      headers: {},
+    });
 
-    console.log(data.message)
+    return response.data;
   } catch (err) {
     console.log(err);
+    return {error: err.response.data.message || err.message}
   }
 }

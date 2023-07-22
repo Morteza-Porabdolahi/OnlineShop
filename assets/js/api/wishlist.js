@@ -1,35 +1,37 @@
 import { axios } from "./interceptAxios";
 
-export async function addUserWish(productId = "") {
+export async function addUserFavourite(productId = "") {
 	try {
-		const { data } = await axios.post(`/users/user/wishlist/${productId}`);
-		console.log(data)
+		const response = await axios.post(`/users/user/wishlist/${productId}`);
 
+		return response.data;
 	} catch (e) {
 		console.log(e);
 	}
 }
 
-export async function deleteUserWish(productId = "") {
+export async function removeUserFavourite(productId = "") {
 	try {
-		const { data } = await axios.delete(`/users/user/wishlist/${productId}`);
-		console.log(data)
+		const response = await axios.delete(`/users/user/wishlist/${productId}`);
 
+		return response.data;
 	} catch (e) {
 		console.log(e);
 	}
 }
 
-export async function isProductInWishlist(productId = "") {
-	try {
-		const { data } = await getUserWishes();
+export async function isProductFavourite(productId = "") {
+	const userFavourites = await getUserWishes();
 
-		return data.some(wishlist => wishlist.productId == productId);
+	return userFavourites.some(favourite => favourite.productId == productId);
+}
+
+export async function getUserWishes() {
+	try {
+		const response = await axios.get('/users/user/wishlist');
+
+		return response.data;
 	} catch (e) {
 		console.log(e);
 	}
-}
-
-export function getUserWishes() {
-	return axios.get('/users/user/wishlist');
 }

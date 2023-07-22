@@ -2,7 +2,8 @@
 "./reset",
 "./generalStyles/nav",
 "./slider",
-"./generalStyles/footer", "./generalStyles/quantityStyles";
+"./generalStyles/footer", "./generalStyles/quantityStyles",
+"../../node_modules/sweetalert2/src/sweetalert2.scss";
 
 html {
   box-sizing: border-box;
@@ -15,7 +16,7 @@ html {
   box-sizing: inherit;
   margin: 0;
   padding: 0;
-}
+} 
 
 @font-face {
   font-family: Yekanbakh;
