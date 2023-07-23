@@ -9,7 +9,7 @@ export async function loginUser(user = {}) {
     return response.data;
   } catch (err) {
     console.log(err);
-    return {error: err.response.data.message || err.message}
+    return {error: err.response.data.message || err.message};
   }
 }
 
@@ -22,6 +22,6 @@ export async function registerUser(newUser = {}) {
     return response.data;
   } catch (err) {
     console.log(err);
-    return {error: err.response.data.message || err.message}
+    return {error: err.response.data.message || err.message};
   }
 }

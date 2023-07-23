@@ -2,7 +2,7 @@ export const $$ = document;
 
 export function getUserToken() {
   return localStorage.getItem('access_token');
-};
+}
 
 export function parseJwt(token) {
   const base64Url = token.split('.')[1];
@@ -40,7 +40,6 @@ export function handleUserToken() {
   }
 }
 
-export function calculateRealProductPrice(price, discount) {
+export function calculateProductRealPrice(price, discount) {
   return ((100 - discount) / 100) * price;
 }
-

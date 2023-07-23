@@ -72,6 +72,11 @@
         box-shadow: $mediumBoxShadow;
         @include textStyle($grayerColor, 1.7rem)
     }
+
+    span.liked::before{
+        content: "";
+        color: #ff0030;
+    }
 }
 
 .prices-title__title {

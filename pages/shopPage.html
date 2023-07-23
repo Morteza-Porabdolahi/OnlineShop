@@ -307,7 +307,9 @@
                                                     <div class="show-products__checkout">
                                                         <div class="checkout__price-sum">
                                                             <span class="price-sum__title">جمع سبد خرید: </span>
-                                                            <span class="price-sum__price">1,177,000 تومان</span>
+                                                            <span class="price-sum__price">
+                                                                <span id="basket-sum"></span>
+                                                            </span>
                                                         </div>
                                                         <div class="checkout__buy-completion">
                                                             <button class="buy-completion__show-basket">
@@ -440,7 +442,7 @@
                                     <img src="../images/63146da1cef0181f650a3095.png" alt="test"
                                         class="img-container__img">
                                     <div class="img-container__options">
-                                        <span class="ri-heart-line"></span>
+                                        <span class="ri-heart-line like-btn"></span>
                                     </div>
                                 </div>
                                 <div class="product__description">
@@ -514,21 +516,21 @@
                                             <div class="progress"></div>
                                         </div>
                                         <div class="min-range-container">
-                                            <input type="range" class="range-input min-range" step="10000" min="100000"
-                                                value="100000" max="5990000">
+                                            <input type="range" class="range-input min-range" step="1000" min="10000"
+                                                value="10000" max="599000">
                                         </div>
                                         <div class="max-range-container">
-                                            <input type="range" class="range-input max-range" step="10000"
-                                                value="5990000" min="290000" max="5990000">
+                                            <input type="range" class="range-input max-range" step="1000"
+                                                value="599000" min="29000" max="599000">
                                         </div>
 
                                     </div>
                                     <p class="container__range">
                                         <span class="range__title">قیمت :</span>
                                         <span class="range__start">
-                                            <span class="start__price">100000</span> ریال</span>
+                                            <span class="start__price">10000</span> تومان</span>
                                         <span class="range__end">
-                                            <span class="end__price">5990000</span> ریال
+                                            <span class="end__price">599000</span> تومان
                                         </span>
                                     </p>
                                     <button class="container__filter-btn">
@@ -794,7 +796,7 @@
     </section>
 
     <script src="/assets/js/pages/shopPage.js" type="module"></script>
-    <script src="/assets/js/pages/general.js" type="module"></script>
+    <script src="/assets/js/pages/navbar.js" type="module"></script>
     <script src="/assets/js/modal.js" type="module"></script>
 </body>
 

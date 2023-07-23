@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>متاتم || آموزش تبدیل قالب HTML به قالب وردپرس</title>
     <link rel="icon" type="image/x-icon" href="/images/metatheme-300x125.png">
-    <link rel="stylesheet" href="/assets/css/swiper-bundle.min.css">
     <link rel="stylesheet" href="/assets/css/general.css">
     <link rel="stylesheet" href="/assets/css/pages/singleProductPage.css">
 </head>
@@ -309,7 +308,9 @@
                                                     <div class="show-products__checkout">
                                                         <div class="checkout__price-sum">
                                                             <span class="price-sum__title">جمع سبد خرید: </span>
-                                                            <span class="price-sum__price">1,177,000 تومان</span>
+                                                            <span class="price-sum__price">
+                                                                <span id="basket-sum"></span>
+                                                            </span>
                                                         </div>
                                                         <div class="checkout__buy-completion">
                                                             <button class="buy-completion__show-basket">
@@ -1172,7 +1173,7 @@
     </section>
 
     <script src="/assets/js/pages/singleProductPage.js" type="module"></script>
-    <script src="/assets/js/pages/general.js" type="module"></script>
+    <script src="/assets/js/pages/navbar.js" type="module"></script>
     <script src="/assets/js/modal.js" type="module"></script>
 </body>
 

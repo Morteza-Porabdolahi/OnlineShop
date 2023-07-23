@@ -3,7 +3,7 @@ import 'swiper/css';
 
 import {
   $$,
-  calculateRealProductPrice,
+  calculateProductRealPrice,
   formatPrice,
   handleUserToken,
 } from '../utils/utils';
@@ -13,16 +13,15 @@ import {
   addUserFavourite,
   isProductFavourite,
   removeUserFavourite,
-  addItemInUserCart,
 } from '../api/api';
 import {toast} from '../utils/toast';
 import {
-  appendCartItemsIntoDom,
-  createUserCartElem,
+  handleUserCartNavbar,
   handleUserFavouritesLength,
+  insertItemInUserCart,
 } from './general';
 
-(function handleHeaderInput() {
+function handleHeaderInput() {
   const headerSearchIcon = $$.querySelector('.search-input__search-icon');
   const headerSearchInput = $$.querySelector('.body__search-input > input');
   const categoryTitle = $$.querySelector('.category-selector__title');
@@ -52,9 +51,9 @@ import {
   categoryItems.forEach((categoryItem) =>
     categoryItem.addEventListener('click', handleCategoryItem),
   );
-})();
+}
 
-(function initializeSliders() {
+function initializeSliders() {
   new Swiper('.swiper', {
     direction: 'horizontal',
     slidesPerView: 4,
@@ -67,35 +66,45 @@ import {
       type: 'bullets',
     },
   });
-})();
+}
+
+window.onload = function() {
+  handleHeaderInput();
+  initializeSliders();
+  getAllProducts();
+};
 
 async function getAllProducts() {
   // implement some endpoints for api like /products/bestselling
-  const [{value}] = await Promise.allSettled([fetchAllProducts()]);
+  const data = await fetchAllProducts();
 
-  createBestSellingElems(value);
-  createNewAndEssentialElems(value, '.new-temps');
-  createNewAndEssentialElems(value, '.essential-temps');
+  if (data.error) {
+    toast.error(data.error);
+  } else {
+    createBestSellingElems(data);
+    createNewAndEssentialElems(data, '.new-temps');
+    createNewAndEssentialElems(data, '.essential-temps');
+  }
 }
-
-window.onload = getAllProducts;
 
 function createBestSellingElems(products = []) {
   const squareTemp = $$.getElementById('squareProductTemp');
   const fragment = $$.createDocumentFragment();
 
-  products.forEach((product) => {
-    const bestSellingElem = createBestSellingElem(product, squareTemp);
+  let cloneTemp;
+  let bestSellingElem;
 
+  products.forEach((product) => {
+    cloneTemp = squareTemp.content.cloneNode(true);
+
+    bestSellingElem = createBestSellingElem(product, cloneTemp);
     fragment.append(bestSellingElem);
   });
 
   appendProductsToContainer(fragment, '.bestselling__products');
 }
 
-function createBestSellingElem(product = {}, template) {
-  const cloneTemp = template.content.cloneNode(true);
-
+function createBestSellingElem(product = {}, cloneTemp) {
   cloneTemp.querySelector(
       'a[href]',
   ).href = `/pages/singleProductPage.html?productId=${product._id}`;
@@ -117,20 +126,20 @@ async function createNewAndEssentialElems(products = [], containerClass = '') {
   const productTemplate = $$.getElementById('productTemp');
   const fragment = $$.createDocumentFragment();
 
-  for (const product of products) {
-    const productElem = await createNewAndEssentialElem(
-        product,
-        productTemplate,
-    );
+  let cloneTemp;
+  let productElem;
 
+  for (const product of products) {
+    cloneTemp = productTemplate.content.cloneNode(true);
+
+    productElem = await createNewAndEssentialElem(product, cloneTemp);
     fragment.append(productElem);
   }
 
   appendProductsToContainer(fragment, containerClass);
 }
 
-async function createNewAndEssentialElem(product = {}, template) {
-  const cloneTemp = template.content.cloneNode(true);
+async function createNewAndEssentialElem(product = {}, cloneTemp) {
   const {_id, imageUrl, description, title, price, discount} = product;
 
   cloneTemp.children[0].setAttribute('data-id', _id);
@@ -145,7 +154,7 @@ async function createNewAndEssentialElem(product = {}, template) {
 
   if (discount) {
     cloneTemp.querySelector('.price__price').textContent = formatPrice(
-        calculateRealProductPrice(price, discount),
+        calculateProductRealPrice(price, discount),
     );
   }
   cloneTemp.querySelector('.price__new-price').textContent = formatPrice(price);
@@ -156,7 +165,9 @@ async function createNewAndEssentialElem(product = {}, template) {
 
   cloneTemp
       .querySelector('.add-to-basket__title')
-      .addEventListener('click', () => insertItemInUserCart(_id));
+      .addEventListener('click', () =>
+        insertItemInUserCart(_id, handleUserCartNavbar),
+      );
   cloneTemp
       .querySelector('.like-btn')
       .addEventListener('click', (e) => handleUserFavourite(e, _id));
@@ -185,24 +196,6 @@ async function handleUserFavourite(event, productId) {
     toast.success(data.message);
     handleUserFavouritesLength();
   }
-}
-
-async function insertItemInUserCart(productId = '') {
-  const data = await addItemInUserCart(productId);
-
-  if (data.error) {
-    toast.error(data.error);
-  } else {
-    insertCartItemInDom(data.newCartItem);
-    toast.success(data.message);
-  }
-}
-
-function insertCartItemInDom(newItem = {}) {
-  const cartItemTemp = $$.getElementById('cartItemTemp');
-  const cartItemElem = createUserCartElem(newItem, cartItemTemp);
-
-  appendCartItemsIntoDom(cartItemElem);
 }
 
 function appendProductsToContainer(fragment, containerClass = '') {

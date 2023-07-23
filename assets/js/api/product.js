@@ -20,8 +20,9 @@ export async function createProduct(product = {}) {
     const response = await axios.post('/products', product);
 
     return response.data;
-  } catch (e) {
-    console.log(e);
+  } catch (err) {
+    console.log(err);
+    return {error: err.response?.data.message || err.message};
   }
 }
 
@@ -30,7 +31,8 @@ export async function fetchProduct(productId = '') {
     const response = await axios.get(`/products/${productId}`);
 
     return response.data;
-  } catch (e) {
-    console.log(e);
+  } catch (err) {
+    console.log(err);
+    return {error: err.response?.data.message || err.message};
   }
 }
