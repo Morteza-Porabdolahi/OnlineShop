@@ -3,11 +3,11 @@
 .main {
 
     .body__no-products {
-        display: none;
+        display: block;
     }
 
     .body__cart-products-container {
-        display: flex;
+        display: none;
         justify-content: space-between;
 
         .cart-products__upgrade-cart {

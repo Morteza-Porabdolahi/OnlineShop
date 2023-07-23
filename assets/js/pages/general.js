@@ -53,10 +53,12 @@ import {toast} from '../utils/toast';
   }
 })();
 
-async function handleUserCart() {
+export async function handleUserCart() {
   const userCart = await getUserCart();
 
-  if (userCart.length <= 0) return;
+  if (userCart.length <= 0) {
+    handleCartContainerClass();
+  };
 
   const fragment = $$.createDocumentFragment();
   const template = $$.getElementById('cartItemTemp');
@@ -153,10 +155,11 @@ async function removeCartItem(event, itemId = '') {
   }
 }
 
-function handleCartContainerClass() {
+async function handleCartContainerClass() {
+  const userCart = await getUserCart();
   const cartContainer = $$.querySelector('.modal-body__show-products');
   const noProducts = $$.querySelector('.modal-body__no-products');
-  const cartItems = cartContainer.children[1].children.length;
+  const cartItems = userCart.length;
 
   if (cartItems > 0) {
     cartContainer.style.display = 'block';

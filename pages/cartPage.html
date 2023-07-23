@@ -307,7 +307,9 @@
                                                     <div class="show-products__checkout">
                                                         <div class="checkout__price-sum">
                                                             <span class="price-sum__title">جمع سبد خرید: </span>
-                                                            <span class="price-sum__price">1,177,000 تومان</span>
+                                                            <span class="price-sum__price">
+                                                                <span id="basket-sum"></span>
+                                                            </span>
                                                         </div>
                                                         <div class="checkout__buy-completion">
                                                             <button class="buy-completion__show-basket">
@@ -381,7 +383,7 @@
                                         <td class="product-price-sum-title">جمع جزء</td>
                                     </tr>
                                 </thead>
-                                <template>
+                                <template id="cartTableTemp">
                                     <tr>
                                         <td>
                                             <div class="product-col">
