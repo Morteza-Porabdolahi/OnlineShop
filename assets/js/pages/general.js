@@ -178,3 +178,7 @@ export async function removeFavourite(productId = '', callback) {
     callback();
   }
 }
+
+export async function addComment(comment = {}){
+  
+}

@@ -7,6 +7,8 @@ const tabButtons = $$.querySelectorAll('.tab-names-list__item');
 const tabs = $$.querySelectorAll('.tab');
 const starElems = $$.querySelectorAll('.star');
 
+const commentForm = $$.querySelector('.comment-form');
+
 tabButtons.forEach((tabButton) =>
   tabButton.addEventListener('click', handleSwitchTab),
 );
@@ -53,6 +55,7 @@ async function getSingleProduct() {
 window.addEventListener('load', getSingleProduct);
 
 function insertProductDatasIntoPage(product = {}) {
+  document.title = `متاتم || ${product.title}`
   $$.querySelector('.intro__breadcrumb > .item--active').textContent =
     product.title;
   $$.querySelector('.intro__title').textContent = product.title;
@@ -75,4 +78,21 @@ function insertProductDatasIntoPage(product = {}) {
         );
       },
   );
+
+  handleCommentForm(product._id);
+}
+
+function handleCommentForm(productId){
+  commentForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  const comment = {
+    text: commentForm.text.value,
+    fullName: commentForm.fullName.value,
+  }
+
+  const data = await addComment();
+
+})
+
 }
