@@ -214,6 +214,11 @@
         }
 
         .additional-icons {
+          .disabled {
+            pointer-events: none;
+            opacity: .6;
+          }
+          
           display: flex;
           margin-top: 1rem;
           @include textStyle($grayerColor, 2.5rem);

@@ -1,5 +1,9 @@
-import {$$, handleUserToken} from '../utils/utils';
-import {handleUserCartNavbar, handleUserFavouritesLength} from './general';
+import {$$, getUserToken, handleUserToken} from '../utils/utils';
+import {handleUserCartNavbar, handleUserFavouritesLength, handleUserLogin} from './general';
+
+const navbarLoginForm = $$.querySelector('.modal-body__form');
+
+navbarLoginForm.addEventListener('submit', handleUserLogin)
 
 function positionNavbar() {
   const navContainerElem = $$.querySelector('.header__nav-container');
@@ -41,6 +45,9 @@ function handleRegisterButton() {
     registerBtn.addEventListener('click', () => {
       location.href = `/pages/accountPage.html?userId=${user.userId}`;
     });
+  }else{
+    $$.querySelector('.additional-icons__heart-icon').classList.add('disabled');
+    $$.querySelector('.additional-icons__heart-icon').setAttribute('aria-disabled','true')
   }
 }
 
@@ -48,6 +55,9 @@ window.addEventListener('load', () => {
   positionNavbar();
   handleNavbarInput();
   handleRegisterButton();
-  handleUserCartNavbar();
-  handleUserFavouritesLength();
+
+  if(getUserToken()){
+    handleUserCartNavbar();
+    handleUserFavouritesLength();
+  }
 });

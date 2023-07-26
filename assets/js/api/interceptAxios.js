@@ -7,6 +7,16 @@ const instance = axios.create({
   baseURL: API_URL,
 });
 
-instance.defaults.headers.common['Authorization'] = `Bearer ${getUserToken()}`;
+instance.interceptors.request.use(function(config){
+  const userToken = getUserToken();
+
+  if(userToken){
+    config.headers.Authorization = `Bearer ${userToken}`;
+  }
+  
+  return config;
+}, function (err) {
+  return Promise.reject(err);
+});
 
 export {instance as axios};

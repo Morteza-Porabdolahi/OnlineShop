@@ -7,10 +7,12 @@ import {
   getUserFavourites,
   addItemInUserCart,
   removeUserFavourite,
+  loginUser,
 } from '../api/api';
 
 export async function handleUserCartNavbar() {
   const userCart = await getUserCart();
+
 
   if (userCart.length <= 0) {
     showNoProducts();
@@ -179,6 +181,28 @@ export async function removeFavourite(productId = '', callback) {
   }
 }
 
-export async function addComment(comment = {}){
-  
+export async function handleUserLogin(e){
+  e.preventDefault();
+
+  toast.loading();
+
+  const user = {
+    email: e.target.emailOrName.value,
+    password: e.target.password.value,
+  };
+
+  const data = await loginUser(user);
+
+  if (data.error) {
+    toast.error(data.error);
+  } else {
+    toast.success(data.message);
+
+    const token = data.token;
+    localStorage.setItem('access_token', token);
+
+    setTimeout(() => {
+      location.href = '/';
+    }, 2000);
+}
 }

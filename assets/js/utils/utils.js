@@ -33,8 +33,8 @@ export function handleUserToken() {
   const nowDate = Date.now();
 
   if (nowDate >= exp * 1000) {
-    localStorage.removeItem('token');
-    location.href = '/pages/accountPage.html';
+    localStorage.removeItem('access_token');
+    location.href = '/';
   } else {
     return user;
   }
