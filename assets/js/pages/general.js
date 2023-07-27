@@ -8,6 +8,7 @@ import {
   addItemInUserCart,
   removeUserFavourite,
   loginUser,
+  addComment,
 } from '../api/api';
 
 export async function handleUserCartNavbar() {
@@ -204,5 +205,15 @@ export async function handleUserLogin(e){
     setTimeout(() => {
       location.href = '/';
     }, 2000);
+  }
 }
+
+export async function insertComment(comment = {}){
+  const data = await addComment(comment);
+
+  if(data.error){
+    toast.error(data.error);
+  }else{
+    toast.success(data.message);
+  }
 }

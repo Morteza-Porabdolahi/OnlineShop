@@ -210,13 +210,15 @@
                                                     <span class="input-container__title">
                                                         نام و کاربری یا ایمیل <span class="required">*</span>
                                                     </span>
-                                                    <input name="emailOrName" type="text" class="input-container__input">
+                                                    <input name="emailOrName" type="text"
+                                                        class="input-container__input">
                                                 </div>
                                                 <div class="form__input-container">
                                                     <span class="input-container__title">
                                                         گذرواژه <span class="required">*</span>
                                                     </span>
-                                                    <input name="password" type="password" class="input-container__input">
+                                                    <input name="password" type="password"
+                                                        class="input-container__input">
                                                 </div>
                                                 <div class="form__remember-me">
                                                     <input type="checkbox" class="remember-me">
@@ -671,7 +673,37 @@
                                                 <p class="comments__no-comments">هیچ دیدگاهی برای این محصول ثبت نشده
                                                     است.
                                                 </p>
-                                                <div class="comments__comment">
+                                                <template id="commentTemp">
+                                                    <div class="comments__comment">
+                                                        <div class="comment__comment-details">
+                                                            <div class="comment-details__comment-identity">
+                                                                <div class="comment-identity__comment-author">
+                                                                    <img class="comment-author__img"
+                                                                        src="/images/bb78b8dadd33882b96924f7b080e8cbb.png"
+                                                                        alt="test">
+                                                                    <div class="comment-author__desc">
+                                                                        <p class="desc__author-name">
+                                                                            علیرضا
+                                                                        </p>
+                                                                        <p class="desc__comment-date">
+                                                                            15 اسفند 1398 در 8:38 ق.ظ
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                                <span class="comment-identity__reply-btn">
+                                                                    پاسخ
+                                                                </span>
+                                                            </div>
+                                                            <div class="comment-details__comment-text">
+                                                                <p>سلام لطفا بیشتر راهنمایی میکنید؟ من متوجه نشدم مرحله
+                                                                    آخرش چطوری هست.
+                                                                    با تشکر</p>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </template>
+                                                <div class="comments">
 
                                                 </div>
                                             </div>
@@ -706,7 +738,12 @@
                                                                 دیدگاه شما
                                                                 <span class="required">*</span>
                                                             </p>
+                                                            <p id="toAnswer">
+                                                                در حال پاسخ به <span id="toAnswerName"></span>
+                                                                <span id="cancelToAnswer">لغو پاسخ</span>
+                                                            </p>
                                                             <textarea cols="30" rows="12" name="text"></textarea>
+
                                                         </div>
                                                         <div class="form__comment-author">
                                                             <p class="input-title">

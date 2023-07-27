@@ -1,4 +1,4 @@
-@import "../variables", "../mixins", "../generalStyles/pagesTitle", "../generalStyles/BlogAndSingleBlogPage";
+@import "../variables", "../mixins", "../generalStyles/pagesTitle", "../generalStyles/BlogAndSingleBlogPage", "../generalStyles/comments";
 
 .main {
     &__body {
@@ -17,20 +17,9 @@
             .post-author-desc__author-desc,
             .post-author-desc__post-tags,
             .post-container__share-post,
-            .comment-identity__comment-author,
-            .comment-details__comment-identity,
             .share-post__social,
             .share-post__post-categories {
                 @include alignCenter;
-            }
-
-            .comment-identity__comment-author {
-                gap: 1.5rem;
-
-                img {
-                    width: 5rem;
-                    height: 5rem;
-                }
             }
 
             .post-author-desc__author-desc {
@@ -44,7 +33,6 @@
 
             .post-author-desc__author-desc>img,
             .post-container__post-author-details>img,
-            .comment-author__img,
             .post-container__share-post>div {
                 border-radius: 50%;
             }
@@ -208,57 +196,7 @@
                 font-size: 3rem;
                 margin-top: 4rem;
             }
-
-            .comment-details__comment-identity {
-                justify-content: space-between;
-                padding: 2rem 0;
-
-                .comment-identity__reply-btn {
-                    font-size: 1.5rem;
-                    border-bottom: 1px solid $themeColor;
-                    padding-bottom: .5rem;
-                    cursor: pointer;
-                    transition: color .3s;
-
-                    &:hover {
-                        color: $grayerColor;
-                    }
-                }
-            }
-
-            .comment-author__desc {
-                font-size: 1.6rem;
-
-                .desc__comment-date {
-                    color: $grayerColor;
-                    margin-top: 1rem;
-                }
-            }
-
-            .comment-details__comment-text {
-                padding: 0 7rem 2.5rem 0;
-
-                p {
-                    @include textStyle($grayerColor, 1.8rem);
-                    line-height: 1.5;
-                }
-            }
-
-            .comment__reply {
-                border-top: 1px solid $creamColor;
-                position: relative;
-                margin-right: 7rem;
-            }
-
-            .comment__reply::before {
-                top: -1.5rem;
-                right: -5rem;
-                position: absolute;
-                content: '\f307';
-                font-family: "remixicon";
-                @include textStyle($grayColor, 3rem);
-            }
-
+            
             .post-comments-container__submit-comment-container {
                 font-size: 1.75rem;
 

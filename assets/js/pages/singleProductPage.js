@@ -1,7 +1,7 @@
 import {$$, formatPrice} from '../utils/utils';
-import {fetchProduct} from '../api/api';
+import {fetchProduct, fetchProductComments} from '../api/api';
 import {toast} from '../utils/toast';
-import {handleUserCartNavbar, insertItemInUserCart} from './general';
+import {handleUserCartNavbar, insertComment, insertItemInUserCart} from './general';
 
 const tabButtons = $$.querySelectorAll('.tab-names-list__item');
 const tabs = $$.querySelectorAll('.tab');
@@ -79,20 +79,93 @@ function insertProductDatasIntoPage(product = {}) {
       },
   );
 
+  getComments(product._id);
   handleCommentForm(product._id);
 }
 
-function handleCommentForm(productId){
-  commentForm.addEventListener('submit', async (e) => {
-  e.preventDefault();
+function handleCommentForm(mediaId){
+  commentForm.addEventListener('submit', (e) => {
+    e.preventDefault();
 
-  const comment = {
-    text: commentForm.text.value,
-    fullName: commentForm.fullName.value,
+    const comment = {
+      text: commentForm.text.value,
+      writerName: commentForm.fullName.value,
+      mediaId,
+      toAnswer: commentForm.dataset.toAnswer,
+    }
+
+    insertComment(comment);
+  });
+}
+
+async function getComments(productId){
+  const data = await fetchProductComments(productId);
+
+  if(data.error){
+    toast.error(data.error);
+  }else{
+    createElemFromComments(data);
+  }
+}
+
+function* createIteratorFromComments(comments = []){
+  for(let comment of comments){
+    yield comment;
+  }
+}
+
+function createElemFromComments(comments = []){
+  let containerFragment = $$.createDocumentFragment();
+  let commentElem = $$.getElementById('commentTemp').content.children[0];
+  const iterator = createIteratorFromComments(comments);
+
+  function createCommentElem(iterator, container){
+    const step = iterator.next();
+
+    if(step.done){
+      return;
+    }
+
+    const newCommentElem = insertDatasIntoCommentElem(commentElem.cloneNode(true),step.value);
+    container.append(newCommentElem);
+
+    const replies = step.value.comments || [];
+
+    if(replies.length > 0){
+      createCommentElem(createIteratorFromComments(replies), newCommentElem);
+    }
+
+    createCommentElem(iterator,container);
   }
 
-  const data = await addComment();
+  createCommentElem(iterator,containerFragment);
+  appendCommentsIntoDom(containerFragment);
+}
 
-})
+function insertDatasIntoCommentElem(elem, comment = {}){
+  elem.querySelector('.desc__author-name').textContent = comment.writerName;
+  elem.querySelector('.desc__comment-date').textContent = new Date(comment.createdDate).toLocaleString('fa-IR',{ timeZone : 'Asia/Tehran',dateStyle: 'full', timeStyle: 'medium' });
+  elem.querySelector('.comment-details__comment-text > p').textContent = comment.text;
+  elem.querySelector('.comment-identity__reply-btn').addEventListener('click', () => handleToAnswer(comment));
 
+  return elem;
+}
+
+function handleToAnswer(comment = {}){
+  function cancelToAnswer(){
+    $$.getElementById('toAnswer').style.display = 'none';
+    commentForm.removeAttribute('data-to-answer');
+  }
+
+  $$.getElementById('toAnswerName').textContent = comment.writerName;
+  $$.getElementById('toAnswer').style.display = 'block';
+
+  commentForm.setAttribute('data-to-answer', comment._id);
+  $$.getElementById('cancelToAnswer').addEventListener('click', cancelToAnswer);
+}
+
+function appendCommentsIntoDom(fragment) {
+  const commentsContainer = $$.querySelector('.comments');
+
+  commentsContainer.append(fragment);
 }
