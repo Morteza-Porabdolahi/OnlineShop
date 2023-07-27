@@ -1,6 +1,5 @@
-import {$$} from '../utils/utils';
+import {$$, toast} from '../utils/utils';
 import {loginUser, registerUser} from '../api/api';
-import {toast} from '../utils/toast';
 import { handleUserLogin } from './general';
 
 const registerForm = $$.getElementById('register-form');

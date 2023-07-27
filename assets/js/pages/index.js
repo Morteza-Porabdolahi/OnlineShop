@@ -6,6 +6,7 @@ import {
   calculateProductRealPrice,
   formatPrice,
   handleUserToken,
+  toast,
 } from '../utils/utils';
 import {setupPopups} from '../popUp';
 import {
@@ -14,13 +15,15 @@ import {
   isProductFavourite,
   removeUserFavourite,
 } from '../api/api';
-import {toast} from '../utils/toast';
 import {
   handleUserCartNavbar,
   handleUserFavouritesLength,
   insertItemInUserCart,
 } from './general';
 
+/**
+ * Sets events for header search input
+ */
 function handleHeaderInput() {
   const headerSearchIcon = $$.querySelector('.search-input__search-icon');
   const headerSearchInput = $$.querySelector('.body__search-input > input');
@@ -175,6 +178,12 @@ async function createNewAndEssentialElem(product = {}, cloneTemp) {
   return cloneTemp;
 }
 
+/**
+ * Runs when user adds/removes his/her favourite product
+ * 
+ * @param {object} event The event object
+ * @param {string} productId The id of the product
+ */
 async function handleUserFavourite(event, productId) {
   const likeButton = event.target;
   const hasLiked = likeButton.classList.contains('liked');
@@ -201,5 +210,6 @@ async function handleUserFavourite(event, productId) {
 function appendProductsToContainer(fragment, containerClass = '') {
   $$.querySelector(containerClass).append(fragment);
 
+  // setup popups just for bestselling products
   if (containerClass == '.bestselling__products') setupPopups();
 }

@@ -1,5 +1,4 @@
-import {toast} from '../utils/toast';
-import {$$, formatPrice} from '../utils/utils';
+import {$$, formatPrice, toast} from '../utils/utils';
 import {
   getUserCart,
   modernizeUserCartItem,
@@ -123,6 +122,13 @@ export async function removeCartItem(itemId = '', callback) {
   }
 }
 
+/**
+ * Updates cart item quantity
+ * 
+ * @param {object} cartItem The cart item
+ * @param {string} mode Increase or decrease quantity of item
+ * @param {function} callback Callback for the dom update
+ */
 export async function updateUserCartItem(cartItem, mode = '', callback) {
   if (mode === 'decrease' && cartItem.quantity > 1) {
     cartItem.quantity -= 1;

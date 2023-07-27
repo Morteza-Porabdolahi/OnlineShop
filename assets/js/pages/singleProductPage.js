@@ -1,6 +1,5 @@
-import {$$, formatPrice} from '../utils/utils';
+import {$$, formatPrice, toast} from '../utils/utils';
 import {fetchProduct, fetchProductComments} from '../api/api';
-import {toast} from '../utils/toast';
 import {handleUserCartNavbar, insertComment, insertItemInUserCart} from './general';
 
 const tabButtons = $$.querySelectorAll('.tab-names-list__item');
@@ -114,6 +113,11 @@ function* createIteratorFromComments(comments = []){
   }
 }
 
+/**
+ * Creates elements for comments with the generators in a recursive way
+ * 
+ * @param {Array} comments The comments array
+ */
 function createElemFromComments(comments = []){
   let containerFragment = $$.createDocumentFragment();
   let commentElem = $$.getElementById('commentTemp').content.children[0];
@@ -126,12 +130,14 @@ function createElemFromComments(comments = []){
       return;
     }
 
+    // first create the parent comment
     const newCommentElem = insertDatasIntoCommentElem(commentElem.cloneNode(true),step.value);
     container.append(newCommentElem);
 
     const replies = step.value.comments || [];
 
     if(replies.length > 0){
+      // recall function with parent comment element as a container to put the replies in
       createCommentElem(createIteratorFromComments(replies), newCommentElem);
     }
 

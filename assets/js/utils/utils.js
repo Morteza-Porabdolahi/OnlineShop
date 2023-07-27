@@ -43,3 +43,5 @@ export function handleUserToken() {
 export function calculateProductRealPrice(price, discount) {
   return ((100 - discount) / 100) * price;
 }
+
+export {toast} from './toast';

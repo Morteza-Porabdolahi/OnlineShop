@@ -36,6 +36,9 @@ async function handleUserCartTable() {
 
 window.addEventListener('load', handleUserCartTable);
 
+/**
+ * Shows no product alert
+ */
 function showNoProducts() {
   const cartContainer = $$.querySelector('.body__cart-products-container');
   const noProducts = $$.querySelector('.body__no-products');
@@ -44,6 +47,9 @@ function showNoProducts() {
   noProducts.style.display = 'block';
 }
 
+/**
+ * Hides no product alert
+ */
 function hideNoProducts() {
   const cartContainer = $$.querySelector('.body__cart-products-container');
   const noProducts = $$.querySelector('.body__no-products');

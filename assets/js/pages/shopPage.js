@@ -1,10 +1,9 @@
-import {fetchAllProducts} from '../api/product';
-import {$$, formatPrice, handleUserToken} from '../utils/utils';
-import {toast} from '../utils/toast';
+import {$$, formatPrice, handleUserToken, toast} from '../utils/utils';
 import {
   addUserFavourite,
   isProductFavourite,
   removeUserFavourite,
+  fetchAllProducts
 } from '../api/api';
 import {
   handleUserCartNavbar,
@@ -249,6 +248,11 @@ function handleProgressWidth() {
   }%`;
 }
 
+/**
+ * handles clicks with the help of bubbling phase
+ * 
+ * @param {object} e The event object
+ */
 function handleClickEvents(e) {
   const targetEl = e.target;
 

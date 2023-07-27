@@ -45,7 +45,7 @@ export function generateElementsForProducts(product = {}, template) {
   return cloneTemplate;
 }
 
-async function updateCallback() {
+function updateCallback() {
   handleUserFavouritesLength();
   import('../pages/wishlistPage').then(({handleUserWishes}) =>
     handleUserWishes(),
