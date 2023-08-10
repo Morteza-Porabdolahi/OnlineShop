@@ -59,7 +59,15 @@ function handleHeaderInput() {
 function initializeSliders() {
   new Swiper('.swiper', {
     direction: 'horizontal',
-    slidesPerView: 4,
+    slidesPerView: 2,
+    breakpoints: {
+      480: {
+        slidesPerView: 3
+      },
+      800: {
+        slidesPerView: 4,
+      },
+    },
     spaceBetween: 20,
     pagination: {
       el: '.my-own-pagination',
@@ -211,5 +219,5 @@ function appendProductsToContainer(fragment, containerClass = '') {
   $$.querySelector(containerClass).append(fragment);
 
   // setup popups just for bestselling products
-  if (containerClass == '.bestselling__products') setupPopups();
+  if (containerClass == '.bestselling__products' && window.innerWidth >= 1024) setupPopups();
 }
