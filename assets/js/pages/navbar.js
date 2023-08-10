@@ -42,9 +42,7 @@ function handleRegisterButton() {
   if (user) {
     registerBtn.classList.remove('modal-btn');
     registerBtn.querySelector('a').textContent = user.username;
-    registerBtn.addEventListener('click', () => {
-      location.href = `/pages/accountPage.html?userId=${user.userId}`;
-    });
+    registerBtn.style.opacity = '.5';
   }else{
     $$.querySelector('.additional-icons__heart-icon').classList.add('disabled');
     $$.querySelector('.additional-icons__heart-icon').setAttribute('aria-disabled','true')

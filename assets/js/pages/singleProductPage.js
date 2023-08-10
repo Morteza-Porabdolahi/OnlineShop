@@ -102,7 +102,7 @@ async function getComments(productId){
 
   if(data.error){
     toast.error(data.error);
-  }else{
+  }else if(data.length > 0){
     createElemFromComments(data);
   }
 }
@@ -167,6 +167,7 @@ function handleToAnswer(comment = {}){
   $$.getElementById('toAnswer').style.display = 'block';
 
   commentForm.setAttribute('data-to-answer', comment._id);
+  commentForm.querySelector('textarea').focus();
   $$.getElementById('cancelToAnswer').addEventListener('click', cancelToAnswer);
 }
 
@@ -174,4 +175,6 @@ function appendCommentsIntoDom(fragment) {
   const commentsContainer = $$.querySelector('.comments');
 
   commentsContainer.append(fragment);
+
+  $$.querySelector('.comments__no-comments').style.display = 'none';
 }
