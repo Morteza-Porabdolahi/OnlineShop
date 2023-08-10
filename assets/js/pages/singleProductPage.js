@@ -102,9 +102,14 @@ async function getComments(productId){
 
   if(data.error){
     toast.error(data.error);
-  }else if(data.length > 0){
-    createElemFromComments(data);
+  }else if(data.commentsLength > 0){
+    createElemFromComments(data.comments);
+    showCommentsLengthInDom(data.commentsLength);
   }
+}
+
+function showCommentsLengthInDom(commentsLength){
+  $$.querySelector('.tab-name__comments-number').textContent = `(${commentsLength})`;
 }
 
 function* createIteratorFromComments(comments = []){
