@@ -1,4 +1,4 @@
-import {axios} from './interceptAxios';
+import { axios } from './interceptAxios';
 
 export async function addUserFavourite(productId = '') {
   try {
@@ -7,7 +7,7 @@ export async function addUserFavourite(productId = '') {
     return response.data;
   } catch (err) {
     console.log(err);
-    return {error: err.response?.data.message || err.message};
+    return { error: err.response?.data.message || err.message };
   }
 }
 
@@ -18,7 +18,7 @@ export async function removeUserFavourite(productId = '') {
     return response.data;
   } catch (err) {
     console.log(err);
-    return {error: err.response.data.message || err.message};
+    return { error: err.response.data.message || err.message };
   }
 }
 
@@ -35,6 +35,6 @@ export async function getUserFavourites() {
     return response.data;
   } catch (err) {
     console.log(err);
-    return {error: err.response.data.message || err.message};
+    return { error: err.response.data.message || err.message };
   }
 }

@@ -1,9 +1,9 @@
-import {$$, formatPrice, handleUserToken, toast} from '../utils/utils';
+import { $$, formatPrice, handleUserToken, toast } from '../utils/utils';
 import {
   addUserFavourite,
   isProductFavourite,
   removeUserFavourite,
-  fetchAllProducts
+  fetchAllProducts,
 } from '../api/api';
 import {
   handleUserCartNavbar,
@@ -33,11 +33,11 @@ maxRangeInput.addEventListener('input', handleMaxRangeInput);
 orderSelector.addEventListener('change', handleProductsOrder);
 
 stockInputs.forEach((stockInput) =>
-  stockInput.addEventListener('change', handleProductsByDiscounts),
+  stockInput.addEventListener('change', handleProductsByDiscounts)
 );
 
 function handleProductsByDiscounts(e) {
-  const {filterByAvailability, filterSpecialSales} = filterProducts(products);
+  const { filterByAvailability, filterSpecialSales } = filterProducts(products);
   const isChecked = e.target.checked;
 
   if (isChecked) {
@@ -110,12 +110,12 @@ function filterProducts(products = []) {
     },
     filterByPrice(start, end) {
       return products.filter(
-          (product) => product.price <= end && product.price >= start,
+        (product) => product.price <= end && product.price >= start
       );
     },
     filterByCategory(category = '') {
       return products.filter((product) =>
-        product.categories.includes(category),
+        product.categories.includes(category)
       );
     },
   };
@@ -161,34 +161,34 @@ async function createElementForProduct(product = {}, cloneTemp) {
 
   cloneTemp.querySelector('.prices-title__title').textContent = product.title;
   cloneTemp.querySelector(
-      '.prices-title__title',
+    '.prices-title__title'
   ).herf = `/pages/singleProductPage.html?productId=${product._id}`;
 
   if (product.discount) {
     cloneTemp.querySelector('.prices__real-price').textContent = formatPrice(
-        product.price,
+      product.price
     );
   }
   cloneTemp.querySelector('.prices__new-price').textContent = formatPrice(
-      ((100 - product.discount) / 100) * product.price,
+    ((100 - product.discount) / 100) * product.price
   );
 
   cloneTemp.querySelector('.summary-btn__summary').textContent =
     product.description;
 
   cloneTemp
-      .querySelector('.summary-btn__btn')
-      .addEventListener('click', () =>
-        insertItemInUserCart(product._id, handleUserCartNavbar),
-      );
+    .querySelector('.summary-btn__btn')
+    .addEventListener('click', () =>
+      insertItemInUserCart(product._id, handleUserCartNavbar)
+    );
 
   if (handleUserToken() && (await isProductFavourite(product._id))) {
     cloneTemp.querySelector('.like-btn').classList.add('liked');
   }
 
   cloneTemp
-      .querySelector('.like-btn')
-      .addEventListener('click', (e) => handleUserFavourite(e, product._id));
+    .querySelector('.like-btn')
+    .addEventListener('click', (e) => handleUserFavourite(e, product._id));
 
   return cloneTemp;
 }
@@ -197,7 +197,7 @@ async function handleUserFavourite(event, productId) {
   const likeButton = event.target;
   const hasLiked = likeButton.classList.contains('liked');
   const data = await (hasLiked ? removeUserFavourite : addUserFavourite)(
-      productId,
+    productId
   );
 
   if (data.error) {
@@ -250,7 +250,7 @@ function handleProgressWidth() {
 
 /**
  * handles clicks with the help of bubbling phase
- * 
+ *
  * @param {object} e The event object
  */
 function handleClickEvents(e) {
@@ -264,10 +264,10 @@ function handleClickEvents(e) {
   } else if (productNumberBtn) {
     limitProductsNumber(productNumberBtn);
   } else if (targetEl.classList.contains('container__filter-btn')) {
-    const {filterByPrice} = filterProducts(products);
+    const { filterByPrice } = filterProducts(products);
     const filteredProducts = filterByPrice(
-        minRangeInput.value,
-        maxRangeInput.value,
+      minRangeInput.value,
+      maxRangeInput.value
     );
 
     createElementsForProducts(filteredProducts);

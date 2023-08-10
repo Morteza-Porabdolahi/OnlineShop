@@ -1,6 +1,10 @@
-import {$$, formatPrice, toast} from '../utils/utils';
-import {fetchProduct, fetchProductComments} from '../api/api';
-import {handleUserCartNavbar, insertComment, insertItemInUserCart} from './general';
+import { $$, formatPrice, toast } from '../utils/utils';
+import { fetchProduct, fetchProductComments } from '../api/api';
+import {
+  handleUserCartNavbar,
+  insertComment,
+  insertItemInUserCart,
+} from './general';
 
 const tabButtons = $$.querySelectorAll('.tab-names-list__item');
 const tabs = $$.querySelectorAll('.tab');
@@ -9,10 +13,10 @@ const starElems = $$.querySelectorAll('.star');
 const commentForm = $$.querySelector('.comment-form');
 
 tabButtons.forEach((tabButton) =>
-  tabButton.addEventListener('click', handleSwitchTab),
+  tabButton.addEventListener('click', handleSwitchTab)
 );
 starElems.forEach((starElem) =>
-  starElem.addEventListener('click', handleScoreStars),
+  starElem.addEventListener('click', handleScoreStars)
 );
 
 function handleSwitchTab(e) {
@@ -21,7 +25,7 @@ function handleSwitchTab(e) {
 
   tabs.forEach((tab) => tab.classList.remove('tab--active'));
   tabButtons.forEach((tabBtn) =>
-    tabBtn.classList.remove('tab-names-list__item--active'),
+    tabBtn.classList.remove('tab-names-list__item--active')
   );
 
   clickedTab.classList.add('tab-names-list__item--active');
@@ -54,15 +58,15 @@ async function getSingleProduct() {
 window.addEventListener('load', getSingleProduct);
 
 function insertProductDatasIntoPage(product = {}) {
-  document.title = `متاتم || ${product.title}`
+  document.title = `متاتم || ${product.title}`;
   $$.querySelector('.intro__breadcrumb > .item--active').textContent =
     product.title;
   $$.querySelector('.intro__title').textContent = product.title;
 
   $$.querySelectorAll('.product-additional-desc__price').forEach(
-      (priceElem) => {
-        priceElem.textContent = formatPrice(product.price);
-      },
+    (priceElem) => {
+      priceElem.textContent = formatPrice(product.price);
+    }
   );
 
   $$.querySelector('.list-item__text > a').textContent = product?.category;
@@ -71,18 +75,18 @@ function insertProductDatasIntoPage(product = {}) {
   $$.querySelector('.product-img-container__img').alt = product.title;
 
   $$.querySelectorAll('.product-additional-desc__add-to-basket-btn').forEach(
-      (addToBasket) => {
-        addToBasket.addEventListener('click', () =>
-          insertItemInUserCart(product._id, handleUserCartNavbar),
-        );
-      },
+    (addToBasket) => {
+      addToBasket.addEventListener('click', () =>
+        insertItemInUserCart(product._id, handleUserCartNavbar)
+      );
+    }
   );
 
   getComments(product._id);
   handleCommentForm(product._id);
 }
 
-function handleCommentForm(mediaId){
+function handleCommentForm(mediaId) {
   commentForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
@@ -91,79 +95,93 @@ function handleCommentForm(mediaId){
       writerName: commentForm.fullName.value,
       mediaId,
       toAnswer: commentForm.dataset.toAnswer,
-    }
+    };
 
     insertComment(comment);
   });
 }
 
-async function getComments(productId){
+async function getComments(productId) {
   const data = await fetchProductComments(productId);
 
-  if(data.error){
+  if (data.error) {
     toast.error(data.error);
-  }else if(data.commentsLength > 0){
+  } else if (data.commentsLength > 0) {
     createElemFromComments(data.comments);
     showCommentsLengthInDom(data.commentsLength);
   }
 }
 
-function showCommentsLengthInDom(commentsLength){
-  $$.querySelector('.tab-name__comments-number').textContent = `(${commentsLength})`;
+function showCommentsLengthInDom(commentsLength) {
+  $$.querySelector(
+    '.tab-name__comments-number'
+  ).textContent = `(${commentsLength})`;
 }
 
-function* createIteratorFromComments(comments = []){
-  for(let comment of comments){
+function* createIteratorFromComments(comments = []) {
+  for (let comment of comments) {
     yield comment;
   }
 }
 
 /**
  * Creates elements for comments with the generators in a recursive way
- * 
+ *
  * @param {Array} comments The comments array
  */
-function createElemFromComments(comments = []){
+function createElemFromComments(comments = []) {
   let containerFragment = $$.createDocumentFragment();
   let commentElem = $$.getElementById('commentTemp').content.children[0];
   const iterator = createIteratorFromComments(comments);
 
-  function createCommentElem(iterator, container){
+  function createCommentElem(iterator, container) {
     const step = iterator.next();
 
-    if(step.done){
+    if (step.done) {
       return;
     }
 
     // first create the parent comment
-    const newCommentElem = insertDatasIntoCommentElem(commentElem.cloneNode(true),step.value);
+    const newCommentElem = insertDatasIntoCommentElem(
+      commentElem.cloneNode(true),
+      step.value
+    );
     container.append(newCommentElem);
 
     const replies = step.value.comments || [];
 
-    if(replies.length > 0){
+    if (replies.length > 0) {
       // recall function with parent comment element as a container to put the replies in
       createCommentElem(createIteratorFromComments(replies), newCommentElem);
     }
 
-    createCommentElem(iterator,container);
+    createCommentElem(iterator, container);
   }
 
-  createCommentElem(iterator,containerFragment);
+  createCommentElem(iterator, containerFragment);
   appendCommentsIntoDom(containerFragment);
 }
 
-function insertDatasIntoCommentElem(elem, comment = {}){
+function insertDatasIntoCommentElem(elem, comment = {}) {
   elem.querySelector('.desc__author-name').textContent = comment.writerName;
-  elem.querySelector('.desc__comment-date').textContent = new Date(comment.createdDate).toLocaleString('fa-IR',{ timeZone : 'Asia/Tehran',dateStyle: 'full', timeStyle: 'medium' });
-  elem.querySelector('.comment-details__comment-text > p').textContent = comment.text;
-  elem.querySelector('.comment-identity__reply-btn').addEventListener('click', () => handleToAnswer(comment));
+  elem.querySelector('.desc__comment-date').textContent = new Date(
+    comment.createdDate
+  ).toLocaleString('fa-IR', {
+    timeZone: 'Asia/Tehran',
+    dateStyle: 'full',
+    timeStyle: 'medium',
+  });
+  elem.querySelector('.comment-details__comment-text > p').textContent =
+    comment.text;
+  elem
+    .querySelector('.comment-identity__reply-btn')
+    .addEventListener('click', () => handleToAnswer(comment));
 
   return elem;
 }
 
-function handleToAnswer(comment = {}){
-  function cancelToAnswer(){
+function handleToAnswer(comment = {}) {
+  function cancelToAnswer() {
     $$.getElementById('toAnswer').style.display = 'none';
     commentForm.removeAttribute('data-to-answer');
   }

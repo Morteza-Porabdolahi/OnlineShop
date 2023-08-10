@@ -1,11 +1,14 @@
-import {$$} from './utils/utils';
+import { $$ } from './utils/utils';
 
 const showModalBtns = $$.querySelectorAll('.modal-btn');
 
-let modalContainer; let modal; let isModalLeft; let closeModalBtn;
+let modalContainer;
+let modal;
+let isModalLeft;
+let closeModalBtn;
 
 showModalBtns.forEach((showModalBtn) =>
-  showModalBtn.addEventListener('click', findClickedModal),
+  showModalBtn.addEventListener('click', findClickedModal)
 );
 
 function findClickedModal(e) {

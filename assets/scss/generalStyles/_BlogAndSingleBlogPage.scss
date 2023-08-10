@@ -1,107 +1,104 @@
 .main__body {
-    .body__aside {
-        width: 25%;
-        padding: 3rem 0;
+  .body__aside {
+    width: 25%;
+    padding: 3rem 0;
 
-        .aside__aside-container>div {
-            box-shadow: $mediumBoxShadow;
-            background-color: $whiteColor;
-            border-radius: 10px;
-            padding: 2.5rem;
-            margin-bottom: 3rem;
-        }
-
-        .aside-container__search-box {
-            @include alignCenter;
-            gap: .3rem;
-        }
-
-        .search-box__btn {
-            font-size: 1.5rem;
-            padding: .75rem 2rem;
-            @include orangeButtonStyles;
-        }
-
-        .aside-children-title {
-            @include alignCenter;
-            gap: 1rem;
-            margin-bottom: 2rem;
-
-            span {
-                color: $themeColor;
-                font-size: 2rem;
-            }
-
-            h3 {
-                font-size: 1.7rem;
-            }
-        }
-
-        .products__product,
-        .posts__post {
-            display: flex;
-            gap: 1rem;
-            align-items: flex-start;
-
-            &:not(:last-child) {
-                margin-bottom: 2rem;
-            }
-
-            .descriptions__title {
-                @include textStyle($textColor, 1.7rem);
-                @include textHover;
-            }
-
-
-        }
-
-        .products__product {
-
-            &:not(:last-child) {
-                border-bottom: 1px solid #E4E4E4;
-                padding-bottom: 1rem;
-            }
-
-            .product__img {
-                width: 55px;
-                height: 65px;
-                border-radius: 10px;
-            }
-
-            .descriptions__prices {
-                margin-top: .8rem;
-            }
-
-            .prices__real-price {
-                text-decoration: line-through;
-                @include textStyle($grayColor, 1.5rem);
-            }
-
-            .prices__new-price {
-                @include textStyle($themeColor, 1.6rem);
-                margin-top: .8rem;
-            }
-        }
-
-        .posts__post {
-            .post__img {
-                width: 45px;
-                height: 45px;
-                border-radius: 10px;
-            }
-
-            .descriptions__date {
-                @include alignCenter;
-                @include textStyle($grayColor, 1.5rem);
-                flex-direction: row-reverse;
-                justify-content: start;
-                margin-top: 1rem;
-                gap: .5rem;
-
-                span {
-                    cursor: text;
-                }
-            }
-        }
+    .aside__aside-container > div {
+      box-shadow: $mediumBoxShadow;
+      background-color: $whiteColor;
+      border-radius: 10px;
+      padding: 2.5rem;
+      margin-bottom: 3rem;
     }
+
+    .aside-container__search-box {
+      @include alignCenter;
+      gap: 0.3rem;
+    }
+
+    .search-box__btn {
+      font-size: 1.5rem;
+      padding: 0.75rem 2rem;
+      @include orangeButtonStyles;
+    }
+
+    .aside-children-title {
+      @include alignCenter;
+      gap: 1rem;
+      margin-bottom: 2rem;
+
+      span {
+        color: $themeColor;
+        font-size: 2rem;
+      }
+
+      h3 {
+        font-size: 1.7rem;
+      }
+    }
+
+    .products__product,
+    .posts__post {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+
+      &:not(:last-child) {
+        margin-bottom: 2rem;
+      }
+
+      .descriptions__title {
+        @include textStyle($textColor, 1.7rem);
+        @include textHover;
+      }
+    }
+
+    .products__product {
+      &:not(:last-child) {
+        border-bottom: 1px solid #e4e4e4;
+        padding-bottom: 1rem;
+      }
+
+      .product__img {
+        width: 55px;
+        height: 65px;
+        border-radius: 10px;
+      }
+
+      .descriptions__prices {
+        margin-top: 0.8rem;
+      }
+
+      .prices__real-price {
+        text-decoration: line-through;
+        @include textStyle($grayColor, 1.5rem);
+      }
+
+      .prices__new-price {
+        @include textStyle($themeColor, 1.6rem);
+        margin-top: 0.8rem;
+      }
+    }
+
+    .posts__post {
+      .post__img {
+        width: 45px;
+        height: 45px;
+        border-radius: 10px;
+      }
+
+      .descriptions__date {
+        @include alignCenter;
+        @include textStyle($grayColor, 1.5rem);
+        flex-direction: row-reverse;
+        justify-content: start;
+        margin-top: 1rem;
+        gap: 0.5rem;
+
+        span {
+          cursor: text;
+        }
+      }
+    }
+  }
 }

@@ -1,5 +1,5 @@
-import {getUserFavourites, fetchProduct} from '../api/api';
-import {$$, formatPrice} from '../utils/utils';
+import { getUserFavourites, fetchProduct } from '../api/api';
+import { $$, formatPrice } from '../utils/utils';
 import {
   handleUserCartNavbar,
   handleUserFavouritesLength,
@@ -34,7 +34,7 @@ async function createWishesElements(userWishes = []) {
 
   const fragment = $$.createDocumentFragment();
   const wishTemplate = $$.querySelector(
-      '.favorite-products__products-container template',
+    '.favorite-products__products-container template'
   );
 
   let cloneTemp;
@@ -63,31 +63,31 @@ function createElementForFavourite(product = {}, cloneTemp) {
 
   cloneTemp.querySelector('.prices-title__title').textContent = product.title;
   cloneTemp.querySelector(
-      '.prices-title__title',
+    '.prices-title__title'
   ).herf = `/pages/singleProductPage.html?productId=${product._id}`;
 
   if (product.discount) {
     cloneTemp.querySelector('.prices__real-price').textContent = formatPrice(
-        product.price,
+      product.price
     );
   }
   cloneTemp.querySelector('.prices__new-price').textContent = formatPrice(
-      ((100 - product.discount) / 100) * product.price,
+    ((100 - product.discount) / 100) * product.price
   );
 
   cloneTemp.querySelector('.summary-btn__summary').textContent =
     product.description;
 
   cloneTemp
-      .querySelector('.summary-btn__btn')
-      .addEventListener('click', () =>
-        insertItemInUserCart(product._id, handleUserCartNavbar),
-      );
+    .querySelector('.summary-btn__btn')
+    .addEventListener('click', () =>
+      insertItemInUserCart(product._id, handleUserCartNavbar)
+    );
   cloneTemp
-      .querySelector('.delete-btn')
-      .addEventListener('click', () =>
-        removeFavourite(product._id, updateCallback),
-      );
+    .querySelector('.delete-btn')
+    .addEventListener('click', () =>
+      removeFavourite(product._id, updateCallback)
+    );
 
   return cloneTemp;
 }

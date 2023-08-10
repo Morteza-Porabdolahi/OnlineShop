@@ -7,25 +7,25 @@ const toast = Swal.mixin({
   showConfirmButton: false,
 });
 
-toast.success = function(text = '') {
+toast.success = function (text = '') {
   this.fire({
     icon: 'success',
     text,
   });
 };
 
-toast.error = function(text = '') {
+toast.error = function (text = '') {
   this.fire({
     icon: 'error',
     text,
   });
 };
 
-toast.loading = function() {
+toast.loading = function () {
   this.fire({
     text: 'لطفا صبر کنید...',
   });
   this.showLoading();
 };
 
-export {toast};
+export { toast };

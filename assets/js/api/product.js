@@ -1,4 +1,4 @@
-import {axios} from './interceptAxios';
+import { axios } from './interceptAxios';
 
 export async function fetchAllProducts() {
   const locationSearch = location.search;
@@ -11,7 +11,7 @@ export async function fetchAllProducts() {
     return response.data;
   } catch (err) {
     console.log(err);
-    return {error: err.response.data.message || err.message};
+    return { error: err.response.data.message || err.message };
   }
 }
 
@@ -22,7 +22,7 @@ export async function createProduct(product = {}) {
     return response.data;
   } catch (err) {
     console.log(err);
-    return {error: err.response?.data.message || err.message};
+    return { error: err.response?.data.message || err.message };
   }
 }
 
@@ -33,6 +33,6 @@ export async function fetchProduct(productId = '') {
     return response.data;
   } catch (err) {
     console.log(err);
-    return {error: err.response?.data.message || err.message};
+    return { error: err.response?.data.message || err.message };
   }
 }

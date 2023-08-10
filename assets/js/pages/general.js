@@ -1,4 +1,4 @@
-import {$$, formatPrice, toast} from '../utils/utils';
+import { $$, formatPrice, toast } from '../utils/utils';
 import {
   getUserCart,
   modernizeUserCartItem,
@@ -12,7 +12,6 @@ import {
 
 export async function handleUserCartNavbar() {
   const userCart = await getUserCart();
-
 
   if (userCart.length <= 0) {
     showNoProducts();
@@ -42,7 +41,7 @@ function createUserCartElem(cartItem = {}, cloneTemp) {
 
   cloneTemp.querySelector('.title__text').textContent = cartItem.title;
   cloneTemp.querySelector(
-      '.title__text',
+    '.title__text'
   ).href = `/pages/singleProductPage.html?productId=${cartItem.productId}`;
 
   cloneTemp.querySelector('.number-of-product__number').textContent =
@@ -50,32 +49,32 @@ function createUserCartElem(cartItem = {}, cloneTemp) {
   cloneTemp.querySelector('.number-of-product').textContent = cartItem.quantity;
 
   cloneTemp.querySelector('.product-price__price').textContent = formatPrice(
-      cartItem.price,
+    cartItem.price
   );
 
   cloneTemp
-      .querySelector('.title__remove')
-      .addEventListener('click', (event) =>
-        removeCartItem(cartItem._id, handleUserCartNavbar),
-      );
+    .querySelector('.title__remove')
+    .addEventListener('click', (event) =>
+      removeCartItem(cartItem._id, handleUserCartNavbar)
+    );
 
   cloneTemp
-      .querySelector('.number-of-product__remove')
-      .addEventListener('click', () =>
-        updateUserCartItem(cartItem, 'decrease', handleUserCartNavbar),
-      );
+    .querySelector('.number-of-product__remove')
+    .addEventListener('click', () =>
+      updateUserCartItem(cartItem, 'decrease', handleUserCartNavbar)
+    );
   cloneTemp
-      .querySelector('.number-of-product__add')
-      .addEventListener('click', () =>
-        updateUserCartItem(cartItem, 'increase', handleUserCartNavbar),
-      );
+    .querySelector('.number-of-product__add')
+    .addEventListener('click', () =>
+      updateUserCartItem(cartItem, 'increase', handleUserCartNavbar)
+    );
 
   return cloneTemp;
 }
 
 function appendCartItemsIntoDom(fragment) {
   const cartItemsContainer = $$.querySelector(
-      '.show-products__basket-products',
+    '.show-products__basket-products'
   );
 
   cartItemsContainer.innerHTML = '';
@@ -124,7 +123,7 @@ export async function removeCartItem(itemId = '', callback) {
 
 /**
  * Updates cart item quantity
- * 
+ *
  * @param {object} cartItem The cart item
  * @param {string} mode Increase or decrease quantity of item
  * @param {function} callback Callback for the dom update
@@ -138,7 +137,7 @@ export async function updateUserCartItem(cartItem, mode = '', callback) {
 
   cartItem.bill = cartItem.quantity * cartItem.price;
 
-  const data = await modernizeUserCartItem({cartItem});
+  const data = await modernizeUserCartItem({ cartItem });
 
   if (data.error) {
     toast.error(data.err);
@@ -149,7 +148,7 @@ export async function updateUserCartItem(cartItem, mode = '', callback) {
 
 export async function handleUserCartItemsLength() {
   const basketNumberIcon = $$.querySelector(
-      '.additional-icons__basket-icon > sup',
+    '.additional-icons__basket-icon > sup'
   );
   const userCart = await getUserCart();
 
@@ -158,7 +157,7 @@ export async function handleUserCartItemsLength() {
 
 export async function handleUserFavouritesLength() {
   const favouritesNumberIcon = $$.querySelector(
-      '.additional-icons__heart-icon > sup',
+    '.additional-icons__heart-icon > sup'
   );
   const userFavourites = await getUserFavourites();
 
@@ -188,7 +187,7 @@ export async function removeFavourite(productId = '', callback) {
   }
 }
 
-export async function handleUserLogin(e){
+export async function handleUserLogin(e) {
   e.preventDefault();
 
   toast.loading();
@@ -214,12 +213,12 @@ export async function handleUserLogin(e){
   }
 }
 
-export async function insertComment(comment = {}){
+export async function insertComment(comment = {}) {
   const data = await addComment(comment);
 
-  if(data.error){
+  if (data.error) {
     toast.error(data.error);
-  }else{
+  } else {
     toast.success(data.message);
   }
 }

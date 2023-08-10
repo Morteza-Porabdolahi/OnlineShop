@@ -1,5 +1,5 @@
-import {$$} from './utils/utils';
-import {computePosition, shift, flip, offset} from '@floating-ui/dom';
+import { $$ } from './utils/utils';
+import { computePosition, shift, flip, offset } from '@floating-ui/dom';
 
 export function setupPopups() {
   const events = [
@@ -18,8 +18,8 @@ export function setupPopups() {
   function update(refrenceEl, floatingEl) {
     computePosition(refrenceEl, floatingEl, {
       placement: 'bottom',
-      middleware: [offset(3), flip(), shift({padding: 100})],
-    }).then(({x, y}) => {
+      middleware: [offset(3), flip(), shift({ padding: 100 })],
+    }).then(({ x, y }) => {
       floatingEl.style.left = `${x}px`;
       floatingEl.style.top = `${y}px`;
     });

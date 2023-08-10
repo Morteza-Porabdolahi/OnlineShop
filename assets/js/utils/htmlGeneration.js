@@ -1,4 +1,4 @@
-import {formatPrice} from './utils';
+import { formatPrice } from './utils';
 import {
   handleUserCartNavbar,
   handleUserFavouritesLength,
@@ -17,7 +17,7 @@ export function generateElementsForProducts(product = {}, template) {
   cloneTemplate.querySelector('.prices-title__title').textContent =
     product.title;
   cloneTemplate.querySelector(
-      '.prices-title__title',
+    '.prices-title__title'
   ).herf = `/pages/singleProductPage.html?productId=${product._id}`;
 
   if (product.discount) {
@@ -25,20 +25,20 @@ export function generateElementsForProducts(product = {}, template) {
       formatPrice(product.price);
   }
   cloneTemplate.querySelector('.prices__new-price').textContent = formatPrice(
-      ((100 - product.discount) / 100) * product.price,
+    ((100 - product.discount) / 100) * product.price
   );
 
   cloneTemplate.querySelector('.summary-btn__summary').textContent =
     product.description;
 
   cloneTemplate
-      .querySelector('.summary-btn__btn')
-      .addEventListener('click', () =>
-        insertItemInUserCart(product._id, handleUserCartNavbar),
-      );
+    .querySelector('.summary-btn__btn')
+    .addEventListener('click', () =>
+      insertItemInUserCart(product._id, handleUserCartNavbar)
+    );
   if (deleteWishBtn) {
     deleteWishBtn.addEventListener('click', () =>
-      removeFavourite(product._id, updateCallback),
+      removeFavourite(product._id, updateCallback)
     );
   }
 
@@ -47,7 +47,7 @@ export function generateElementsForProducts(product = {}, template) {
 
 function updateCallback() {
   handleUserFavouritesLength();
-  import('../pages/wishlistPage').then(({handleUserWishes}) =>
-    handleUserWishes(),
+  import('../pages/wishlistPage').then(({ handleUserWishes }) =>
+    handleUserWishes()
   );
 }

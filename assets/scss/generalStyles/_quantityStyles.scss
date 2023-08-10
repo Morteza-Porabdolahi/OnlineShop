@@ -1,35 +1,37 @@
 .title-container__number-of-product {
-    @include alignCenter;
-    border: 1px solid $creamColor;
-    width: fit-content;
-    border-radius: 5px;
-    font-size: 1.8rem;
-    margin: 1.5rem 0;
-    overflow: hidden;
+  @include alignCenter;
+  border: 1px solid $creamColor;
+  width: fit-content;
+  border-radius: 5px;
+  font-size: 1.8rem;
+  margin: 1.5rem 0;
+  overflow: hidden;
 
-    span {
-        padding: .5rem .8rem;
-        color: $grayerColor;
+  span {
+    padding: 0.5rem 0.8rem;
+    color: $grayerColor;
+  }
+
+  .number-of-product__add {
+    border-right: 1px solid $creamColor;
+  }
+
+  .number-of-product__remove {
+    border-left: 1px solid $creamColor;
+  }
+
+  .number-of-product__add,
+  .number-of-product__remove {
+    transition:
+      background-color 0.3s,
+      color 0.3s;
+    padding: 0.5rem;
+    font-size: 2rem;
+    cursor: pointer;
+
+    &:hover {
+      color: $whiteColor;
+      background-color: $themeColor;
     }
-
-    .number-of-product__add {
-        border-right: 1px solid $creamColor
-    }
-
-    .number-of-product__remove {
-        border-left: 1px solid $creamColor;
-    }
-
-    .number-of-product__add,
-    .number-of-product__remove {
-        transition: background-color .3s, color .3s;
-        padding: .5rem;
-        font-size: 2rem;
-        cursor: pointer;
-
-        &:hover {
-            color: $whiteColor;
-            background-color: $themeColor;
-        }
-    }
+  }
 }

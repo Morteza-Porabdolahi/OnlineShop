@@ -8,7 +8,7 @@ import {
   handleUserToken,
   toast,
 } from '../utils/utils';
-import {setupPopups} from '../popUp';
+import { setupPopups } from '../popUp';
 import {
   fetchAllProducts,
   addUserFavourite,
@@ -29,7 +29,7 @@ function handleHeaderInput() {
   const headerSearchInput = $$.querySelector('.body__search-input > input');
   const categoryTitle = $$.querySelector('.category-selector__title');
   const categoryItems = $$.querySelectorAll(
-      '.list-container__list > li[data-category]',
+    '.list-container__list > li[data-category]'
   );
 
   function handleHeaderSearchInput(e) {
@@ -52,7 +52,7 @@ function handleHeaderInput() {
   headerSearchInput.addEventListener('keydown', handleHeaderSearchInput);
   headerSearchIcon.addEventListener('click', handleHeaderSearchInput);
   categoryItems.forEach((categoryItem) =>
-    categoryItem.addEventListener('click', handleCategoryItem),
+    categoryItem.addEventListener('click', handleCategoryItem)
   );
 }
 
@@ -62,7 +62,7 @@ function initializeSliders() {
     slidesPerView: 2,
     breakpoints: {
       480: {
-        slidesPerView: 3
+        slidesPerView: 3,
       },
       800: {
         slidesPerView: 4,
@@ -79,7 +79,7 @@ function initializeSliders() {
   });
 }
 
-window.onload = function() {
+window.onload = function () {
   handleHeaderInput();
   initializeSliders();
   getAllProducts();
@@ -117,7 +117,7 @@ function createBestSellingElems(products = []) {
 
 function createBestSellingElem(product = {}, cloneTemp) {
   cloneTemp.querySelector(
-      'a[href]',
+    'a[href]'
   ).href = `/pages/singleProductPage.html?productId=${product._id}`;
 
   cloneTemp.querySelector('.product__img').src = product.imageUrl;
@@ -151,13 +151,13 @@ async function createNewAndEssentialElems(products = [], containerClass = '') {
 }
 
 async function createNewAndEssentialElem(product = {}, cloneTemp) {
-  const {_id, imageUrl, description, title, price, discount} = product;
+  const { _id, imageUrl, description, title, price, discount } = product;
 
   cloneTemp.children[0].setAttribute('data-id', _id);
 
   cloneTemp.querySelector('.title').textContent = title;
   cloneTemp.querySelector(
-      '.title',
+    '.title'
   ).href = `/pages/singleProductPage.html?productId=${_id}`;
 
   cloneTemp.querySelector('img').src = imageUrl;
@@ -165,7 +165,7 @@ async function createNewAndEssentialElem(product = {}, cloneTemp) {
 
   if (discount) {
     cloneTemp.querySelector('.price__price').textContent = formatPrice(
-        calculateProductRealPrice(price, discount),
+      calculateProductRealPrice(price, discount)
     );
   }
   cloneTemp.querySelector('.price__new-price').textContent = formatPrice(price);
@@ -175,20 +175,20 @@ async function createNewAndEssentialElem(product = {}, cloneTemp) {
   }
 
   cloneTemp
-      .querySelector('.add-to-basket__title')
-      .addEventListener('click', () =>
-        insertItemInUserCart(_id, handleUserCartNavbar),
-      );
+    .querySelector('.add-to-basket__title')
+    .addEventListener('click', () =>
+      insertItemInUserCart(_id, handleUserCartNavbar)
+    );
   cloneTemp
-      .querySelector('.like-btn')
-      .addEventListener('click', (e) => handleUserFavourite(e, _id));
+    .querySelector('.like-btn')
+    .addEventListener('click', (e) => handleUserFavourite(e, _id));
 
   return cloneTemp;
 }
 
 /**
  * Runs when user adds/removes his/her favourite product
- * 
+ *
  * @param {object} event The event object
  * @param {string} productId The id of the product
  */
@@ -196,18 +196,18 @@ async function handleUserFavourite(event, productId) {
   const likeButton = event.target;
   const hasLiked = likeButton.classList.contains('liked');
   const data = await (hasLiked ? removeUserFavourite : addUserFavourite)(
-      productId,
+    productId
   );
 
   if (data.error) {
     toast.error(data.error);
   } else {
     $$.querySelectorAll(`.temps__temp[data-id="${productId}"]`).forEach(
-        (temp) => {
-          temp
-              .querySelector('.like-btn')
-              .classList[hasLiked ? 'remove' : 'add']('liked');
-        },
+      (temp) => {
+        temp
+          .querySelector('.like-btn')
+          .classList[hasLiked ? 'remove' : 'add']('liked');
+      }
     );
 
     toast.success(data.message);
@@ -219,5 +219,6 @@ function appendProductsToContainer(fragment, containerClass = '') {
   $$.querySelector(containerClass).append(fragment);
 
   // setup popups just for bestselling products
-  if (containerClass == '.bestselling__products' && window.innerWidth >= 1024) setupPopups();
+  if (containerClass == '.bestselling__products' && window.innerWidth >= 1024)
+    setupPopups();
 }

@@ -1,9 +1,13 @@
-import {$$, getUserToken, handleUserToken} from '../utils/utils';
-import {handleUserCartNavbar, handleUserFavouritesLength, handleUserLogin} from './general';
+import { $$, getUserToken, handleUserToken } from '../utils/utils';
+import {
+  handleUserCartNavbar,
+  handleUserFavouritesLength,
+  handleUserLogin,
+} from './general';
 
 const navbarLoginForm = $$.querySelector('.modal-body__form');
 
-navbarLoginForm.addEventListener('submit', handleUserLogin)
+navbarLoginForm.addEventListener('submit', handleUserLogin);
 
 function positionNavbar() {
   const navContainerElem = $$.querySelector('.header__nav-container');
@@ -43,9 +47,12 @@ function handleRegisterButton() {
     registerBtn.classList.remove('modal-btn');
     registerBtn.querySelector('a').textContent = user.username;
     registerBtn.style.opacity = '.5';
-  }else{
+  } else {
     $$.querySelector('.additional-icons__heart-icon').classList.add('disabled');
-    $$.querySelector('.additional-icons__heart-icon').setAttribute('aria-disabled','true')
+    $$.querySelector('.additional-icons__heart-icon').setAttribute(
+      'aria-disabled',
+      'true'
+    );
   }
 }
 
@@ -54,7 +61,7 @@ window.addEventListener('load', () => {
   handleNavbarInput();
   handleRegisterButton();
 
-  if(getUserToken()){
+  if (getUserToken()) {
     handleUserCartNavbar();
     handleUserFavouritesLength();
   }

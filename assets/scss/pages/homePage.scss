@@ -1,6 +1,5 @@
-@import "../variables",
-"../mixins",
-"../generalStyles/footer", "../generalStyles/productsPopUp";
+@import '../variables', '../mixins', '../generalStyles/footer',
+  '../generalStyles/productsPopUp';
 
 .header__body {
   text-align: center;
@@ -18,7 +17,7 @@
 
     .search-input__left {
       @include alignCenter;
-      gap: .8rem; 
+      gap: 0.8rem;
     }
 
     .search-input__category-selector {
@@ -33,10 +32,10 @@
       span:first-child {
         font-size: 1.5rem;
         vertical-align: middle;
-        transition: opacity .3s;
+        transition: opacity 0.3s;
 
         &:hover {
-          opacity: .8;
+          opacity: 0.8;
         }
       }
 
@@ -56,14 +55,14 @@
         @include textStyle($grayerColor, 1.6rem);
         text-align: right;
         cursor: pointer;
-        transition: color .3s;
+        transition: color 0.3s;
 
         &:hover {
           color: $textColor;
         }
       }
 
-      .list-container__list>li {
+      .list-container__list > li {
         &:not(:last-child) {
           padding-bottom: 2rem;
         }
@@ -153,7 +152,7 @@
       position: relative;
     }
 
-    .product__img{
+    .product__img {
       width: 100%;
       height: 100%;
     }
@@ -171,7 +170,7 @@
       translate: 0 36px;
       margin-top: -40px;
       background-color: $whiteColor;
-      transition: translate .3s;
+      transition: translate 0.3s;
     }
 
     .title__icon {
@@ -184,7 +183,7 @@
       justify-content: space-between;
       gap: 1rem;
 
-      >a {
+      > a {
         @include textStyle($textColor, 1.5rem);
         @include textHover;
         line-height: 1.5;
@@ -194,7 +193,7 @@
         @include textStyle($grayColor, 1.9rem);
       }
 
-      span.liked::before{
+      span.liked::before {
         content: '\ee0a';
         color: #ff0030;
       }
@@ -204,7 +203,7 @@
       cursor: text;
       @include alignCenter;
       justify-content: left;
-      gap: .5rem;
+      gap: 0.5rem;
 
       .price__new-price {
         font-size: 1.6rem;
@@ -235,7 +234,7 @@
 
       .add-to-basket__title {
         font-size: 1.5rem;
-        margin-right: .5rem;
+        margin-right: 0.5rem;
       }
     }
   }
@@ -268,8 +267,8 @@
 
   &__blog-posts {
     background-color: $whiteColor;
-    // not implemented 
-    opacity: .3;
+    // not implemented
+    opacity: 0.3;
     pointer-events: none;
 
     .archive-btn__container {
@@ -300,7 +299,7 @@
       overflow: hidden;
 
       img {
-        transition: transform .3s;
+        transition: transform 0.3s;
         scale: 1.2;
       }
     }
@@ -315,7 +314,7 @@
       @include alignCenter;
       justify-content: center;
       opacity: 0;
-      transition: opacity .3s;
+      transition: opacity 0.3s;
 
       a {
         @include textStyle($whiteColor, 2rem);
@@ -342,7 +341,7 @@
 
     .btns__share,
     .btns__comment {
-      transition: color .3s;
+      transition: color 0.3s;
     }
 
     .btns__share {
@@ -403,15 +402,15 @@
     p {
       font-size: 1.9rem;
       font-weight: bold;
-      word-spacing: .2rem;
+      word-spacing: 0.2rem;
     }
 
-    p>span {
+    p > span {
       color: $themeColor;
     }
 
-    a>span,
-    p>span {
+    a > span,
+    p > span {
       vertical-align: middle;
       font-size: 2.3rem;
     }

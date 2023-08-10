@@ -1,9 +1,7 @@
-@import "./remixicon", "./variables", "./mixins",
-"./reset",
-"./generalStyles/nav",
-"./slider",
-"./generalStyles/footer", "./generalStyles/quantityStyles",
-"../../node_modules/sweetalert2/src/sweetalert2.scss";
+@import './remixicon', './variables', './mixins', './reset',
+  './generalStyles/nav', './slider', './generalStyles/footer',
+  './generalStyles/quantityStyles',
+  '../../node_modules/sweetalert2/src/sweetalert2.scss';
 
 html {
   box-sizing: border-box;
@@ -11,19 +9,19 @@ html {
 }
 
 @media only screen and (max-width: 1024px) {
-  html{
+  html {
     font-size: 7px;
   }
 }
 
 @media only screen and (max-width: 716px) {
-  html{
+  html {
     font-size: 6px;
   }
 }
 
 @media only screen and (max-width: 600px) {
-  html{
+  html {
     font-size: 5px;
   }
 }
@@ -34,11 +32,12 @@ html {
   box-sizing: inherit;
   margin: 0;
   padding: 0;
-} 
+}
 
 @font-face {
   font-family: Yekanbakh;
-  src: local('Yekan Bakh'),
+  src:
+    local('Yekan Bakh'),
     url('/assets/fonts/YekanBakh-Medium.ttf') format('truetype'),
     url('/assets/fonts/YekanBakh-Medium.woff') format('woff'),
     url('/assets/fonts/YekanBakh-Medium.woff2') format('woff2');
@@ -56,7 +55,9 @@ img {
 
 button {
   cursor: pointer;
-  transition: color .3s, background-color .3s;
+  transition:
+    color 0.3s,
+    background-color 0.3s;
 }
 
 input,
@@ -69,10 +70,10 @@ textarea {
   background-color: transparent;
 }
 
-input:not([type="checkbox"], [type="radio"], [type="range"]),
+input:not([type='checkbox'], [type='radio'], [type='range']),
 textarea {
   border: 1px solid $creamColor;
-  padding: .8rem 1.2rem;
+  padding: 0.8rem 1.2rem;
   @include textStyle($grayerColor, 1.5rem);
 
   &::placeholder {
@@ -96,7 +97,7 @@ a {
 
 .vertical-divider {
   width: 3rem;
-  height: .09px;
+  height: 0.09px;
   transform: rotate(90deg);
   background-color: #ddd;
 }
@@ -128,8 +129,8 @@ a {
     .close-btn {
       cursor: pointer;
       font-size: 2.5rem;
-      margin-left: .5rem;
-      transition: color .3s;
+      margin-left: 0.5rem;
+      transition: color 0.3s;
 
       &:hover {
         color: $grayerColor;
@@ -158,9 +159,9 @@ a {
   right: 0;
   left: 0;
   display: none;
-  animation: opacityZeroToOne .3s;
+  animation: opacityZeroToOne 0.3s;
   z-index: 3;
-  background-color: rgba(0, 0, 0, .6);
+  background-color: rgba(0, 0, 0, 0.6);
 }
 
 .modal-container__login-modal {
@@ -173,13 +174,13 @@ a {
   .input-container__title {
     font-size: 1.7rem;
     display: block;
-    margin-bottom: .5rem;
+    margin-bottom: 0.5rem;
   }
 
   .input-container__input {
-    padding: .6rem 1.5rem;
+    padding: 0.6rem 1.5rem;
     font-size: 1.5rem;
-    width: 100%
+    width: 100%;
   }
 
   .form__forgot-pass {
@@ -193,13 +194,13 @@ a {
 
     input {
       vertical-align: middle;
-      margin-left: .5rem;
+      margin-left: 0.5rem;
     }
   }
 
   .form__submit-btn {
     font-size: 1.6rem;
-    padding: .7rem 1.5rem;
+    padding: 0.7rem 1.5rem;
     width: fit-content;
     @include greenButtonStyles;
   }
@@ -239,10 +240,10 @@ a {
       display: flex;
     }
 
-    .modal-body__show-products{
+    .modal-body__show-products {
       display: none;
     }
-    
+
     .show-products__basket-products {
       max-height: 32rem;
       overflow: auto;
@@ -289,19 +290,19 @@ a {
 
       .title-container__title {
         display: flex;
-        gap: .7rem;
+        gap: 0.7rem;
         line-height: 1.5;
 
         span,
         a {
-          transition: color .3s;
+          transition: color 0.3s;
         }
 
         span {
           cursor: pointer;
 
           &:hover {
-            color: $grayColor
+            color: $grayColor;
           }
         }
 
@@ -314,21 +315,18 @@ a {
       .title-container__product-price {
         @include textStyle($themeColor, 1.7rem);
 
-        p>span {
+        p > span {
           color: $grayerColor;
         }
       }
     }
-
-
   }
 
   .checkout__buy-completion {
-
     button {
       width: 100%;
       font-size: 1.5rem;
-      padding: .9rem 0;
+      padding: 0.9rem 0;
       margin-top: 1rem;
     }
 
@@ -344,10 +342,9 @@ a {
       @include greenButtonStyles;
 
       a {
-        color: $whiteColor
+        color: $whiteColor;
       }
     }
-
   }
 
   .checkout__price-sum {
@@ -367,7 +364,6 @@ a {
   .price-sum__price {
     color: $themeColor;
   }
-
 }
 
 @keyframes opacityZeroToOne {
@@ -387,19 +383,19 @@ a {
 .tooltip {
   background-color: $textColor;
   border-radius: 5px;
-  padding: .7rem 1.5rem;
+  padding: 0.7rem 1.5rem;
   position: absolute;
   width: max-content;
-  top: -.5rem;
+  top: -0.5rem;
   left: 2.2rem;
   display: none;
 
   &__arrow {
     position: absolute;
-    width: .8rem;
-    height: .8rem;
+    width: 0.8rem;
+    height: 0.8rem;
     background-color: $textColor;
-    left: -.4rem;
+    left: -0.4rem;
     top: 50%;
     transform: rotate(45deg) translate(-50%, -50%);
   }
@@ -407,14 +403,14 @@ a {
   a {
     @include textStyle($whiteColor, 1.6rem, 100);
     vertical-align: middle;
-    transition: opacity .3s;
+    transition: opacity 0.3s;
 
     &:hover {
-      opacity: .7;
+      opacity: 0.7;
     }
 
     &:not(:last-of-type) {
-      margin-right: .7rem;
+      margin-right: 0.7rem;
     }
   }
 }

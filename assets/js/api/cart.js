@@ -1,4 +1,4 @@
-import {axios} from './interceptAxios';
+import { axios } from './interceptAxios';
 
 export async function addItemInUserCart(productId = '') {
   try {
@@ -7,7 +7,7 @@ export async function addItemInUserCart(productId = '') {
     return response.data;
   } catch (err) {
     console.log(err);
-    return {error: err.response.data.message || err.message};
+    return { error: err.response.data.message || err.message };
   }
 }
 
@@ -18,7 +18,7 @@ export async function removeItemFromUserCart(itemId = '') {
     return response.data;
   } catch (err) {
     console.log(err);
-    return {error: err.response.data.message || err.message};
+    return { error: err.response.data.message || err.message };
   }
 }
 
@@ -29,7 +29,7 @@ export async function getUserCart() {
     return response.data;
   } catch (err) {
     console.log(err);
-    return {error: err.response?.data.message || err.message};
+    return { error: err.response?.data.message || err.message };
   }
 }
 
@@ -40,6 +40,6 @@ export async function modernizeUserCartItem(data) {
     return response.data;
   } catch (err) {
     console.log(err);
-    return {error: err.response.data.message || err.message};
+    return { error: err.response.data.message || err.message };
   }
 }

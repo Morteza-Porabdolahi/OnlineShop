@@ -48,22 +48,22 @@
   @include alignCenter;
 }
 
-.comments__comment .comments__comment{
-    margin-right: 2rem;
+.comments__comment .comments__comment {
+  margin-right: 2rem;
 }
 
-.comments{
-    padding: 0 2rem;
+.comments {
+  padding: 0 2rem;
 }
 
 #toAnswer {
   font-size: 1.4rem;
-  margin-bottom: .7rem;
+  margin-bottom: 0.7rem;
   color: $grayerColor;
   display: none;
 }
 
-#cancelToAnswer{
+#cancelToAnswer {
   color: $themeColor;
   cursor: pointer;
 }

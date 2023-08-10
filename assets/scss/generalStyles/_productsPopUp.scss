@@ -1,50 +1,49 @@
 .product__description {
-    position: absolute;
-    background-color: $textColor;
-    pointer-events: none;
-    border: 1px solid $blackColor;
-    padding: 1rem;
-    width: 50rem;
-    top: 0;
-    left: 0;
-    z-index: 3;
-    color: $whiteColor;
-    display: none;
-    animation: .3s opacityZeroToOne;
+  position: absolute;
+  background-color: $textColor;
+  pointer-events: none;
+  border: 1px solid $blackColor;
+  padding: 1rem;
+  width: 50rem;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  color: $whiteColor;
+  display: none;
+  animation: 0.3s opacityZeroToOne;
 
+  .description__title {
+    font-size: 2rem;
+    margin: 1.5rem 0;
+  }
 
-    .description__title {
-        font-size: 2rem;
-        margin: 1.5rem 0;
+  .author__description {
+    font-size: 1.5rem;
+    opacity: 0.9;
+  }
+
+  .author__name {
+    @include textStyle($grayColor, 1.1rem);
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+
+  .description__other {
+    @include alignCenter;
+    justify-content: space-between;
+  }
+
+  .description__price {
+    text-align: left;
+    font-weight: bold;
+
+    .price__price {
+      font-size: 3rem;
+      margin-top: 0.5rem;
     }
 
-    .author__description {
-        font-size: 1.5rem;
-        opacity: .9;
+    .price__currency {
+      font-size: 1.8rem;
     }
-
-    .author__name {
-        @include textStyle($grayColor, 1.1rem);
-        margin-bottom: .5rem;
-        display: block;
-    }
-
-    .description__other {
-        @include alignCenter;
-        justify-content: space-between;
-    }
-
-    .description__price {
-        text-align: left;
-        font-weight: bold;
-
-        .price__price {
-            font-size: 3rem;
-            margin-top: .5rem;
-        }
-
-        .price__currency {
-            font-size: 1.8rem;
-        }
-    }
+  }
 }

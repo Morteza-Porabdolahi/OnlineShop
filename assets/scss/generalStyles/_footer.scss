@@ -8,7 +8,7 @@
     .about__box {
       @include alignCenter;
       flex-direction: column;
-      width: calc(100% /4);
+      width: calc(100% / 4);
       gap: 1.5rem;
 
       .box__title {
@@ -102,8 +102,8 @@
         background-color: $themeColor;
         border-radius: 5px 0 0 5px;
         @include textStyle($whiteColor, 1.5rem);
-        padding: .8rem 2rem;
-        transition: background-color .3s;
+        padding: 0.8rem 2rem;
+        transition: background-color 0.3s;
 
         &:hover {
           background-color: rgb(223, 134, 1);
@@ -139,7 +139,7 @@
       span {
         @include textStyle($themeColor, 2rem);
         vertical-align: middle;
-        margin-left: .5rem;
+        margin-left: 0.5rem;
       }
 
       @include textStyle($grayerColor, 1.6rem, bold);
@@ -162,12 +162,12 @@
 
         p {
           @include textStyle($grayerColor, 1.4rem);
-          margin-top: .5rem;
+          margin-top: 0.5rem;
         }
       }
 
-      .list__title>span:first-child,
-      .list__item>span:first-child {
+      .list__title > span:first-child,
+      .list__item > span:first-child {
         @include textStyle($themeColor, 2rem);
         vertical-align: middle;
       }
@@ -175,7 +175,7 @@
       .list__item {
         display: flex;
         align-items: center;
-        gap: .5rem;
+        gap: 0.5rem;
         margin-bottom: 1.5rem;
 
         span:nth-child(2),
@@ -210,13 +210,13 @@
         }
 
         &::before {
-          content: "\2022";
+          content: '\2022';
           /* Add content: \2022 is the CSS Code/unicode for a bullet */
           color: $grayColor;
           /* Change the color */
           display: inline-block;
           width: 2rem;
-          margin-left: .8rem;
+          margin-left: 0.8rem;
           vertical-align: middle;
         }
 
@@ -225,9 +225,9 @@
         }
 
         a {
-          @include textStyle($textColor , 1.5rem, bold);
+          @include textStyle($textColor, 1.5rem, bold);
           position: relative;
-          transition: color .3s;
+          transition: color 0.3s;
 
           &:hover::after {
             width: 100%;
@@ -240,7 +240,7 @@
           &::after {
             content: '';
             width: 0;
-            transition: width .6s cubic-bezier(.19, 1, .22, 1);
+            transition: width 0.6s cubic-bezier(0.19, 1, 0.22, 1);
             height: 3px;
             position: absolute;
             bottom: -1rem;

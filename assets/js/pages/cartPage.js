@@ -1,5 +1,5 @@
-import {$$, formatPrice} from '../utils/utils';
-import {getUserCart} from '../api/api';
+import { $$, formatPrice } from '../utils/utils';
+import { getUserCart } from '../api/api';
 import {
   handleUserCartNavbar,
   removeCartItem,
@@ -60,10 +60,10 @@ function hideNoProducts() {
 
 function createUserCartElem(cartItem = {}, cloneTemp) {
   cloneTemp
-      .querySelector('.product-col__remove-btn')
-      .addEventListener('click', () =>
-        removeCartItem(cartItem._id, updateCallback),
-      );
+    .querySelector('.product-col__remove-btn')
+    .addEventListener('click', () =>
+      removeCartItem(cartItem._id, updateCallback)
+    );
 
   cloneTemp.querySelector('.product-col__product-img').src = cartItem.imageUrl;
   cloneTemp.querySelector('.product-col__product-img').alt = cartItem.title;
@@ -71,7 +71,7 @@ function createUserCartElem(cartItem = {}, cloneTemp) {
   cloneTemp.querySelector('.product-col__product-title').textContent =
     cartItem.title;
   cloneTemp.querySelector('.product-price__price').textContent = formatPrice(
-      cartItem.price,
+    cartItem.price
   );
 
   cloneTemp.querySelector('.product-sum-price__price').textContent =
@@ -81,15 +81,15 @@ function createUserCartElem(cartItem = {}, cloneTemp) {
     cartItem.quantity;
 
   cloneTemp
-      .querySelector('.number-of-product__remove')
-      .addEventListener('click', () =>
-        updateUserCartItem(cartItem, 'decrease', updateCallback),
-      );
+    .querySelector('.number-of-product__remove')
+    .addEventListener('click', () =>
+      updateUserCartItem(cartItem, 'decrease', updateCallback)
+    );
   cloneTemp
-      .querySelector('.number-of-product__add')
-      .addEventListener('click', () =>
-        updateUserCartItem(cartItem, 'increase', updateCallback),
-      );
+    .querySelector('.number-of-product__add')
+    .addEventListener('click', () =>
+      updateUserCartItem(cartItem, 'increase', updateCallback)
+    );
 
   return cloneTemp;
 }
@@ -110,7 +110,7 @@ async function calculateSumOfTheCart() {
 
 function appendCartItemsIntoDom(fragment) {
   const cartItemsContainer = $$.querySelector(
-      '.cart-products__cart-products-table > tbody',
+    '.cart-products__cart-products-table > tbody'
   );
 
   cartItemsContainer.innerHTML = '';

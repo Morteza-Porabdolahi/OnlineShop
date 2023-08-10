@@ -1,12 +1,10 @@
-@mixin textStyle($color, $fontSize, $fontWeight : "", $fontFamily : "") {
+@mixin textStyle($color, $fontSize, $fontWeight: '', $fontFamily: '') {
   font-size: $fontSize;
   color: $color;
 
-  @if $fontFamily !="" {
+  @if $fontFamily != '' {
     font-family: $fontFamily;
-  }
-
-  @else if $fontWeight !="" {
+  } @else if $fontWeight != '' {
     font-weight: $fontWeight;
   }
 }
@@ -17,7 +15,10 @@
 }
 
 @mixin navBarListStyles {
-  transition: opacity .3s, transform .3s, visibility .3s;
+  transition:
+    opacity 0.3s,
+    transform 0.3s,
+    visibility 0.3s;
   transform: translateX(20px);
   visibility: hidden;
   opacity: 0;
@@ -30,7 +31,7 @@
 }
 
 @mixin textHover {
-  transition: color .3s;
+  transition: color 0.3s;
 
   &:hover {
     color: $themeColor;
@@ -39,22 +40,21 @@
 
 @mixin greenButtonStyles {
   background-color: #57d57e;
-  transition: background-color .3s;
+  transition: background-color 0.3s;
   color: $whiteColor;
 
   &:hover {
-    background-color: #50C479;
+    background-color: #50c479;
   }
 }
 
 @mixin orangeButtonStyles {
   background-color: $themeColor;
-  transition: background-color .3s;
+  transition: background-color 0.3s;
   color: $whiteColor;
 
   &:hover {
     background-color: rgb(223, 134, 1);
-
   }
 }
 
