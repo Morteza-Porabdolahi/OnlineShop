@@ -34,7 +34,7 @@ export function handleUserToken() {
 
   if (nowDate >= exp * 1000) {
     localStorage.removeItem('access_token');
-    location.href = '/';
+    location.href = '/pages/accountPage.html';
   } else {
     return user;
   }
