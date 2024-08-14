@@ -1,0 +1,22 @@
+.spinner {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+
+  .spinner__icon {
+    display: block;
+    font-size: 7rem;
+    color: $grayerColor;
+    animation: spin 1s linear infinite;
+
+    @keyframes spin {
+      0% {
+        rotate: 0deg;
+      }
+      100% {
+        rotate: 360deg;
+      }
+    }
+  }
+}

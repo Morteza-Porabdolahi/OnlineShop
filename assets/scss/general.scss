@@ -1,7 +1,8 @@
 @import './remixicon', './variables', './mixins', './reset',
   './generalStyles/nav', './slider', './generalStyles/footer',
   './generalStyles/quantityStyles',
-  '../../node_modules/sweetalert2/src/sweetalert2.scss';
+  '../../node_modules/sweetalert2/src/sweetalert2.scss',
+  './generalStyles/spinner';
 
 html {
   box-sizing: border-box;
@@ -36,8 +37,7 @@ html {
 
 @font-face {
   font-family: Yekanbakh;
-  src:
-    local('Yekan Bakh'),
+  src: local('Yekan Bakh'),
     url('/assets/fonts/YekanBakh-Medium.ttf') format('truetype'),
     url('/assets/fonts/YekanBakh-Medium.woff') format('woff'),
     url('/assets/fonts/YekanBakh-Medium.woff2') format('woff2');
@@ -55,9 +55,7 @@ img {
 
 button {
   cursor: pointer;
-  transition:
-    color 0.3s,
-    background-color 0.3s;
+  transition: color 0.3s, background-color 0.3s;
 }
 
 input,

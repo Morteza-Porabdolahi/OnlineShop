@@ -142,6 +142,8 @@
     .bestselling__products {
       display: grid;
       grid-template-columns: repeat(6, 1fr);
+      position: relative;
+      min-height: 12rem;
       gap: 2.5rem 2rem;
     }
 

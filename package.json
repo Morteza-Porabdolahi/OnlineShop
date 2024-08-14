@@ -7,7 +7,7 @@
     "dev": "vite dev --port=2000",
     "build": "vite build",
     "preview": "vite preview",
-    "start-sass": "sass --watch assets/scss:assets/css --style=compressed"
+    "start-sass": "sass --watch assets/scss:assets/css "
   },
   "keywords": [],
   "author": "Morteza",

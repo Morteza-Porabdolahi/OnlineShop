@@ -8,6 +8,7 @@ import {
   handleUserToken,
   toast,
 } from '../utils/utils';
+import { showSpinner, hideSpinner } from '../utils/spinner';
 import { setupPopups } from '../popUp';
 import {
   fetchAllProducts,
@@ -87,12 +88,17 @@ window.onload = function () {
 
 async function getAllProducts() {
   // implement some endpoints for api like /products/bestselling
-  const data = await fetchAllProducts();
+  const [bestSellingProducts, newProducts, essentialProducts] =
+    await Promise.allSettled([
+      fetchAllProducts(),
+      fetchAllProducts(),
+      fetchAllProducts(), // to be changed
+    ]);
 
+  console.log(bestSellingProducts, newProducts, essentialProducts);
   if (data.error) {
     toast.error(data.error);
   } else {
-    createBestSellingElems(data);
     createNewAndEssentialElems(data, '.new-temps');
     createNewAndEssentialElems(data, '.essential-temps');
   }
@@ -112,6 +118,7 @@ function createBestSellingElems(products = []) {
     fragment.append(bestSellingElem);
   });
 
+  hideSpinner('.bestselling__products');
   appendProductsToContainer(fragment, '.bestselling__products');
 }
 
