@@ -23,9 +23,13 @@ export async function removeUserFavourite(productId = '') {
 }
 
 export async function isProductFavourite(productId = '') {
-  const userFavourites = await getUserFavourites();
-
-  return userFavourites.some((favourite) => favourite.productId == productId);
+  try {
+    const userFavourites = await getUserFavourites();
+    
+    return userFavourites.some((favourite) => favourite.productId == productId);
+  } catch (err) {
+    throw err.response.data.message || err.message;
+  }
 }
 
 export async function getUserFavourites() {

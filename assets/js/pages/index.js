@@ -93,33 +93,42 @@ function getAllProducts() {
 }
 
 async function getBestSellingProducts() {
-  showSpinner('.bestselling__products');
-  const data = await fetchAllProducts();
+  try {
+    showSpinner('.bestselling__products');
+    const data = await fetchAllProducts();
 
-  if (data.error) return toast.error(data.error);
-
-  createBestSellingElems(data);
-  hideSpinner('.bestselling__products');
+    createBestSellingElems(data);
+  } catch (err) {
+    toast.error(err);
+  } finally {
+    hideSpinner('.bestselling__products');
+  }
 }
 
 async function getNewProducts() {
-  showSpinner('.new-temps');
-  const data = await fetchAllProducts();
+  try {
+    showSpinner('.new-temps');
+    const data = await fetchAllProducts();
 
-  if (data.error) return toast.error(data.error);
-
-  createNewAndEssentialElems(data, '.new-temps');
-  hideSpinner('.new-temps');
+    createNewAndEssentialElems(data, '.new-temps');
+  } catch (err) {
+    toast.error(err);
+  } finally {
+    hideSpinner('.new-temps');
+  }
 }
 
 async function getEssentialProducts() {
-  showSpinner('.essential-temps');
-  const data = await fetchAllProducts();
+  try {
+    showSpinner('.essential-temps');
+    const data = await fetchAllProducts();
 
-  if (data.error) return toast.error(data.error);
-
-  createNewAndEssentialElems(data, '.essential-temps');
-  hideSpinner('.essential-temps');
+    createNewAndEssentialElems(data, '.essential-temps');
+  } catch (err) {
+    toast.error(err);
+  } finally {
+    hideSpinner('.essential-temps');
+  }
 }
 
 function createBestSellingElems(products = []) {

@@ -10,8 +10,7 @@ export async function fetchAllProducts() {
 
     return response.data;
   } catch (err) {
-    console.log(err);
-    return { error: err.response?.data.message || err.message };
+    throw err.response?.data.message || err.message;
   }
 }
 

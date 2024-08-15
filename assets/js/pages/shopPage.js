@@ -10,6 +10,7 @@ import {
   handleUserFavouritesLength,
   insertItemInUserCart,
 } from './general';
+import { showSpinner, hideSpinner } from '../utils/spinner';
 
 let products = [];
 
@@ -122,13 +123,17 @@ function filterProducts(products = []) {
 }
 
 async function getAllProducts(limit, category = '', query = '') {
-  const data = await fetchAllProducts(limit, category, query);
+  try {
+    emptyProductsContainer()
+    showSpinner('.products-container__products');
+    const data = await fetchAllProducts(limit, category, query);
 
-  if (data.error) {
-    toast.error(data.error);
-  } else {
     products = data;
     createElementsForProducts(products);
+  } catch (err) {
+    toast.error(err);
+  } finally {
+    hideSpinner('.products-container__products');
   }
 }
 
@@ -160,9 +165,8 @@ async function createElementForProduct(product = {}, cloneTemp) {
   cloneTemp.querySelector('.img-container__img').alt = product.title;
 
   cloneTemp.querySelector('.prices-title__title').textContent = product.title;
-  cloneTemp.querySelector(
-    '.prices-title__title'
-  ).herf = `/pages/singleProductPage.html?productId=${product._id}`;
+  cloneTemp.querySelector('.prices-title__title').herf =
+    `/pages/singleProductPage.html?productId=${product._id}`;
 
   if (product.discount) {
     cloneTemp.querySelector('.prices__real-price').textContent = formatPrice(
@@ -212,9 +216,15 @@ async function handleUserFavourite(event, productId) {
 
 function appendProductsIntoContainer(fragment) {
   const productsContainer = $$.querySelector('.products-container__products');
+  
+  emptyProductsContainer();
+  productsContainer.append(fragment);
+}
+
+function emptyProductsContainer() {
+  const productsContainer = $$.querySelector('.products-container__products');
 
   productsContainer.innerHTML = '';
-  productsContainer.append(fragment);
 }
 
 function handleMaxRangeInput() {
