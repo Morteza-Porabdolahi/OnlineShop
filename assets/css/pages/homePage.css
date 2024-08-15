@@ -398,7 +398,7 @@
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   position: relative;
-  min-height: 12rem;
+  min-height: 17rem;
   gap: 2.5rem 2rem;
 }
 .main__bestselling .products__product {
@@ -413,6 +413,12 @@
 }
 .main__essential-wp-plugins {
   padding: 0rem 1.5rem 6rem 1.5rem !important;
+}
+.main__essential-wp-plugins .essential-temps {
+  min-height: 36rem;
+}
+.main__new-temps .new-temps {
+  min-height: 36rem;
 }
 .main__new-temps .temp__description, .main__essential-wp-plugins .temp__description {
   padding: 1.8rem;

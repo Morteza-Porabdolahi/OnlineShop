@@ -86,22 +86,40 @@ window.onload = function () {
   getAllProducts();
 };
 
-async function getAllProducts() {
-  // implement some endpoints for api like /products/bestselling
-  const [bestSellingProducts, newProducts, essentialProducts] =
-    await Promise.allSettled([
-      fetchAllProducts(),
-      fetchAllProducts(),
-      fetchAllProducts(), // to be changed
-    ]);
+function getAllProducts() {
+  getBestSellingProducts();
+  getNewProducts();
+  getEssentialProducts();
+}
 
-  console.log(bestSellingProducts, newProducts, essentialProducts);
-  if (data.error) {
-    toast.error(data.error);
-  } else {
-    createNewAndEssentialElems(data, '.new-temps');
-    createNewAndEssentialElems(data, '.essential-temps');
-  }
+async function getBestSellingProducts() {
+  showSpinner('.bestselling__products');
+  const data = await fetchAllProducts();
+
+  if (data.error) return toast.error(data.error);
+
+  createBestSellingElems(data);
+  hideSpinner('.bestselling__products');
+}
+
+async function getNewProducts() {
+  showSpinner('.new-temps');
+  const data = await fetchAllProducts();
+
+  if (data.error) return toast.error(data.error);
+
+  createNewAndEssentialElems(data, '.new-temps');
+  hideSpinner('.new-temps');
+}
+
+async function getEssentialProducts() {
+  showSpinner('.essential-temps');
+  const data = await fetchAllProducts();
+
+  if (data.error) return toast.error(data.error);
+
+  createNewAndEssentialElems(data, '.essential-temps');
+  hideSpinner('.essential-temps');
 }
 
 function createBestSellingElems(products = []) {
@@ -118,14 +136,12 @@ function createBestSellingElems(products = []) {
     fragment.append(bestSellingElem);
   });
 
-  hideSpinner('.bestselling__products');
   appendProductsToContainer(fragment, '.bestselling__products');
 }
 
 function createBestSellingElem(product = {}, cloneTemp) {
-  cloneTemp.querySelector(
-    'a[href]'
-  ).href = `/pages/singleProductPage.html?productId=${product._id}`;
+  cloneTemp.querySelector('a[href]').href =
+    `/pages/singleProductPage.html?productId=${product._id}`;
 
   cloneTemp.querySelector('.product__img').src = product.imageUrl;
   cloneTemp.querySelector('.product__img').alt = product.description;
@@ -163,9 +179,8 @@ async function createNewAndEssentialElem(product = {}, cloneTemp) {
   cloneTemp.children[0].setAttribute('data-id', _id);
 
   cloneTemp.querySelector('.title').textContent = title;
-  cloneTemp.querySelector(
-    '.title'
-  ).href = `/pages/singleProductPage.html?productId=${_id}`;
+  cloneTemp.querySelector('.title').href =
+    `/pages/singleProductPage.html?productId=${_id}`;
 
   cloneTemp.querySelector('img').src = imageUrl;
   cloneTemp.querySelector('img').alt = description;
