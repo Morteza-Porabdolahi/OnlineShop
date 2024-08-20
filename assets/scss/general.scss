@@ -37,7 +37,8 @@ html {
 
 @font-face {
   font-family: Yekanbakh;
-  src: local('Yekan Bakh'),
+  src:
+    local('Yekan Bakh'),
     url('/assets/fonts/YekanBakh-Medium.ttf') format('truetype'),
     url('/assets/fonts/YekanBakh-Medium.woff') format('woff'),
     url('/assets/fonts/YekanBakh-Medium.woff2') format('woff2');
@@ -55,7 +56,9 @@ img {
 
 button {
   cursor: pointer;
-  transition: color 0.3s, background-color 0.3s;
+  transition:
+    color 0.3s,
+    background-color 0.3s;
 }
 
 input,

@@ -113,9 +113,8 @@ async function getComments(productId) {
 }
 
 function showCommentsLengthInDom(commentsLength) {
-  $$.querySelector(
-    '.tab-name__comments-number'
-  ).textContent = `(${commentsLength})`;
+  $$.querySelector('.tab-name__comments-number').textContent =
+    `(${commentsLength})`;
 }
 
 function* createIteratorFromComments(comments = []) {

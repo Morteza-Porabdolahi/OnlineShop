@@ -124,7 +124,7 @@ function filterProducts(products = []) {
 
 async function getAllProducts(limit, category = '', query = '') {
   try {
-    emptyProductsContainer()
+    emptyProductsContainer();
     showSpinner('.products-container__products');
     const data = await fetchAllProducts(limit, category, query);
 
@@ -216,7 +216,7 @@ async function handleUserFavourite(event, productId) {
 
 function appendProductsIntoContainer(fragment) {
   const productsContainer = $$.querySelector('.products-container__products');
-  
+
   emptyProductsContainer();
   productsContainer.append(fragment);
 }

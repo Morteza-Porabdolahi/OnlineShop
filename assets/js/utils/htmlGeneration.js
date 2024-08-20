@@ -16,9 +16,8 @@ export function generateElementsForProducts(product = {}, template) {
 
   cloneTemplate.querySelector('.prices-title__title').textContent =
     product.title;
-  cloneTemplate.querySelector(
-    '.prices-title__title'
-  ).herf = `/pages/singleProductPage.html?productId=${product._id}`;
+  cloneTemplate.querySelector('.prices-title__title').herf =
+    `/pages/singleProductPage.html?productId=${product._id}`;
 
   if (product.discount) {
     cloneTemplate.querySelector('.prices__real-price').textContent =

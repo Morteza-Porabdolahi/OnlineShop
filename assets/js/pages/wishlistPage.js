@@ -62,9 +62,8 @@ function createElementForFavourite(product = {}, cloneTemp) {
   cloneTemp.querySelector('.img-container__img').alt = product.title;
 
   cloneTemp.querySelector('.prices-title__title').textContent = product.title;
-  cloneTemp.querySelector(
-    '.prices-title__title'
-  ).herf = `/pages/singleProductPage.html?productId=${product._id}`;
+  cloneTemp.querySelector('.prices-title__title').herf =
+    `/pages/singleProductPage.html?productId=${product._id}`;
 
   if (product.discount) {
     cloneTemp.querySelector('.prices__real-price').textContent = formatPrice(

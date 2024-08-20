@@ -30,8 +30,7 @@ function handleNavbarInput() {
     urlSearchParams.set('search', searchInput.value);
 
     if (e.type === 'click' || e.key === 'Enter') {
-      location.href =
-        `${location.origin}/pages/shopPage.html?${urlSearchParams.toString()}`;
+      location.href = `${location.origin}/pages/shopPage.html?${urlSearchParams.toString()}`;
     }
   }
 

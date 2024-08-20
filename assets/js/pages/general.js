@@ -40,9 +40,8 @@ function createUserCartElem(cartItem = {}, cloneTemp) {
   cloneTemp.querySelector('img').alt = cartItem.title;
 
   cloneTemp.querySelector('.title__text').textContent = cartItem.title;
-  cloneTemp.querySelector(
-    '.title__text'
-  ).href = `/pages/singleProductPage.html?productId=${cartItem.productId}`;
+  cloneTemp.querySelector('.title__text').href =
+    `/pages/singleProductPage.html?productId=${cartItem.productId}`;
 
   cloneTemp.querySelector('.number-of-product__number').textContent =
     cartItem.quantity;
