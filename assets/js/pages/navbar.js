@@ -26,12 +26,12 @@ function handleNavbarInput() {
   const searchIcon = searchInput.nextElementSibling;
 
   function handleHref(e) {
-    const newHref = `/pages/shopPage.html?search=${searchInput.value}`;
+    const urlSearchParams = new URLSearchParams(location.search);
+    urlSearchParams.set('search', searchInput.value);
 
-    if (e.type === 'click') {
-      location.href = newHref;
-    } else if (e.key === 'Enter') {
-      location.href = newHref;
+    if (e.type === 'click' || e.key === 'Enter') {
+      location.href =
+        `${location.origin}/pages/shopPage.html?${urlSearchParams.toString()}`;
     }
   }
 
