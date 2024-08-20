@@ -124,7 +124,6 @@ function filterProducts(products = []) {
 
 async function getAllProducts(limit, category = '', query = '') {
   try {
-    emptyProductsContainer();
     showSpinner('.products-container__products');
     const data = await fetchAllProducts(limit, category, query);
 
@@ -132,8 +131,6 @@ async function getAllProducts(limit, category = '', query = '') {
     createElementsForProducts(products);
   } catch (err) {
     toast.error(err);
-  } finally {
-    hideSpinner('.products-container__products');
   }
 }
 
@@ -144,6 +141,9 @@ window.addEventListener('load', () => {
 });
 
 async function createElementsForProducts(products = []) {
+  emptyProductsContainer();
+  showSpinner('.products-container__products');
+
   const fragment = $$.createDocumentFragment();
   const productTemp = $$.querySelector('.body__products-container > template');
 
@@ -219,6 +219,7 @@ function appendProductsIntoContainer(fragment) {
 
   emptyProductsContainer();
   productsContainer.append(fragment);
+  hideSpinner('.products-container__products');
 }
 
 function emptyProductsContainer() {

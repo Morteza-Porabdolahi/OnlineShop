@@ -1,4 +1,8 @@
 export function showSpinner(container) {
+  if (document.querySelector('.spinner')) {
+    return;
+  }
+
   const spinner = document.createElement('div');
   const spinnerIcon = document.createElement('i');
 
@@ -16,6 +20,10 @@ export function showSpinner(container) {
 }
 
 export function hideSpinner(container) {
+  if (!document.querySelector('.spinner')) {
+    return;
+  }
+
   if (container instanceof HTMLElement) {
     container.querySelector('.spinner').remove();
   } else {
