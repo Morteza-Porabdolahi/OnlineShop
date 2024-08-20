@@ -88,10 +88,20 @@ function handleProductsOrder(e) {
 function filterProducts(products = []) {
   return {
     filterLowToHighPrice() {
-      return products.sort((a, b) => a.price - b.price);
+      return products.sort((a, b) => {
+        return (
+          calculateDiscountedPrice(a.price, a.discount) -
+          calculateDiscountedPrice(b.price, b.discount)
+        );
+      });
     },
     filterHighToLowPrice() {
-      return products.sort((a, b) => b.price - a.price);
+      return products.sort((a, b) => {
+        return (
+          calculateDiscountedPrice(b.price, b.discount) -
+          calculateDiscountedPrice(a.price, a.discount)
+        );
+      });
     },
     filterByPopularity() {
       return products.sort((a, b) => (a.popular ? 1 : -1));
@@ -174,7 +184,7 @@ async function createElementForProduct(product = {}, cloneTemp) {
     );
   }
   cloneTemp.querySelector('.prices__new-price').textContent = formatPrice(
-    ((100 - product.discount) / 100) * product.price
+    calculateDiscountedPrice(product.price, product.discount)
   );
 
   cloneTemp.querySelector('.summary-btn__summary').textContent =
@@ -195,6 +205,10 @@ async function createElementForProduct(product = {}, cloneTemp) {
     .addEventListener('click', (e) => handleUserFavourite(e, product._id));
 
   return cloneTemp;
+}
+
+function calculateDiscountedPrice(price, discount) {
+  return ((100 - discount) / 100) * price;
 }
 
 async function handleUserFavourite(event, productId) {
