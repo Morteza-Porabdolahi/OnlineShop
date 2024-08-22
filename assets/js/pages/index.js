@@ -110,11 +110,11 @@ async function getNewProducts() {
     showSpinner('.new-temps');
     const data = await fetchAllProducts();
 
-    createNewAndEssentialElems(data, '.new-temps');
+    await createNewAndEssentialElems(data, '.new-temps');
+
+    hideSpinner('.new-temps');
   } catch (err) {
     toast.error(err);
-  } finally {
-    hideSpinner('.new-temps');
   }
 }
 
@@ -123,11 +123,11 @@ async function getEssentialProducts() {
     showSpinner('.essential-temps');
     const data = await fetchAllProducts();
 
-    createNewAndEssentialElems(data, '.essential-temps');
+    await createNewAndEssentialElems(data, '.essential-temps');
+
+    hideSpinner('.essential-temps');
   } catch (err) {
     toast.error(err);
-  } finally {
-    hideSpinner('.essential-temps');
   }
 }
 

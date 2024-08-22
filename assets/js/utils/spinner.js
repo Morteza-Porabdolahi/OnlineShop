@@ -8,28 +8,32 @@ export function showSpinner(container) {
   spinner.appendChild(spinnerIcon);
 
   if (container instanceof HTMLElement) {
-    container.classList.add(`spinner-${container.id}`);
+    spinner.classList.add(`spinner-${container.id}`);
     container.appendChild(spinner);
   } else {
     const containerElement = document.querySelector(container);
 
-    containerElement.classList.add(`spinner-${containerElement.id}`);
+    spinner.classList.add(`spinner-${containerElement.id}`);
     containerElement.appendChild(spinner);
   }
 }
 
 export function hideSpinner(container) {
   if (container instanceof HTMLElement) {
-    if (document.querySelector(`.spinner-${container.id}`)) {
-      container.querySelector(`.spinner-${container.id}`)?.remove();
+    const spinner = container.querySelector(`.spinner-${container.id}`);
+
+    if (spinner) {
+      spinner.remove();
     }
   } else {
     const containerElement = document.querySelector(container);
 
-    if (document.querySelector(`.spinner-${containerElement.id}`)) {
-      containerElement
-        .querySelector(`.spinner-${containerElement.id}`)
-        ?.remove();
+    const spinner = containerElement.querySelector(
+      `.spinner-${containerElement.id}`
+    );
+
+    if (spinner) {
+      spinner.remove();
     }
   }
 }

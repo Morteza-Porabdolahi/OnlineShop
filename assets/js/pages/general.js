@@ -8,6 +8,7 @@ import {
   removeUserFavourite,
   loginUser,
   addComment,
+  sendEmail,
 } from '../api/api';
 
 export async function handleUserCartNavbar() {
@@ -214,6 +215,28 @@ export async function handleUserLogin(e) {
 
 export async function insertComment(comment = {}) {
   const data = await addComment(comment);
+
+  if (data.error) {
+    toast.error(data.error);
+  } else {
+    toast.success(data.message);
+  }
+}
+
+// implement email functionality
+export async function handleSendEmail(e) {
+  e.preventDefault();
+
+  const emailInput = $$.getElementById('email-input');
+
+  const regex =
+    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+  if (!regex.test(emailInput.value)) {
+    return toast.error('لطفا ایمیل معتبر وارد کنید');
+  }
+
+  const data = await sendEmail(emailInput.value);
 
   if (data.error) {
     toast.error(data.error);

@@ -138,7 +138,9 @@ async function getAllProducts(limit, category = '', query = '') {
     const data = await fetchAllProducts(limit, category, query);
 
     products = data;
-    createElementsForProducts(products);
+    await createElementsForProducts(products);
+
+    hideSpinner('.products-container__products');
   } catch (err) {
     toast.error(err);
   }
@@ -233,7 +235,6 @@ function appendProductsIntoContainer(fragment) {
 
   emptyProductsContainer();
   productsContainer.append(fragment);
-  hideSpinner('.products-container__products');
 }
 
 function emptyProductsContainer() {
