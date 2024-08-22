@@ -1,8 +1,4 @@
 export function showSpinner(container) {
-  if (document.querySelector('.spinner')) {
-    return;
-  }
-
   const spinner = document.createElement('div');
   const spinnerIcon = document.createElement('i');
 
@@ -12,22 +8,28 @@ export function showSpinner(container) {
   spinner.appendChild(spinnerIcon);
 
   if (container instanceof HTMLElement) {
+    container.classList.add(`spinner-${container.id}`);
     container.appendChild(spinner);
   } else {
     const containerElement = document.querySelector(container);
+
+    containerElement.classList.add(`spinner-${containerElement.id}`);
     containerElement.appendChild(spinner);
   }
 }
 
 export function hideSpinner(container) {
-  if (!document.querySelector('.spinner')) {
-    return;
-  }
-
   if (container instanceof HTMLElement) {
-    container.querySelector('.spinner').remove();
+    if (document.querySelector(`.spinner-${container.id}`)) {
+      container.querySelector(`.spinner-${container.id}`)?.remove();
+    }
   } else {
     const containerElement = document.querySelector(container);
-    containerElement.querySelector('.spinner').remove();
+
+    if (document.querySelector(`.spinner-${containerElement.id}`)) {
+      containerElement
+        .querySelector(`.spinner-${containerElement.id}`)
+        ?.remove();
+    }
   }
 }
