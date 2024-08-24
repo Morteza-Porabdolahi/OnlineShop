@@ -12,8 +12,6 @@ import {
 } from './general';
 import { showSpinner, hideSpinner } from '../utils/spinner';
 
-let products = [];
-
 const stockInputs = $$.querySelectorAll('.stock-input');
 
 const orderSelector = $$.querySelector('.products-filtering__select');
@@ -31,114 +29,109 @@ const maxPrice = 599000;
 minRangeInput.addEventListener('input', handleMinRangeInput);
 maxRangeInput.addEventListener('input', handleMaxRangeInput);
 
-orderSelector.addEventListener('change', handleProductsOrder);
+orderSelector.addEventListener('change', handleSortByUrl);
 
 stockInputs.forEach((stockInput) =>
   stockInput.addEventListener('change', handleProductsByDiscounts)
 );
 
 function handleProductsByDiscounts(e) {
-  const { filterByAvailability, filterSpecialSales } = filterProducts(products);
   const isChecked = e.target.checked;
 
   if (isChecked) {
-    if (e.target.value === 'available') {
-      createElementsForProducts(filterByAvailability());
-    } else {
-      createElementsForProducts(filterSpecialSales());
-    }
+    handleFilterUrl(e.target.value);
   } else {
-    createElementsForProducts(products);
+    removeFilterFromUrl(e.target.value);
   }
 }
 
-function handleProductsOrder(e) {
-  const {
-    filterLowToHighPrice,
-    filterHighToLowPrice,
-    filterByLatest,
-    filterByScore,
-    filterByPopularity,
-  } = filterProducts(products);
+function removeFilterFromUrl(filter) {
+  const urlSearchParams = new URLSearchParams(location.search);
+  const filterByArr = urlSearchParams.get('filterBy').split(',');
+
+  const newFilterBy = filterByArr.filter((item) => item !== filter).join(',');
+
+  urlSearchParams.set('filterBy', newFilterBy);
+
+  history.pushState(null, null, `?${urlSearchParams.toString()}`);
+  getAllProducts();
+}
+
+function handleSortByUrl(e) {
+  const urlSearchParams = new URLSearchParams(location.search);
 
   switch (e.target.value) {
     case 'popularity': {
-      createElementsForProducts(filterByPopularity());
+      urlSearchParams.set('sortBy', 'popularity');
       break;
     }
     case 'score': {
-      createElementsForProducts(filterByScore());
+      urlSearchParams.set('sortBy', 'rating');
       break;
     }
     case 'last': {
-      createElementsForProducts(filterByLatest());
+      urlSearchParams.set('sortBy', 'latest');
       break;
     }
     case 'expensive': {
-      createElementsForProducts(filterHighToLowPrice());
+      urlSearchParams.set('sortBy', 'HighToLowPrice');
       break;
     }
     case 'cheap': {
-      createElementsForProducts(filterLowToHighPrice());
+      urlSearchParams.set('sortBy', 'lowToHighPrice');
       break;
     }
   }
+
+  history.pushState(null, null, `?${urlSearchParams.toString()}`);
+  getAllProducts();
 }
 
-function filterProducts(products = []) {
-  return {
-    filterLowToHighPrice() {
-      return products.sort((a, b) => {
-        return (
-          calculateDiscountedPrice(a.price, a.discount) -
-          calculateDiscountedPrice(b.price, b.discount)
-        );
-      });
-    },
-    filterHighToLowPrice() {
-      return products.sort((a, b) => {
-        return (
-          calculateDiscountedPrice(b.price, b.discount) -
-          calculateDiscountedPrice(a.price, a.discount)
-        );
-      });
-    },
-    filterByPopularity() {
-      return products.sort((a, b) => (a.popular ? 1 : -1));
-    },
-    filterByScore() {
-      return products.sort((a, b) => b.rating - a.rating);
-    },
-    filterByLatest() {
-      // needs to be checked in mongodb
-      return products.sort((a, b) => b.createdDate - a.createdDate);
-    },
-    filterByAvailability() {
-      return products.filter((product) => product.stock > 0);
-    },
-    filterSpecialSales() {
-      return products.filter((product) => product.discount >= 70);
-    },
-    filterByPrice(start, end) {
-      return products.filter(
-        (product) => product.price <= end && product.price >= start
-      );
-    },
-    filterByCategory(category = '') {
-      return products.filter((product) =>
-        product.categories.includes(category)
-      );
-    },
-  };
+function handleFilterUrl(filter, start, end) {
+  const urlSearchParams = new URLSearchParams(location.search);
+
+  const prevFilter = urlSearchParams.get('filterBy');
+  const shouldBeCommaSeprated = prevFilter ? `${prevFilter},` : '';
+
+  switch (filter) {
+    case 'available': {
+      urlSearchParams.set('filterBy', `${shouldBeCommaSeprated}available`);
+      break;
+    }
+    case 'specialSale': {
+      urlSearchParams.set('filterBy', `${shouldBeCommaSeprated}specialSale`);
+      break;
+    }
+    case 'price': {
+      if (!prevFilter.split(',').includes('price')) {
+        urlSearchParams.set('filterBy', `${shouldBeCommaSeprated}price`);
+      }
+
+      if (
+        urlSearchParams.get('start') === start &&
+        urlSearchParams.get('end') === end
+      ) {
+        return;
+      }
+
+      urlSearchParams.set('start', start);
+      urlSearchParams.set('end', end);
+      break;
+    }
+  }
+
+  history.pushState(null, null, `?${urlSearchParams.toString()}`);
+  getAllProducts();
 }
 
-async function getAllProducts(limit, category = '', query = '') {
+async function getAllProducts() {
   try {
+    emptyProductsContainer();
     showSpinner('.products-container__products');
-    const data = await fetchAllProducts(limit, category, query);
 
-    products = data;
-    await createElementsForProducts(products);
+    const data = await fetchAllProducts();
+
+    await createElementsForProducts(data);
 
     hideSpinner('.products-container__products');
   } catch (err) {
@@ -146,16 +139,7 @@ async function getAllProducts(limit, category = '', query = '') {
   }
 }
 
-window.addEventListener('load', () => {
-  const params = new URLSearchParams(location.search);
-
-  getAllProducts(12, params.get('category') || '', params.get('q') || '');
-});
-
 async function createElementsForProducts(products = []) {
-  emptyProductsContainer();
-  showSpinner('.products-container__products');
-
   const fragment = $$.createDocumentFragment();
   const productTemp = $$.querySelector('.body__products-container > template');
 
@@ -233,7 +217,6 @@ async function handleUserFavourite(event, productId) {
 function appendProductsIntoContainer(fragment) {
   const productsContainer = $$.querySelector('.products-container__products');
 
-  emptyProductsContainer();
   productsContainer.append(fragment);
 }
 
@@ -290,13 +273,7 @@ function handleClickEvents(e) {
   } else if (productNumberBtn) {
     limitProductsNumber(productNumberBtn);
   } else if (targetEl.classList.contains('container__filter-btn')) {
-    const { filterByPrice } = filterProducts(products);
-    const filteredProducts = filterByPrice(
-      minRangeInput.value,
-      maxRangeInput.value
-    );
-
-    createElementsForProducts(filteredProducts);
+    handleFilterUrl('price', minRangeInput.value, maxRangeInput.value);
   }
 }
 
@@ -314,11 +291,19 @@ function handleProductsGrid(squareBtn) {
 
 function limitProductsNumber(productNumberBtn) {
   const activeClass = 'number-of-products__number--active';
+  const urlSearchParams = new URLSearchParams(location.search);
 
   $$.querySelector(`.${activeClass}`).classList.remove(activeClass);
   productNumberBtn.classList.add(activeClass);
 
-  getAllProducts(parseInt(productNumberBtn.dataset.num));
+  if (productNumberBtn.dataset.num !== urlSearchParams.get('limit')) {
+    urlSearchParams.set('limit', productNumberBtn.dataset.num);
+    history.pushState(null, null, `?${urlSearchParams.toString()}`);
+
+    getAllProducts();
+  }
 }
 
 document.documentElement.addEventListener('click', handleClickEvents);
+
+window.addEventListener('load', getAllProducts);
