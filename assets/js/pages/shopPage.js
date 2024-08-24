@@ -26,14 +26,63 @@ const rangeInputsProgress = $$.querySelector('.progress');
 
 const maxPrice = 599000;
 
+setDefaultActiveLimit();
+
 minRangeInput.addEventListener('input', handleMinRangeInput);
 maxRangeInput.addEventListener('input', handleMaxRangeInput);
+setDefaultValueForRangeInputs();
 
 orderSelector.addEventListener('change', handleSortByUrl);
+setDefaultValueForOrderSelector();
 
-stockInputs.forEach((stockInput) =>
-  stockInput.addEventListener('change', handleProductsByDiscounts)
-);
+stockInputs.forEach((stockInput) => {
+  setDefaultValueForCheckboxes(stockInput);
+  stockInput.addEventListener('change', handleProductsByDiscounts);
+});
+
+function setDefaultActiveLimit() {
+  const activeClass = 'number-of-products__number--active';
+  const urlSearchParams = new URLSearchParams(location.search);
+  const limit = urlSearchParams.get('limit');
+
+  if (limit) {
+    $$.querySelector(`.${activeClass}`).classList.remove(activeClass);
+    $$.querySelector(`span[data-num="${limit}"]`).classList.add(activeClass);
+  }
+}
+
+function setDefaultValueForRangeInputs() {
+  const urlSearchParams = new URLSearchParams(location.search);
+  const start = urlSearchParams.get('start');
+  const end = urlSearchParams.get('end');
+
+  if (start && end) {
+    minRangeInput.value = start;
+    maxRangeInput.value = end;
+
+    handleMinRangeInput();
+    handleMaxRangeInput();
+  }
+}
+
+function setDefaultValueForOrderSelector() {
+  const urlSearchParams = new URLSearchParams(location.search);
+  const sortBy = urlSearchParams.get('sortBy');
+
+  if (sortBy) {
+    orderSelector.value = sortBy;
+  }
+}
+
+function setDefaultValueForCheckboxes(checkbox) {
+  const urlSearchParams = new URLSearchParams(location.search);
+  const filterBy = urlSearchParams.get('filterBy');
+  const filterByArr = filterBy ? filterBy.split(',') : [];
+
+  if (filterByArr.includes(checkbox.value)) {
+    checkbox.checked = true;
+  }
+}
 
 function handleProductsByDiscounts(e) {
   const isChecked = e.target.checked;
@@ -74,11 +123,11 @@ function handleSortByUrl(e) {
       break;
     }
     case 'expensive': {
-      urlSearchParams.set('sortBy', 'HighToLowPrice');
+      urlSearchParams.set('sortBy', 'expensive');
       break;
     }
     case 'cheap': {
-      urlSearchParams.set('sortBy', 'lowToHighPrice');
+      urlSearchParams.set('sortBy', 'cheap');
       break;
     }
   }
@@ -297,7 +346,7 @@ function limitProductsNumber(productNumberBtn) {
   productNumberBtn.classList.add(activeClass);
 
   if (productNumberBtn.dataset.num !== urlSearchParams.get('limit')) {
-    urlSearchParams.set('limit', productNumberBtn.dataset.num);
+    urlSearchParams.set('limit', productNumberBtn.dataset.num ?? 'all');
     history.pushState(null, null, `?${urlSearchParams.toString()}`);
 
     getAllProducts();

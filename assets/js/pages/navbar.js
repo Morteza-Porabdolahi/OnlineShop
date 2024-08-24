@@ -27,7 +27,7 @@ function handleNavbarInput() {
 
   function handleHref(e) {
     const urlSearchParams = new URLSearchParams(location.search);
-    urlSearchParams.set('search', searchInput.value);
+    urlSearchParams.set('q', searchInput.value);
 
     if (e.type === 'click' || e.key === 'Enter') {
       location.href = `${location.origin}/pages/shopPage.html?${urlSearchParams.toString()}`;
