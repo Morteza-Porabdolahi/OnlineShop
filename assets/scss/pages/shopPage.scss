@@ -11,6 +11,28 @@
     .body__products-container {
       width: 75%;
 
+      .pagination {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+
+        &__btn {
+          @include orangeButtonStyles;
+          cursor: pointer;
+          border-radius: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 4rem;
+          height: 4rem;
+          font-size: 2rem;
+          
+          span {
+            padding-top: .4rem;
+          }
+        }
+      }
+        
       .products-container__products {
         display: grid;
         gap: 2rem;
