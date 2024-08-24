@@ -629,14 +629,14 @@
                     <option value="popularity">
                       مرتب سازی بر اساس محبوبیت
                     </option>
-                    <option value="score">مرتب سازی بر اساس امتیاز</option>
-                    <option value="last" selected>
+                    <option value="rating">مرتب سازی بر اساس امتیاز</option>
+                    <option value="latest" selected>
                       مرتب سازی بر اساس آخرین
                     </option>
-                    <option value="expensive">
+                    <option value="priceDesc">
                       مرتب سازی بر اساس گرانترین
                     </option>
-                    <option value="cheap">مرتب سازی بر اساس ارزانترین</option>
+                    <option value="priceAsc">مرتب سازی بر اساس ارزانترین</option>
                   </select>
                 </div>
               </div>
@@ -687,23 +687,12 @@
                 class="products-container__products columns_3"
                 id="products-container"
               ></div>
-              <div class="pagination">
-                <button class="pagination__btn" data-page="1">
-                  <span>1</span>
+              <template id="pagination-btn_template">
+                <button class="pagination__btn" data-page="">
+                  <span></span>
                 </button>
-                <button class="pagination__btn" data-page="2">
-                  <span>2</span>
-                </button>
-                <button class="pagination__btn" data-page="3">
-                  <span>3</span>
-                </button>
-                <button class="pagination__btn" data-page="4">
-                  <span>4</span>
-                </button>
-                <button class="pagination__btn" data-page="5">
-                  <span>5</span>
-                </button>
-              </div>
+              </template>
+              <div class="pagination"></div>
             </section>
             <section class="body__aside">
               <aside class="aside">

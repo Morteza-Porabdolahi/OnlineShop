@@ -40,10 +40,35 @@ stockInputs.forEach((stockInput) => {
   stockInput.addEventListener('change', handleProductsByDiscounts);
 });
 
+function setURLSearchParams(params = []) {
+  const urlSearchParams = new URLSearchParams(location.search);
+
+  params.forEach((param) => {
+    urlSearchParams.set(param.key, param.value);
+  });
+
+  history.pushState(null, null, `?${urlSearchParams.toString()}`);
+}
+
+function getURLSearchParams(keys = []) {
+  const urlSearchParams = new URLSearchParams(location.search);
+
+  if (!Array.isArray(keys)) {
+    return urlSearchParams.get(keys);
+  }
+
+  const values = [];
+
+  keys.forEach((key) => {
+    values.push(urlSearchParams.get(key));
+  });
+
+  return values;
+}
+
 function setDefaultActiveLimit() {
   const activeClass = 'number-of-products__number--active';
-  const urlSearchParams = new URLSearchParams(location.search);
-  const limit = urlSearchParams.get('limit');
+  const limit = getURLSearchParams('limit');
 
   if (limit) {
     $$.querySelector(`.${activeClass}`).classList.remove(activeClass);
@@ -52,9 +77,7 @@ function setDefaultActiveLimit() {
 }
 
 function setDefaultValueForRangeInputs() {
-  const urlSearchParams = new URLSearchParams(location.search);
-  const start = urlSearchParams.get('start');
-  const end = urlSearchParams.get('end');
+  const [start, end] = getURLSearchParams(['start', 'end']);
 
   if (start && end) {
     minRangeInput.value = start;
@@ -66,8 +89,7 @@ function setDefaultValueForRangeInputs() {
 }
 
 function setDefaultValueForOrderSelector() {
-  const urlSearchParams = new URLSearchParams(location.search);
-  const sortBy = urlSearchParams.get('sortBy');
+  const sortBy = getURLSearchParams('sortBy');
 
   if (sortBy) {
     orderSelector.value = sortBy;
@@ -75,8 +97,7 @@ function setDefaultValueForOrderSelector() {
 }
 
 function setDefaultValueForCheckboxes(checkbox) {
-  const urlSearchParams = new URLSearchParams(location.search);
-  const filterBy = urlSearchParams.get('filterBy');
+  const filterBy = getURLSearchParams('filterBy');
   const filterByArr = filterBy ? filterBy.split(',') : [];
 
   if (filterByArr.includes(checkbox.value)) {
@@ -95,44 +116,16 @@ function handleProductsByDiscounts(e) {
 }
 
 function removeFilterFromUrl(filter) {
-  const urlSearchParams = new URLSearchParams(location.search);
   const filterByArr = urlSearchParams.get('filterBy').split(',');
 
   const newFilterBy = filterByArr.filter((item) => item !== filter).join(',');
 
-  urlSearchParams.set('filterBy', newFilterBy);
-
-  history.pushState(null, null, `?${urlSearchParams.toString()}`);
+  setURLSearchParams([{ key: 'filterBy', value: newFilterBy }]);
   getAllProducts();
 }
 
 function handleSortByUrl(e) {
-  const urlSearchParams = new URLSearchParams(location.search);
-
-  switch (e.target.value) {
-    case 'popularity': {
-      urlSearchParams.set('sortBy', 'popularity');
-      break;
-    }
-    case 'score': {
-      urlSearchParams.set('sortBy', 'rating');
-      break;
-    }
-    case 'last': {
-      urlSearchParams.set('sortBy', 'latest');
-      break;
-    }
-    case 'expensive': {
-      urlSearchParams.set('sortBy', 'expensive');
-      break;
-    }
-    case 'cheap': {
-      urlSearchParams.set('sortBy', 'cheap');
-      break;
-    }
-  }
-
-  history.pushState(null, null, `?${urlSearchParams.toString()}`);
+  setURLSearchParams([{ key: 'sortBy', value: e.target.value }]);
   getAllProducts();
 }
 
@@ -178,14 +171,55 @@ async function getAllProducts() {
     emptyProductsContainer();
     showSpinner('.products-container__products');
 
-    const data = await fetchAllProducts();
+    const { products, totalProducts } = await fetchAllProducts();
 
-    await createElementsForProducts(data);
+    await createElementsForProducts(products);
+    createPageElementsAndAppend(totalProducts);
 
     hideSpinner('.products-container__products');
   } catch (err) {
     toast.error(err);
   }
+}
+
+function createPageElementsAndAppend(totalProducts) {
+  const pagination = $$.querySelector('.pagination');
+  let limit = getURLSearchParams('limit');
+
+  limit = limit ? limit : '12';
+
+  pagination.innerHTML = '';
+
+  if (limit === 'all' || limit >= totalProducts) {
+    setURLSearchParams([{ key: 'page', value: '1' }]);
+  }
+
+  const totalPages = Math.ceil(totalProducts / limit);
+  const fragment = $$.createDocumentFragment();
+  const buttonTemp = $$.getElementById('pagination-btn_template');
+
+  let cloneTemp;
+
+  for (let i = 1; i <= totalPages; i++) {
+    cloneTemp = buttonTemp.content.cloneNode(true);
+
+    cloneTemp.querySelector('.pagination__btn').dataset.page = i;
+    cloneTemp.querySelector('.pagination__btn > span').textContent = i;
+    cloneTemp
+      .querySelector('.pagination__btn')
+      .addEventListener('click', handlePaginationBtn);
+
+    fragment.append(cloneTemp);
+  }
+
+  pagination.append(fragment);
+}
+
+function handlePaginationBtn(e) {
+  const page = e.currentTarget.dataset.page;
+
+  setURLSearchParams([{ key: 'page', value: page }]);
+  getAllProducts();
 }
 
 async function createElementsForProducts(products = []) {
@@ -340,15 +374,14 @@ function handleProductsGrid(squareBtn) {
 
 function limitProductsNumber(productNumberBtn) {
   const activeClass = 'number-of-products__number--active';
-  const urlSearchParams = new URLSearchParams(location.search);
 
   $$.querySelector(`.${activeClass}`).classList.remove(activeClass);
   productNumberBtn.classList.add(activeClass);
 
-  if (productNumberBtn.dataset.num !== urlSearchParams.get('limit')) {
-    urlSearchParams.set('limit', productNumberBtn.dataset.num ?? 'all');
-    history.pushState(null, null, `?${urlSearchParams.toString()}`);
-
+  if (productNumberBtn.dataset.num !== getURLSearchParams('limit')) {
+    setURLSearchParams([
+      { key: 'limit', value: productNumberBtn.dataset.num ?? 'all' },
+    ]);
     getAllProducts();
   }
 }
