@@ -10105,6 +10105,7 @@ table {
 .header__nav-container .nav-container__nav .nav__top .search-container span {
   font-size: 2rem;
   color: #7a7a7a;
+  cursor: pointer;
 }
 .header__nav-container .nav-container__nav .nav__top .search-container__input {
   border: 0;

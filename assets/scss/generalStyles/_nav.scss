@@ -171,6 +171,7 @@
 
           span {
             @include textStyle($grayerColor, 2rem);
+            cursor: pointer;
           }
 
           &__input {
