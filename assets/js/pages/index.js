@@ -95,9 +95,9 @@ function getAllProducts() {
 async function getBestSellingProducts() {
   try {
     showSpinner('.bestselling__products');
-    const data = await fetchAllProducts();
+    const { products } = await fetchAllProducts('filterBy=specialSale');
 
-    createBestSellingElems(data);
+    createBestSellingElems(products);
   } catch (err) {
     toast.error(err);
   } finally {
@@ -108,9 +108,9 @@ async function getBestSellingProducts() {
 async function getNewProducts() {
   try {
     showSpinner('.new-temps');
-    const data = await fetchAllProducts();
+    const { products } = await fetchAllProducts('category=new-wp-theme');
 
-    await createNewAndEssentialElems(data, '.new-temps');
+    await createNewAndEssentialElems(products, '.new-temps');
 
     hideSpinner('.new-temps');
   } catch (err) {
@@ -121,9 +121,9 @@ async function getNewProducts() {
 async function getEssentialProducts() {
   try {
     showSpinner('.essential-temps');
-    const data = await fetchAllProducts();
+    const { products } = await fetchAllProducts('category=essential-wp-theme');
 
-    await createNewAndEssentialElems(data, '.essential-temps');
+    await createNewAndEssentialElems(products, '.essential-temps');
 
     hideSpinner('.essential-temps');
   } catch (err) {

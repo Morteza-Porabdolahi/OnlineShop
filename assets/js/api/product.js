@@ -1,12 +1,15 @@
 import { axios } from './interceptAxios';
 
-export async function fetchAllProducts() {
+export async function fetchAllProducts(search) {
   const locationSearch = location.search;
 
   try {
-    const response = await axios.get(`/products${locationSearch}`, {
-      headers: {},
-    });
+    const response = await axios.get(
+      `/products${search ? `?${search}` : locationSearch}`,
+      {
+        headers: {},
+      }
+    );
 
     return response.data;
   } catch (err) {

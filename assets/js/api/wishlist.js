@@ -28,7 +28,8 @@ export async function isProductFavourite(productId = '') {
 
     return userFavourites.some((favourite) => favourite.productId == productId);
   } catch (err) {
-    throw err.response.data.message || err.message;
+    console.log(err);
+    return { error: err.response.data.message || err.message };
   }
 }
 
@@ -38,7 +39,6 @@ export async function getUserFavourites() {
 
     return response.data;
   } catch (err) {
-    console.log(err);
-    return { error: err.response.data.message || err.message };
+    throw err;
   }
 }

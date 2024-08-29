@@ -839,8 +839,9 @@
               <div class="newsletter__container">
                 <div class="newsletter">
                   <span class="newsletter__title">عضویت در خبرنامه</span>
-                  <div class="newsletter__input-container">
+                  <form id="email-form" class="newsletter__input-container">
                     <input
+                      id="email-input"
                       class="input-container__input"
                       type="text"
                       placeholder="آدرس ایمیل خود را وارد کنید..."
@@ -848,7 +849,7 @@
                     <button type="submit" class="input-container__btn">
                       عضویت
                     </button>
-                  </div>
+                  </form>
                 </div>
                 <div class="vertical-divider" style="width: 7rem"></div>
                 <div class="newsletter__social">
@@ -947,7 +948,8 @@
         </footer>
       </section>
     </section>
-
+  
+    <script src="/assets/js/pages/navbar.js" type="module"></script>
     <script src="/assets/js/pages/checkOutPage.js"></script>
     <script src="/assets/js/pages/general.js" type="module"></script>
     <script src="/assets/js/modal.js" type="module"></script>
