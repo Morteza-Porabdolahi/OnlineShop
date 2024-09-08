@@ -70,6 +70,12 @@ function insertProductDatasIntoPage(product = {}) {
   );
 
   $$.querySelector('.list-item__text > a').textContent = product?.category;
+  $$.querySelector('.product-title').textContent = product.title;
+  $$.querySelector('.product-description__title').textContent = product.title;
+  $$.querySelector('.product-description__text').textContent =
+    product.description;
+
+  $$.querySelector('.product-img').src = product.imageUrl;
 
   $$.querySelector('.product-img-container__img').src = product.imageUrl;
   $$.querySelector('.product-img-container__img').alt = product.title;
@@ -82,8 +88,30 @@ function insertProductDatasIntoPage(product = {}) {
     }
   );
 
+  handleAskedQuestions(product.faq);
   getComments(product._id);
   handleCommentForm(product._id);
+}
+
+function handleAskedQuestions(faq) {
+  const template = document.getElementById('product-asked-ques-template');
+
+  faq.forEach((question) => {
+    const newQuestion = template.content.cloneNode(true);
+    const questionId = `question__checkbox${question._id}`;
+
+    newQuestion.querySelector('.question__title').textContent =
+      question.question;
+    newQuestion
+      .querySelector('.question__title')
+      .setAttribute('for', questionId);
+
+    newQuestion.querySelector('.question__answer').textContent =
+      question.answer;
+    newQuestion.querySelector('.question__checkbox').id = questionId;
+
+    $$.querySelector('.product-asked-ques').append(newQuestion);
+  });
 }
 
 function handleCommentForm(mediaId) {
