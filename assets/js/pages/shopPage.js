@@ -244,7 +244,7 @@ async function createElementForProduct(product = {}, cloneTemp) {
   cloneTemp.querySelector('.img-container__img').alt = product.title;
 
   cloneTemp.querySelector('.prices-title__title').textContent = product.title;
-  cloneTemp.querySelector('.prices-title__title').herf =
+  cloneTemp.querySelector('.prices-title__title').href =
     `/pages/singleProductPage.html?productId=${product._id}`;
 
   if (product.discount) {
