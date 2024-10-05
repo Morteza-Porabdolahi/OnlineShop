@@ -11,6 +11,7 @@ import {
   insertItemInUserCart,
 } from './general';
 import { showSpinner, hideSpinner } from '../utils/spinner';
+import { showError, hideError } from '../utils/error';
 
 const stockInputs = $$.querySelectorAll('.stock-input');
 
@@ -116,7 +117,7 @@ function handleProductsByDiscounts(e) {
 }
 
 function removeFilterFromUrl(filter) {
-  const filterByArr = urlSearchParams.get('filterBy').split(',');
+  const filterByArr = getURLSearchParams('filterBy').split(',');
 
   const newFilterBy = filterByArr.filter((item) => item !== filter).join(',');
 
@@ -176,9 +177,11 @@ async function getAllProducts() {
     await createElementsForProducts(products);
     createPageElementsAndAppend(totalProducts);
 
-    hideSpinner('.products-container__products');
   } catch (err) {
     toast.error(err);
+    showError(err, '.products-container__products')
+  } finally {
+    hideSpinner('.products-container__products');
   }
 }
 
@@ -195,6 +198,11 @@ function createPageElementsAndAppend(totalProducts) {
   }
 
   const totalPages = Math.ceil(totalProducts / limit);
+
+  if(totalPages === 1) {
+    return;
+  }
+  
   const fragment = $$.createDocumentFragment();
   const buttonTemp = $$.getElementById('pagination-btn_template');
 

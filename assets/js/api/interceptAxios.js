@@ -3,6 +3,7 @@ import axios from 'axios';
 import { getUserToken } from '../utils/utils';
 
 const API_URL = 'https://onlineshop-api-5h7s.onrender.com/api/';
+// const API_URL = 'http://localhost:3000/api/';
 const instance = axios.create({
   baseURL: API_URL,
 });

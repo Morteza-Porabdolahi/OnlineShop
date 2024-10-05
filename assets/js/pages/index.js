@@ -9,6 +9,7 @@ import {
   toast,
 } from '../utils/utils';
 import { showSpinner, hideSpinner } from '../utils/spinner';
+import { hideError, showError } from '../utils/error';
 import { setupPopups } from '../popUp';
 import {
   fetchAllProducts,
@@ -94,12 +95,15 @@ function getAllProducts() {
 
 async function getBestSellingProducts() {
   try {
+    hideError('.bestselling__products')
     showSpinner('.bestselling__products');
+    
     const { products } = await fetchAllProducts('filterBy=specialSale');
 
     createBestSellingElems(products);
   } catch (err) {
     toast.error(err);
+    showError(err, '.bestselling__products')
   } finally {
     hideSpinner('.bestselling__products');
   }
@@ -107,27 +111,33 @@ async function getBestSellingProducts() {
 
 async function getNewProducts() {
   try {
+    hideError('.new-temps')
     showSpinner('.new-temps');
     const { products } = await fetchAllProducts('category=new-wp-theme');
 
     await createNewAndEssentialElems(products, '.new-temps');
 
-    hideSpinner('.new-temps');
   } catch (err) {
     toast.error(err);
+    showError(err, '.new-temps')
+  } finally {
+    hideSpinner('.new-temps');
   }
 }
 
 async function getEssentialProducts() {
   try {
+    hideError('.essential-temps')
     showSpinner('.essential-temps');
     const { products } = await fetchAllProducts('category=essential-wp-theme');
 
     await createNewAndEssentialElems(products, '.essential-temps');
 
-    hideSpinner('.essential-temps');
   } catch (err) {
     toast.error(err);
+    showError(err, '.essential-temps')
+  } finally {
+    hideSpinner('.essential-temps');
   }
 }
 

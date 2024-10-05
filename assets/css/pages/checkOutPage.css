@@ -1,4 +1,5 @@
-﻿.footer {
+@charset "UTF-8";
+.footer {
   padding: 8rem 0 4rem 0;
 }
 .footer__about {
@@ -71,8 +72,8 @@
   align-items: center;
   justify-content: center;
   border-radius: 10px;
-  width: 50px;
-  height: 50px;
+  width: 7rem;
+  height: 7rem;
 }
 .footer__newsletter .newsletter__social div:not(:first-child) {
   font-size: 2.8rem;
@@ -97,7 +98,7 @@
   transition: background-color 0.3s;
 }
 .footer__newsletter .newsletter .input-container__btn:hover {
-  background-color: #df8601;
+  background-color: rgb(223, 134, 1);
 }
 .footer__newsletter .newsletter .input-container__input {
   border-radius: 0 5px 5px 0;
@@ -185,11 +186,13 @@
   position: relative;
 }
 .footer__copyright .copyright__list li:first-child::before {
-  content: '';
+  content: "";
 }
 .footer__copyright .copyright__list li::before {
-  content: '•';
+  content: "•";
+  /* Add content: \2022 is the CSS Code/unicode for a bullet */
   color: #b8b9ba;
+  /* Change the color */
   display: inline-block;
   width: 2rem;
   margin-left: 0.8rem;
@@ -212,7 +215,7 @@
   color: #7a7a7a;
 }
 .footer__copyright .copyright__list li a::after {
-  content: '';
+  content: "";
   width: 0;
   transition: width 0.6s cubic-bezier(0.19, 1, 0.22, 1);
   height: 3px;
@@ -225,6 +228,7 @@
   font-size: 1.4rem;
   color: #7a7a7a;
 }
+
 .main {
   padding: 23rem 1.5rem 0 1.5rem;
 }
@@ -249,15 +253,16 @@
   color: #333;
 }
 .main__intro .intro__breadcrumb .item:not(:last-child) > a::after {
-  font-family: 'remixicon';
+  font-family: "remixicon";
   vertical-align: middle;
   font-size: 2rem;
-  content: '';
+  content: "\ea52";
   color: #b8b9ba;
 }
 .main__intro .intro__breadcrumb .item--active > a {
   color: #333;
 }
+
 .main .main__intro {
   padding: 0;
 }
@@ -404,4 +409,6 @@
 }
 .main .discount-input-container__input-container button:hover {
   background-color: #50c479;
-} /*# sourceMappingURL=checkOutPage.css.map */
+}
+
+/*# sourceMappingURL=checkOutPage.css.map */

@@ -43,7 +43,7 @@ function handleRegisterButton() {
   const registerBtn = $$.querySelector('.register-btn');
 
   if (user) {
-    registerBtn.classList.remove('modal-btn');
+    registerBtn.setAttribute('disabled', true);
     registerBtn.querySelector('a').textContent = user.username;
     registerBtn.style.opacity = '.5';
   } else {
@@ -55,6 +55,17 @@ function handleRegisterButton() {
   }
 }
 
+function handleLogoutBtn() {
+  const logoutBtn = $$.getElementById('logout-btn')
+
+  logoutBtn.style.display = 'block';
+  
+  logoutBtn.addEventListener('click', function () {
+    localStorage.removeItem('access_token')
+    location.href = '/pages/accountPage.html'
+  })
+}
+
 window.addEventListener('load', () => {
   positionNavbar();
   handleNavbarInput();
@@ -63,5 +74,6 @@ window.addEventListener('load', () => {
   if (getUserToken()) {
     handleUserCartNavbar();
     handleUserFavouritesLength();
+    handleLogoutBtn();
   }
 });

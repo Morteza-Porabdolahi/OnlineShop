@@ -5,6 +5,7 @@ import {
   insertComment,
   insertItemInUserCart,
 } from './general';
+import { showSpinner, hideSpinner } from '../utils/spinner'
 
 const tabButtons = $$.querySelectorAll('.tab-names-list__item');
 const tabs = $$.querySelectorAll('.tab');
@@ -53,6 +54,8 @@ async function getSingleProduct() {
   } else {
     insertProductDatasIntoPage(data);
   }
+  
+  hideSpinner('.website-wrapper')
 }
 
 window.addEventListener('load', getSingleProduct);

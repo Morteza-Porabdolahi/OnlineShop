@@ -18,7 +18,7 @@ export function setupPopups() {
   function update(refrenceEl, floatingEl) {
     computePosition(refrenceEl, floatingEl, {
       placement: 'bottom',
-      middleware: [offset(3), flip(), shift({ padding: 100 })],
+      middleware: [offset(-150), flip(), shift()],
     }).then(({ x, y }) => {
       floatingEl.style.left = `${x}px`;
       floatingEl.style.top = `${y}px`;

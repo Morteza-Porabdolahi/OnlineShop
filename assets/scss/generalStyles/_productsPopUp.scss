@@ -12,6 +12,12 @@
   display: none;
   animation: 0.3s opacityZeroToOne;
 
+  .description__image {
+    max-height: 25rem;
+    width: 100%;
+    object-fit: cover;
+  }
+
   .description__title {
     font-size: 2rem;
     margin: 1.5rem 0;

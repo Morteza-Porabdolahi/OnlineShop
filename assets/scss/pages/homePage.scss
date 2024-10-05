@@ -280,7 +280,7 @@
   &__blog-posts {
     background-color: $whiteColor;
     // not implemented
-    opacity: 0.3;
+    display: none;
     pointer-events: none;
 
     .archive-btn__container {

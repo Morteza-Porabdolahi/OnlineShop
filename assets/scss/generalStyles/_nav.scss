@@ -260,7 +260,16 @@
           gap: 3.5rem;
           padding: 0.6rem 0;
 
-          a {
+          li:nth-child(3) >  a {
+            color: $grayerColor;
+          }
+
+          button#logout-btn {
+            color: $themeColor;
+            display: none;
+          }
+
+          a, button {
             @include textStyle($whiteColor, 1.6rem);
             transition: opacity 0.3s;
 
