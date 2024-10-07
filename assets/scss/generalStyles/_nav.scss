@@ -1,5 +1,3 @@
-@import '../mediaQueries/navQuery';
-
 .header {
   &__nav-container {
     position: absolute;
@@ -293,5 +291,29 @@
     .nav__bottom {
       display: none;
     }
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .top__left {
+    display: none !important;
+  }
+
+  .top__right {
+    width: 100% !important;
+  }
+}
+
+@media only screen and (max-width: 1260px) {
+  .nav__bottom {
+    width: 100% !important;
+  }
+}
+
+@media only screen and (min-width: 1360px) {
+  .container,
+  .header__nav-container {
+    max-width: 1360px;
+    margin: 0 auto;
   }
 }

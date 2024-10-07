@@ -1,0 +1,24 @@
+@media only screen and (max-width: 533px) {
+  .main__forms {
+    flex-direction: column;
+  }
+  .main__forms .forms__form-container {
+    width: 100%;
+  }
+  .main__forms .forms__divider {
+    flex-direction: row;
+    gap: 2rem;
+  }
+  .main__forms .forms__divider .divider__line {
+    width: calc(50% - 5rem);
+    height: 1px;
+  }
+}
+@media only screen and (max-width: 350px) {
+  .main__forms {
+    flex-direction: column;
+    padding: 0 3rem;
+  }
+}
+
+/*# sourceMappingURL=accountPage.css.map */

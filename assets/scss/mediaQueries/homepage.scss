@@ -16,33 +16,6 @@
   .body__search-input {
     width: 65rem !important;
   }
-
-  .newsletter__container .vertical-divider {
-    display: none;
-  }
-
-  .newsletter {
-    flex-direction: column;
-    gap: 2rem !important;
-  }
-
-  .newsletter__container {
-    gap: 2rem;
-    flex-direction: column;
-  }
-
-  .footer__newsletter .newsletter__social {
-    width: 100%;
-    justify-content: center;
-  }
-
-  .footer__addresses {
-    flex-direction: column;
-  }
-
-  .addresses__lists {
-    flex-direction: column;
-  }
 }
 
 @media only screen and (max-width: 500px) {
@@ -58,14 +31,6 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .top__left {
-    display: none !important;
-  }
-
-  .top__right {
-    width: 100% !important;
-  }
-
   .products-category {
     display: none !important;
   }
@@ -79,21 +44,5 @@
   .header__body {
     padding-left: 2rem;
     padding-right: 2rem;
-  }
-
-  .footer__about {
-    display: none;
-  }
-
-  .footer__about .about__box:not(:last-child) {
-    margin-bottom: 1rem;
-  }
-
-  .footer__newsletter .newsletter .newsletter__input-container {
-    width: 100%;
-  }
-
-  .footer {
-    padding-top: 1rem;
   }
 }

@@ -1,4 +1,4 @@
-﻿.main {
+.main {
   padding: 23rem 1.5rem 0 1.5rem;
 }
 .main__intro .intro__title {
@@ -22,15 +22,16 @@
   color: #333;
 }
 .main__intro .intro__breadcrumb .item:not(:last-child) > a::after {
-  font-family: 'remixicon';
+  font-family: "remixicon";
   vertical-align: middle;
   font-size: 2rem;
-  content: '';
+  content: "\ea52";
   color: #b8b9ba;
 }
 .main__intro .intro__breadcrumb .item--active > a {
   color: #333;
 }
+
 .main__forms {
   display: flex;
   padding: 0 10rem;
@@ -107,4 +108,6 @@
 .main__forms .options__warning a {
   font-weight: bold;
   color: #ec9500;
-} /*# sourceMappingURL=accountPage.css.map */
+}
+
+/*# sourceMappingURL=accountPage.css.map */
