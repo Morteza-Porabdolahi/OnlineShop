@@ -116,6 +116,18 @@ a {
   background-color: $whiteColor;
   padding: 3rem;
 
+  @media only screen and (max-width: 860px) {
+    width: 36%;
+  }
+  
+  @media only screen and (max-width: 630px) {
+    width: 44%;
+  }
+  
+  @media only screen and (max-width: 490px) {
+    width: 65%;
+  }
+
   .modal__modal-header {
     @include alignCenter;
     justify-content: space-between;

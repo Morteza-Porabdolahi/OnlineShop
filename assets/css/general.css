@@ -11773,6 +11773,21 @@ a {
   background-color: #fff;
   padding: 3rem;
 }
+@media only screen and (max-width: 860px) {
+  .modal-container__modal {
+    width: 36%;
+  }
+}
+@media only screen and (max-width: 630px) {
+  .modal-container__modal {
+    width: 44%;
+  }
+}
+@media only screen and (max-width: 490px) {
+  .modal-container__modal {
+    width: 65%;
+  }
+}
 .modal-container__modal .modal__modal-header {
   display: flex;
   align-items: center;
