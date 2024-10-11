@@ -18,14 +18,8 @@
   .body__products-title {
     display: none !important;
   }
-  .register-btn > span {
-    display: none;
-  }
   .main__bestselling .bestselling__products {
     grid-template-columns: repeat(2, 1fr);
-  }
-  .products-category {
-    display: none !important;
   }
 }
 @media only screen and (max-width: 400px) {

@@ -23,16 +23,8 @@
     display: none !important;
   }
 
-  .register-btn > span {
-    display: none;
-  }
-
   .main__bestselling .bestselling__products {
     grid-template-columns: repeat(2, 1fr);
-  }
-
-  .products-category {
-    display: none !important;
   }
 }
 
