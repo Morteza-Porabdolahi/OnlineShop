@@ -10209,10 +10209,6 @@ table {
     width: 65%;
     height: 24rem;
   }
-  .nav__bottom {
-    position: relative;
-    z-index: -1;
-  }
   #top__left {
     transform-origin: top left;
     transition: all 0.3s;
