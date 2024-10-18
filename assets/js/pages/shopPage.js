@@ -11,7 +11,7 @@ import {
   insertItemInUserCart,
 } from './general';
 import { showSpinner, hideSpinner } from '../utils/spinner';
-import { showError, hideError } from '../utils/error';
+import { showError } from '../utils/error';
 
 const stockInputs = $$.querySelectorAll('.stock-input');
 
@@ -134,20 +134,20 @@ function handleFilterUrl(filter, start, end) {
   const urlSearchParams = new URLSearchParams(location.search);
 
   const prevFilter = urlSearchParams.get('filterBy');
-  const shouldBeCommaSeprated = prevFilter ? `${prevFilter},` : '';
+  const shouldBeCommaSeparated = prevFilter ? `${prevFilter},` : '';
 
   switch (filter) {
     case 'available': {
-      urlSearchParams.set('filterBy', `${shouldBeCommaSeprated}available`);
+      urlSearchParams.set('filterBy', `${shouldBeCommaSeparated}available`);
       break;
     }
     case 'specialSale': {
-      urlSearchParams.set('filterBy', `${shouldBeCommaSeprated}specialSale`);
+      urlSearchParams.set('filterBy', `${shouldBeCommaSeparated}specialSale`);
       break;
     }
     case 'price': {
-      if (!prevFilter.split(',').includes('price')) {
-        urlSearchParams.set('filterBy', `${shouldBeCommaSeprated}price`);
+      if (!shouldBeCommaSeparated.split(',').includes('price')) {
+        urlSearchParams.set('filterBy', `${shouldBeCommaSeparated}price`);
       }
 
       if (
@@ -173,6 +173,10 @@ async function getAllProducts() {
     showSpinner('.products-container__products');
 
     const { products, totalProducts } = await fetchAllProducts();
+
+    if (products.length <= 0) {
+      return showError(err, '.products-container__products')
+    }
 
     await createElementsForProducts(products);
     createPageElementsAndAppend(totalProducts);
