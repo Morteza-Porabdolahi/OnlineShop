@@ -10197,7 +10197,7 @@ table {
   display: none;
 }
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 510px) {
   #hamburger-icon {
     display: block;
     font-size: 3rem;

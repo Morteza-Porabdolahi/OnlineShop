@@ -421,6 +421,7 @@
   text-align: center;
   font-size: 2rem;
   margin: 3.5rem 0;
+  line-height: 3.3rem;
 }
 .main__product-container .product-container__product-body .tabs .properties__title {
   font-size: 2.5rem;
