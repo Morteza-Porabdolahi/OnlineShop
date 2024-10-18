@@ -186,7 +186,8 @@
   height: 100%;
 }
 .main__essential-wp-plugins {
-  padding: 0rem 1.5rem 6rem 1.5rem !important;
+  background-color: #fff;
+  padding: 4rem 1.5rem 6rem 1.5rem !important;
 }
 .main__essential-wp-plugins .essential-temps {
   min-height: 36rem;
